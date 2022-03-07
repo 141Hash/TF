@@ -1,0 +1,937 @@
+{:linearizable
+ {:valid? false,
+  :configs
+  ({:model {:value 4},
+    :last-op
+    {:process 18,
+     :type :ok,
+     :f :cas,
+     :value [2 4],
+     :index 61,
+     :time 6337725791},
+    :pending
+    [{:process 1,
+      :type :invoke,
+      :f :read,
+      :value 0,
+      :index 62,
+      :time 6502764570}
+     {:process 2,
+      :type :invoke,
+      :f :cas,
+      :value [4 2],
+      :index 10,
+      :time 1053387795}
+     {:process 3,
+      :type :invoke,
+      :f :cas,
+      :value [1 2],
+      :index 8,
+      :time 790013466}
+     {:process 6,
+      :type :invoke,
+      :f :cas,
+      :value [0 1],
+      :index 14,
+      :time 1392468889}
+     {:process 7,
+      :type :invoke,
+      :f :cas,
+      :value [0 2],
+      :index 22,
+      :time 2037535117}
+     {:process 11,
+      :type :invoke,
+      :f :cas,
+      :value [0 0],
+      :index 26,
+      :time 2478532111}
+     {:process 15,
+      :type :invoke,
+      :f :cas,
+      :value [1 4],
+      :index 36,
+      :time 3393209504}
+     {:process 19,
+      :type :invoke,
+      :f :cas,
+      :value [2 1],
+      :index 40,
+      :time 3850103200}
+     {:process 23,
+      :type :invoke,
+      :f :cas,
+      :value [4 1],
+      :index 44,
+      :time 4522278485}]}
+   {:model {:value 4},
+    :last-op
+    {:process 18,
+     :type :ok,
+     :f :cas,
+     :value [2 4],
+     :index 61,
+     :time 6337725791},
+    :pending
+    [{:process 1,
+      :type :invoke,
+      :f :read,
+      :value 0,
+      :index 62,
+      :time 6502764570}
+     {:process 2,
+      :type :invoke,
+      :f :cas,
+      :value [4 2],
+      :index 10,
+      :time 1053387795}
+     {:process 6,
+      :type :invoke,
+      :f :cas,
+      :value [0 1],
+      :index 14,
+      :time 1392468889}
+     {:process 10,
+      :type :invoke,
+      :f :cas,
+      :value [0 4],
+      :index 30,
+      :time 2842563598}
+     {:process 11,
+      :type :invoke,
+      :f :cas,
+      :value [0 0],
+      :index 26,
+      :time 2478532111}
+     {:process 14,
+      :type :invoke,
+      :f :cas,
+      :value [4 2],
+      :index 56,
+      :time 5828571487}]}
+   {:model {:value 4},
+    :last-op
+    {:process 18,
+     :type :ok,
+     :f :cas,
+     :value [2 4],
+     :index 61,
+     :time 6337725791},
+    :pending
+    [{:process 1,
+      :type :invoke,
+      :f :read,
+      :value 0,
+      :index 62,
+      :time 6502764570}
+     {:process 3,
+      :type :invoke,
+      :f :cas,
+      :value [1 2],
+      :index 8,
+      :time 790013466}
+     {:process 6,
+      :type :invoke,
+      :f :cas,
+      :value [0 1],
+      :index 14,
+      :time 1392468889}
+     {:process 7,
+      :type :invoke,
+      :f :cas,
+      :value [0 2],
+      :index 22,
+      :time 2037535117}
+     {:process 14,
+      :type :invoke,
+      :f :cas,
+      :value [4 2],
+      :index 56,
+      :time 5828571487}
+     {:process 19,
+      :type :invoke,
+      :f :cas,
+      :value [2 1],
+      :index 40,
+      :time 3850103200}]}
+   {:model {:value 4},
+    :last-op
+    {:process 18,
+     :type :ok,
+     :f :cas,
+     :value [2 4],
+     :index 61,
+     :time 6337725791},
+    :pending
+    [{:process 1,
+      :type :invoke,
+      :f :read,
+      :value 0,
+      :index 62,
+      :time 6502764570}
+     {:process 6,
+      :type :invoke,
+      :f :cas,
+      :value [0 1],
+      :index 14,
+      :time 1392468889}
+     {:process 7,
+      :type :invoke,
+      :f :cas,
+      :value [0 2],
+      :index 22,
+      :time 2037535117}
+     {:process 11,
+      :type :invoke,
+      :f :cas,
+      :value [0 0],
+      :index 26,
+      :time 2478532111}
+     {:process 14,
+      :type :invoke,
+      :f :cas,
+      :value [4 2],
+      :index 56,
+      :time 5828571487}
+     {:process 19,
+      :type :invoke,
+      :f :cas,
+      :value [2 1],
+      :index 40,
+      :time 3850103200}]}
+   {:model {:value 4},
+    :last-op
+    {:process 18,
+     :type :ok,
+     :f :cas,
+     :value [2 4],
+     :index 61,
+     :time 6337725791},
+    :pending
+    [{:process 1,
+      :type :invoke,
+      :f :read,
+      :value 0,
+      :index 62,
+      :time 6502764570}
+     {:process 2,
+      :type :invoke,
+      :f :cas,
+      :value [4 2],
+      :index 10,
+      :time 1053387795}
+     {:process 7,
+      :type :invoke,
+      :f :cas,
+      :value [0 2],
+      :index 22,
+      :time 2037535117}
+     {:process 10,
+      :type :invoke,
+      :f :cas,
+      :value [0 4],
+      :index 30,
+      :time 2842563598}
+     {:process 11,
+      :type :invoke,
+      :f :cas,
+      :value [0 0],
+      :index 26,
+      :time 2478532111}
+     {:process 14,
+      :type :invoke,
+      :f :cas,
+      :value [4 2],
+      :index 56,
+      :time 5828571487}
+     {:process 15,
+      :type :invoke,
+      :f :cas,
+      :value [1 4],
+      :index 36,
+      :time 3393209504}
+     {:process 19,
+      :type :invoke,
+      :f :cas,
+      :value [2 1],
+      :index 40,
+      :time 3850103200}
+     {:process 23,
+      :type :invoke,
+      :f :cas,
+      :value [4 1],
+      :index 44,
+      :time 4522278485}]}
+   {:model {:value 4},
+    :last-op
+    {:process 18,
+     :type :ok,
+     :f :cas,
+     :value [2 4],
+     :index 61,
+     :time 6337725791},
+    :pending
+    [{:process 1,
+      :type :invoke,
+      :f :read,
+      :value 0,
+      :index 62,
+      :time 6502764570}
+     {:process 3,
+      :type :invoke,
+      :f :cas,
+      :value [1 2],
+      :index 8,
+      :time 790013466}
+     {:process 7,
+      :type :invoke,
+      :f :cas,
+      :value [0 2],
+      :index 22,
+      :time 2037535117}
+     {:process 10,
+      :type :invoke,
+      :f :cas,
+      :value [0 4],
+      :index 30,
+      :time 2842563598}
+     {:process 14,
+      :type :invoke,
+      :f :cas,
+      :value [4 2],
+      :index 56,
+      :time 5828571487}
+     {:process 19,
+      :type :invoke,
+      :f :cas,
+      :value [2 1],
+      :index 40,
+      :time 3850103200}
+     {:process 23,
+      :type :invoke,
+      :f :cas,
+      :value [4 1],
+      :index 44,
+      :time 4522278485}]}
+   {:model {:value 4},
+    :last-op
+    {:process 18,
+     :type :ok,
+     :f :cas,
+     :value [2 4],
+     :index 61,
+     :time 6337725791},
+    :pending
+    [{:process 1,
+      :type :invoke,
+      :f :read,
+      :value 0,
+      :index 62,
+      :time 6502764570}
+     {:process 2,
+      :type :invoke,
+      :f :cas,
+      :value [4 2],
+      :index 10,
+      :time 1053387795}
+     {:process 3,
+      :type :invoke,
+      :f :cas,
+      :value [1 2],
+      :index 8,
+      :time 790013466}
+     {:process 6,
+      :type :invoke,
+      :f :cas,
+      :value [0 1],
+      :index 14,
+      :time 1392468889}
+     {:process 10,
+      :type :invoke,
+      :f :cas,
+      :value [0 4],
+      :index 30,
+      :time 2842563598}
+     {:process 11,
+      :type :invoke,
+      :f :cas,
+      :value [0 0],
+      :index 26,
+      :time 2478532111}
+     {:process 23,
+      :type :invoke,
+      :f :cas,
+      :value [4 1],
+      :index 44,
+      :time 4522278485}]}
+   {:model {:value 4},
+    :last-op
+    {:process 18,
+     :type :ok,
+     :f :cas,
+     :value [2 4],
+     :index 61,
+     :time 6337725791},
+    :pending
+    [{:process 1,
+      :type :invoke,
+      :f :read,
+      :value 0,
+      :index 62,
+      :time 6502764570}
+     {:process 6,
+      :type :invoke,
+      :f :cas,
+      :value [0 1],
+      :index 14,
+      :time 1392468889}
+     {:process 10,
+      :type :invoke,
+      :f :cas,
+      :value [0 4],
+      :index 30,
+      :time 2842563598}
+     {:process 14,
+      :type :invoke,
+      :f :cas,
+      :value [4 2],
+      :index 56,
+      :time 5828571487}
+     {:process 23,
+      :type :invoke,
+      :f :cas,
+      :value [4 1],
+      :index 44,
+      :time 4522278485}]}
+   {:model {:value 4},
+    :last-op
+    {:process 18,
+     :type :ok,
+     :f :cas,
+     :value [2 4],
+     :index 61,
+     :time 6337725791},
+    :pending
+    [{:process 1,
+      :type :invoke,
+      :f :read,
+      :value 0,
+      :index 62,
+      :time 6502764570}
+     {:process 6,
+      :type :invoke,
+      :f :cas,
+      :value [0 1],
+      :index 14,
+      :time 1392468889}
+     {:process 7,
+      :type :invoke,
+      :f :cas,
+      :value [0 2],
+      :index 22,
+      :time 2037535117}
+     {:process 11,
+      :type :invoke,
+      :f :cas,
+      :value [0 0],
+      :index 26,
+      :time 2478532111}
+     {:process 14,
+      :type :invoke,
+      :f :cas,
+      :value [4 2],
+      :index 56,
+      :time 5828571487}]}
+   {:model {:value 4},
+    :last-op
+    {:process 18,
+     :type :ok,
+     :f :cas,
+     :value [2 4],
+     :index 61,
+     :time 6337725791},
+    :pending
+    [{:process 1,
+      :type :invoke,
+      :f :read,
+      :value 0,
+      :index 62,
+      :time 6502764570}
+     {:process 2,
+      :type :invoke,
+      :f :cas,
+      :value [4 2],
+      :index 10,
+      :time 1053387795}
+     {:process 3,
+      :type :invoke,
+      :f :cas,
+      :value [1 2],
+      :index 8,
+      :time 790013466}
+     {:process 6,
+      :type :invoke,
+      :f :cas,
+      :value [0 1],
+      :index 14,
+      :time 1392468889}
+     {:process 10,
+      :type :invoke,
+      :f :cas,
+      :value [0 4],
+      :index 30,
+      :time 2842563598}
+     {:process 11,
+      :type :invoke,
+      :f :cas,
+      :value [0 0],
+      :index 26,
+      :time 2478532111}
+     {:process 14,
+      :type :invoke,
+      :f :cas,
+      :value [4 2],
+      :index 56,
+      :time 5828571487}
+     {:process 15,
+      :type :invoke,
+      :f :cas,
+      :value [1 4],
+      :index 36,
+      :time 3393209504}
+     {:process 19,
+      :type :invoke,
+      :f :cas,
+      :value [2 1],
+      :index 40,
+      :time 3850103200}
+     {:process 23,
+      :type :invoke,
+      :f :cas,
+      :value [4 1],
+      :index 44,
+      :time 4522278485}]}),
+  :final-paths
+  ([{:op
+     {:process 18,
+      :type :ok,
+      :f :cas,
+      :value [2 4],
+      :index 61,
+      :time 6337725791},
+     :model {:value 4}}
+    {:op
+     {:process 2,
+      :type :invoke,
+      :f :cas,
+      :value [4 2],
+      :index 10,
+      :time 1053387795},
+     :model {:value 2}}
+    {:op
+     {:process 19,
+      :type :invoke,
+      :f :cas,
+      :value [2 1],
+      :index 40,
+      :time 3850103200},
+     :model {:value 1}}
+    {:op
+     {:process 3,
+      :type :invoke,
+      :f :cas,
+      :value [1 2],
+      :index 8,
+      :time 790013466},
+     :model {:value 2}}
+    {:op
+     {:process 14,
+      :type :invoke,
+      :f :cas,
+      :value [4 2],
+      :index 56,
+      :time 5828571487},
+     :model {:msg "can't CAS 2 from 4 to 2"}}]
+   [{:op
+     {:process 18,
+      :type :ok,
+      :f :cas,
+      :value [2 4],
+      :index 61,
+      :time 6337725791},
+     :model {:value 4}}
+    {:op
+     {:process 23,
+      :type :invoke,
+      :f :cas,
+      :value [4 1],
+      :index 44,
+      :time 4522278485},
+     :model {:value 1}}
+    {:op
+     {:process 15,
+      :type :invoke,
+      :f :cas,
+      :value [1 4],
+      :index 36,
+      :time 3393209504},
+     :model {:value 4}}
+    {:op
+     {:process 2,
+      :type :invoke,
+      :f :cas,
+      :value [4 2],
+      :index 10,
+      :time 1053387795},
+     :model {:value 2}}
+    {:op
+     {:process 1,
+      :type :ok,
+      :f :read,
+      :value 0,
+      :index 63,
+      :time 6514886088},
+     :model {:msg "can't read 0 from register 2"}}]
+   [{:op
+     {:process 18,
+      :type :ok,
+      :f :cas,
+      :value [2 4],
+      :index 61,
+      :time 6337725791},
+     :model {:value 4}}
+    {:op
+     {:process 23,
+      :type :invoke,
+      :f :cas,
+      :value [4 1],
+      :index 44,
+      :time 4522278485},
+     :model {:value 1}}
+    {:op
+     {:process 3,
+      :type :invoke,
+      :f :cas,
+      :value [1 2],
+      :index 8,
+      :time 790013466},
+     :model {:value 2}}
+    {:op
+     {:process 14,
+      :type :invoke,
+      :f :cas,
+      :value [4 2],
+      :index 56,
+      :time 5828571487},
+     :model {:msg "can't CAS 2 from 4 to 2"}}]
+   [{:op
+     {:process 18,
+      :type :ok,
+      :f :cas,
+      :value [2 4],
+      :index 61,
+      :time 6337725791},
+     :model {:value 4}}
+    {:op
+     {:process 14,
+      :type :invoke,
+      :f :cas,
+      :value [4 2],
+      :index 56,
+      :time 5828571487},
+     :model {:value 2}}
+    {:op
+     {:process 19,
+      :type :invoke,
+      :f :cas,
+      :value [2 1],
+      :index 40,
+      :time 3850103200},
+     :model {:value 1}}
+    {:op
+     {:process 15,
+      :type :invoke,
+      :f :cas,
+      :value [1 4],
+      :index 36,
+      :time 3393209504},
+     :model {:value 4}}
+    {:op
+     {:process 2,
+      :type :invoke,
+      :f :cas,
+      :value [4 2],
+      :index 10,
+      :time 1053387795},
+     :model {:value 2}}
+    {:op
+     {:process 11,
+      :type :invoke,
+      :f :cas,
+      :value [0 0],
+      :index 26,
+      :time 2478532111},
+     :model {:msg "can't CAS 2 from 0 to 0"}}]
+   [{:op
+     {:process 18,
+      :type :ok,
+      :f :cas,
+      :value [2 4],
+      :index 61,
+      :time 6337725791},
+     :model {:value 4}}
+    {:op
+     {:process 2,
+      :type :invoke,
+      :f :cas,
+      :value [4 2],
+      :index 10,
+      :time 1053387795},
+     :model {:value 2}}
+    {:op
+     {:process 6,
+      :type :invoke,
+      :f :cas,
+      :value [0 1],
+      :index 14,
+      :time 1392468889},
+     :model {:msg "can't CAS 2 from 0 to 1"}}]
+   [{:op
+     {:process 18,
+      :type :ok,
+      :f :cas,
+      :value [2 4],
+      :index 61,
+      :time 6337725791},
+     :model {:value 4}}
+    {:op
+     {:process 23,
+      :type :invoke,
+      :f :cas,
+      :value [4 1],
+      :index 44,
+      :time 4522278485},
+     :model {:value 1}}
+    {:op
+     {:process 15,
+      :type :invoke,
+      :f :cas,
+      :value [1 4],
+      :index 36,
+      :time 3393209504},
+     :model {:value 4}}
+    {:op
+     {:process 14,
+      :type :invoke,
+      :f :cas,
+      :value [4 2],
+      :index 56,
+      :time 5828571487},
+     :model {:value 2}}
+    {:op
+     {:process 19,
+      :type :invoke,
+      :f :cas,
+      :value [2 1],
+      :index 40,
+      :time 3850103200},
+     :model {:value 1}}
+    {:op
+     {:process 11,
+      :type :invoke,
+      :f :cas,
+      :value [0 0],
+      :index 26,
+      :time 2478532111},
+     :model {:msg "can't CAS 1 from 0 to 0"}}]
+   [{:op
+     {:process 18,
+      :type :ok,
+      :f :cas,
+      :value [2 4],
+      :index 61,
+      :time 6337725791},
+     :model {:value 4}}
+    {:op
+     {:process 14,
+      :type :invoke,
+      :f :cas,
+      :value [4 2],
+      :index 56,
+      :time 5828571487},
+     :model {:value 2}}
+    {:op
+     {:process 19,
+      :type :invoke,
+      :f :cas,
+      :value [2 1],
+      :index 40,
+      :time 3850103200},
+     :model {:value 1}}
+    {:op
+     {:process 3,
+      :type :invoke,
+      :f :cas,
+      :value [1 2],
+      :index 8,
+      :time 790013466},
+     :model {:value 2}}
+    {:op
+     {:process 11,
+      :type :invoke,
+      :f :cas,
+      :value [0 0],
+      :index 26,
+      :time 2478532111},
+     :model {:msg "can't CAS 2 from 0 to 0"}}]
+   [{:op
+     {:process 18,
+      :type :ok,
+      :f :cas,
+      :value [2 4],
+      :index 61,
+      :time 6337725791},
+     :model {:value 4}}
+    {:op
+     {:process 23,
+      :type :invoke,
+      :f :cas,
+      :value [4 1],
+      :index 44,
+      :time 4522278485},
+     :model {:value 1}}
+    {:op
+     {:process 3,
+      :type :invoke,
+      :f :cas,
+      :value [1 2],
+      :index 8,
+      :time 790013466},
+     :model {:value 2}}
+    {:op
+     {:process 7,
+      :type :invoke,
+      :f :cas,
+      :value [0 2],
+      :index 22,
+      :time 2037535117},
+     :model {:msg "can't CAS 2 from 0 to 2"}}]
+   [{:op
+     {:process 18,
+      :type :ok,
+      :f :cas,
+      :value [2 4],
+      :index 61,
+      :time 6337725791},
+     :model {:value 4}}
+    {:op
+     {:process 23,
+      :type :invoke,
+      :f :cas,
+      :value [4 1],
+      :index 44,
+      :time 4522278485},
+     :model {:value 1}}
+    {:op
+     {:process 15,
+      :type :invoke,
+      :f :cas,
+      :value [1 4],
+      :index 36,
+      :time 3393209504},
+     :model {:value 4}}
+    {:op
+     {:process 2,
+      :type :invoke,
+      :f :cas,
+      :value [4 2],
+      :index 10,
+      :time 1053387795},
+     :model {:value 2}}
+    {:op
+     {:process 19,
+      :type :invoke,
+      :f :cas,
+      :value [2 1],
+      :index 40,
+      :time 3850103200},
+     :model {:value 1}}
+    {:op
+     {:process 3,
+      :type :invoke,
+      :f :cas,
+      :value [1 2],
+      :index 8,
+      :time 790013466},
+     :model {:value 2}}
+    {:op
+     {:process 11,
+      :type :invoke,
+      :f :cas,
+      :value [0 0],
+      :index 26,
+      :time 2478532111},
+     :model {:msg "can't CAS 2 from 0 to 0"}}]
+   [{:op
+     {:process 18,
+      :type :ok,
+      :f :cas,
+      :value [2 4],
+      :index 61,
+      :time 6337725791},
+     :model {:value 4}}
+    {:op
+     {:process 2,
+      :type :invoke,
+      :f :cas,
+      :value [4 2],
+      :index 10,
+      :time 1053387795},
+     :model {:value 2}}
+    {:op
+     {:process 19,
+      :type :invoke,
+      :f :cas,
+      :value [2 1],
+      :index 40,
+      :time 3850103200},
+     :model {:value 1}}
+    {:op
+     {:process 3,
+      :type :invoke,
+      :f :cas,
+      :value [1 2],
+      :index 8,
+      :time 790013466},
+     :model {:value 2}}
+    {:op
+     {:process 10,
+      :type :invoke,
+      :f :cas,
+      :value [0 4],
+      :index 30,
+      :time 2842563598},
+     :model {:msg "can't CAS 2 from 0 to 4"}}]),
+  :previous-ok
+  {:process 18,
+   :type :ok,
+   :f :cas,
+   :value [2 4],
+   :index 61,
+   :time 6337725791},
+  :last-op
+  {:process 18,
+   :type :ok,
+   :f :cas,
+   :value [2 4],
+   :index 61,
+   :time 6337725791},
+  :op
+  {:process 1,
+   :type :ok,
+   :f :read,
+   :value 0,
+   :index 63,
+   :time 6514886088}},
+ :timeline {:valid? true},
+ :valid? false}

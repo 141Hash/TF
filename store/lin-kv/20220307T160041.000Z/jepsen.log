@@ -1,0 +1,335 @@
+2022-03-07 16:00:41,209{GMT}	INFO	[jepsen test runner] jepsen.core: Command line:
+lein run test --bin lin-kv.py --time-limit 10 --node-count 2 --concurrency 4 --workload lin-kv
+2022-03-07 16:00:41,307{GMT}	INFO	[jepsen test runner] jepsen.core: Running test:
+{:args []
+ :remote
+ #jepsen.control.retry.Remote{:remote #jepsen.control.scp.Remote{:cmd-remote #jepsen.control.clj_ssh.Remote{:concurrency-limit 8,
+                                                                                                            :conn-spec nil,
+                                                                                                            :session nil,
+                                                                                                            :semaphore nil},
+                                                                 :conn-spec nil},
+                              :conn nil}
+ :log-net-send false
+ :node-count 2
+ :max-txn-length 4
+ :concurrency 4
+ :db
+ #object[maelstrom.db$db$reify__16817
+         "0x439c706"
+         "maelstrom.db$db$reify__16817@439c706"]
+ :max-writes-per-key 16
+ :leave-db-running? false
+ :name "lin-kv"
+ :logging-json? false
+ :start-time
+ #object[org.joda.time.DateTime "0x4eaf08f4" "2022-03-07T16:00:41.000Z"]
+ :nemesis-interval 10
+ :net
+ #object[maelstrom.net$jepsen_net$reify__15673
+         "0x78405f00"
+         "maelstrom.net$jepsen_net$reify__15673@78405f00"]
+ :client
+ #object[maelstrom.workload.lin_kv$client$reify__17684
+         "0x295f115d"
+         "maelstrom.workload.lin_kv$client$reify__17684@295f115d"]
+ :barrier
+ #object[java.util.concurrent.CyclicBarrier
+         "0xa6cb2c9"
+         "java.util.concurrent.CyclicBarrier@a6cb2c9"]
+ :log-stderr false
+ :pure-generators true
+ :ssh {:dummy? true}
+ :rate 5
+ :checker
+ #object[jepsen.checker$compose$reify__8787
+         "0x3c32f3d8"
+         "jepsen.checker$compose$reify__8787@3c32f3d8"]
+ :argv
+ ("test"
+  "--bin"
+  "lin-kv.py"
+  "--time-limit"
+  "10"
+  "--node-count"
+  "2"
+  "--concurrency"
+  "4"
+  "--workload"
+  "lin-kv")
+ :nemesis
+ (jepsen.nemesis.ReflCompose
+  {:fm {:start-partition 0,
+        :stop-partition 0,
+        :kill 1,
+        :start 1,
+        :pause 1,
+        :resume 1},
+   :nemeses [#unprintable "jepsen.nemesis.combined$partition_nemesis$reify__17089@46700301"
+             #unprintable "jepsen.nemesis.combined$db_nemesis$reify__17070@17f4276b"]})
+ :nodes ["n0" "n1"]
+ :test-count 1
+ :latency {:mean 0, :dist :constant}
+ :bin "lin-kv.py"
+ :generator
+ (jepsen.generator.TimeLimit
+  {:limit 10000000000,
+   :cutoff nil,
+   :gen (jepsen.generator.Any
+         {:gens [(jepsen.generator.OnThreads {:f #{:nemesis}, :gen nil})
+                 (jepsen.generator.OnThreads
+                  {:f #object[clojure.core$complement$fn__5654
+                              "0x793577e0"
+                              "clojure.core$complement$fn__5654@793577e0"],
+                   :gen (jepsen.generator.Stagger
+                         {:dt 400000000,
+                          :next-time nil,
+                          :gen (jepsen.generator.OnThreads
+                                {:f #object[clojure.core$complement$fn__5654
+                                            "0x39e75e88"
+                                            "clojure.core$complement$fn__5654@39e75e88"],
+                                 :gen (jepsen.independent.ConcurrentGenerator
+                                       {:n 4,
+                                        :fgen #object[jepsen.tests.linearizable_register$test$fn__17484
+                                                      "0x642ebd4c"
+                                                      "jepsen.tests.linearizable_register$test$fn__17484@642ebd4c"],
+                                        :group->threads nil,
+                                        :thread->group nil,
+                                        :keys (0 1 2 3 4 5 6 7 ...),
+                                        :gens nil})})})})]})})
+ :log-net-recv false
+ :os
+ #object[maelstrom.net$jepsen_os$reify__15676
+         "0x70721c2d"
+         "maelstrom.net$jepsen_os$reify__15676@70721c2d"]
+ :time-limit 10
+ :workload :lin-kv
+ :consistency-models [:strict-serializable]
+ :topology :grid}
+
+2022-03-07 16:00:41,313{GMT}	INFO	[jepsen node n0] maelstrom.net: Starting Maelstrom network
+2022-03-07 16:00:41,314{GMT}	INFO	[jepsen test runner] jepsen.db: Tearing down DB
+2022-03-07 16:00:41,316{GMT}	INFO	[jepsen test runner] jepsen.db: Setting up DB
+2022-03-07 16:00:41,317{GMT}	INFO	[jepsen node n1] maelstrom.db: Setting up n1
+2022-03-07 16:00:41,317{GMT}	INFO	[jepsen node n1] maelstrom.process: launching lin-kv.py []
+2022-03-07 16:00:41,319{GMT}	INFO	[jepsen node n0] maelstrom.service: Starting services: (lin-kv lin-tso lww-kv seq-kv)
+2022-03-07 16:00:41,322{GMT}	INFO	[jepsen node n0] maelstrom.db: Setting up n0
+2022-03-07 16:00:41,323{GMT}	INFO	[jepsen node n0] maelstrom.process: launching lin-kv.py []
+2022-03-07 16:00:41,725{GMT}	INFO	[jepsen test runner] jepsen.core: Relative time begins now
+2022-03-07 16:00:41,750{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-07 16:00:41,761{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[0 nil]	[:unknown "not found"]
+2022-03-07 16:00:41,767{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-07 16:00:41,773{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[0 nil]	[:unknown "not found"]
+2022-03-07 16:00:42,123{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:write	[0 0]
+2022-03-07 16:00:42,136{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:ok	:write	[0 0]
+2022-03-07 16:00:42,478{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-07 16:00:42,494{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 0]
+2022-03-07 16:00:42,615{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-07 16:00:42,631{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 0]
+2022-03-07 16:00:42,983{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-07 16:00:42,988{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 0]
+2022-03-07 16:00:43,070{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-07 16:00:43,075{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 0]
+2022-03-07 16:00:43,235{GMT}	INFO	[jepsen worker 3] jepsen.util: 3	:invoke	:write	[0 1]
+2022-03-07 16:00:43,244{GMT}	INFO	[jepsen worker 3] jepsen.util: 3	:ok	:write	[0 1]
+2022-03-07 16:00:43,521{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-07 16:00:43,534{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 1]
+2022-03-07 16:00:43,590{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-07 16:00:43,594{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 1]
+2022-03-07 16:00:43,852{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-07 16:00:43,864{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 1]
+2022-03-07 16:00:44,241{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-07 16:00:44,254{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 1]
+2022-03-07 16:00:44,527{GMT}	INFO	[jepsen worker 3] jepsen.util: 3	:invoke	:cas	[0 [1 3]]
+2022-03-07 16:00:44,533{GMT}	INFO	[jepsen worker 3] jepsen.util: 3	:ok	:cas	[0 [1 3]]
+2022-03-07 16:00:44,784{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-07 16:00:44,795{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 3]
+2022-03-07 16:00:45,161{GMT}	INFO	[jepsen worker 3] jepsen.util: 3	:invoke	:cas	[0 [2 2]]
+2022-03-07 16:00:45,169{GMT}	INFO	[jepsen worker 3] jepsen.util: 3	:info	:cas	[0 [2 2]]	[:unknown "does not match"]
+2022-03-07 16:00:45,373{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-07 16:00:45,381{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 3]
+2022-03-07 16:00:45,751{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:cas	[0 [1 1]]
+2022-03-07 16:00:45,757{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:ok	:cas	[0 [1 1]]
+2022-03-07 16:00:45,823{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-07 16:00:45,834{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 3]
+2022-03-07 16:00:46,100{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-07 16:00:46,113{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 3]
+2022-03-07 16:00:46,282{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-07 16:00:46,286{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 3]
+2022-03-07 16:00:46,444{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:cas	[0 [4 3]]
+2022-03-07 16:00:46,446{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:info	:cas	[0 [4 3]]	[:unknown "does not match"]
+2022-03-07 16:00:46,569{GMT}	INFO	[jepsen worker 3] jepsen.util: 7	:invoke	:cas	[0 [2 1]]
+2022-03-07 16:00:46,572{GMT}	INFO	[jepsen worker 3] jepsen.util: 7	:info	:cas	[0 [2 1]]	[:unknown "does not match"]
+2022-03-07 16:00:46,782{GMT}	INFO	[jepsen worker 3] jepsen.util: 11	:invoke	:cas	[0 [1 3]]
+2022-03-07 16:00:46,788{GMT}	INFO	[jepsen worker 3] jepsen.util: 11	:info	:cas	[0 [1 3]]	[:unknown "does not match"]
+2022-03-07 16:00:47,147{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-07 16:00:47,158{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 1]
+2022-03-07 16:00:47,414{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-07 16:00:47,426{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 3]
+2022-03-07 16:00:47,461{GMT}	INFO	[jepsen worker 2] jepsen.util: 6	:invoke	:cas	[0 [3 0]]
+2022-03-07 16:00:47,466{GMT}	INFO	[jepsen worker 2] jepsen.util: 6	:info	:cas	[0 [3 0]]	[:unknown "does not match"]
+2022-03-07 16:00:47,543{GMT}	INFO	[jepsen worker 2] jepsen.util: 10	:invoke	:cas	[0 [0 1]]
+2022-03-07 16:00:47,549{GMT}	INFO	[jepsen worker 2] jepsen.util: 10	:info	:cas	[0 [0 1]]	[:unknown "does not match"]
+2022-03-07 16:00:47,645{GMT}	INFO	[jepsen worker 2] jepsen.util: 14	:invoke	:write	[0 3]
+2022-03-07 16:00:47,665{GMT}	INFO	[jepsen worker 2] jepsen.util: 14	:ok	:write	[0 3]
+2022-03-07 16:00:47,847{GMT}	INFO	[jepsen worker 3] jepsen.util: 15	:invoke	:write	[0 4]
+2022-03-07 16:00:47,866{GMT}	INFO	[jepsen worker 3] jepsen.util: 15	:ok	:write	[0 4]
+2022-03-07 16:00:47,936{GMT}	INFO	[jepsen worker 3] jepsen.util: 15	:invoke	:write	[0 4]
+2022-03-07 16:00:47,950{GMT}	INFO	[jepsen worker 3] jepsen.util: 15	:ok	:write	[0 4]
+2022-03-07 16:00:48,018{GMT}	INFO	[jepsen worker 2] jepsen.util: 14	:invoke	:cas	[0 [1 1]]
+2022-03-07 16:00:48,020{GMT}	INFO	[jepsen worker 2] jepsen.util: 14	:info	:cas	[0 [1 1]]	[:unknown "does not match"]
+2022-03-07 16:00:48,323{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-07 16:00:48,333{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 4]
+2022-03-07 16:00:48,557{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-07 16:00:48,561{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 4]
+2022-03-07 16:00:48,579{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-07 16:00:48,583{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 4]
+2022-03-07 16:00:48,974{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-07 16:00:48,983{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 4]
+2022-03-07 16:00:49,308{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-07 16:00:49,312{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 4]
+2022-03-07 16:00:49,624{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-07 16:00:49,636{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 4]
+2022-03-07 16:00:49,906{GMT}	INFO	[jepsen worker 2] jepsen.util: 18	:invoke	:cas	[0 [2 2]]
+2022-03-07 16:00:49,912{GMT}	INFO	[jepsen worker 2] jepsen.util: 18	:info	:cas	[0 [2 2]]	[:unknown "does not match"]
+2022-03-07 16:00:50,068{GMT}	INFO	[jepsen worker 3] jepsen.util: 15	:invoke	:cas	[0 [3 4]]
+2022-03-07 16:00:50,073{GMT}	INFO	[jepsen worker 3] jepsen.util: 15	:info	:cas	[0 [3 4]]	[:unknown "does not match"]
+2022-03-07 16:00:50,246{GMT}	INFO	[jepsen worker 2] jepsen.util: 22	:invoke	:write	[0 2]
+2022-03-07 16:00:50,261{GMT}	INFO	[jepsen worker 2] jepsen.util: 22	:ok	:write	[0 2]
+2022-03-07 16:00:50,448{GMT}	INFO	[jepsen worker 2] jepsen.util: 22	:invoke	:write	[0 3]
+2022-03-07 16:00:50,462{GMT}	INFO	[jepsen worker 2] jepsen.util: 22	:ok	:write	[0 3]
+2022-03-07 16:00:50,760{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-07 16:00:50,772{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 3]
+2022-03-07 16:00:50,907{GMT}	INFO	[jepsen worker 2] jepsen.util: 22	:invoke	:write	[0 4]
+2022-03-07 16:00:50,922{GMT}	INFO	[jepsen worker 2] jepsen.util: 22	:ok	:write	[0 4]
+2022-03-07 16:00:51,070{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-07 16:00:51,080{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 4]
+2022-03-07 16:00:51,132{GMT}	INFO	[jepsen worker 3] jepsen.util: 19	:invoke	:write	[0 0]
+2022-03-07 16:00:51,137{GMT}	INFO	[jepsen worker 3] jepsen.util: 19	:ok	:write	[0 0]
+2022-03-07 16:00:51,189{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-07 16:00:51,197{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 0]
+2022-03-07 16:00:51,409{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-07 16:00:51,419{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 0]
+2022-03-07 16:00:51,641{GMT}	INFO	[jepsen worker 2] jepsen.util: 22	:invoke	:cas	[0 [3 3]]
+2022-03-07 16:00:51,647{GMT}	INFO	[jepsen worker 2] jepsen.util: 22	:info	:cas	[0 [3 3]]	[:unknown "does not match"]
+2022-03-07 16:00:51,660{GMT}	INFO	[jepsen node n0] maelstrom.db: Tearing down n0
+2022-03-07 16:00:51,660{GMT}	INFO	[jepsen node n1] maelstrom.db: Tearing down n1
+2022-03-07 16:00:53,331{GMT}	INFO	[jepsen node n0] maelstrom.net: Shutting down Maelstrom network
+2022-03-07 16:00:53,333{GMT}	INFO	[jepsen test runner] jepsen.core: Run complete, writing
+2022-03-07 16:00:53,346{GMT}	INFO	[jepsen test runner] jepsen.core: Analyzing...
+2022-03-07 16:00:53,565{GMT}	INFO	[clojure-agent-send-pool-0] jepsen.independent: Wrote /home/clock/Mestrado/2Sem/TF/Lab2/store/lin-kv/20220307T160041.000Z/independent/0/results.edn
+2022-03-07 16:00:53,569{GMT}	INFO	[clojure-agent-send-pool-0] jepsen.independent: Wrote /home/clock/Mestrado/2Sem/TF/Lab2/store/lin-kv/20220307T160041.000Z/independent/0/history.edn
+2022-03-07 16:00:53,569{GMT}	INFO	[jepsen test runner] jepsen.core: Analysis complete
+2022-03-07 16:00:53,610{GMT}	INFO	[jepsen results] jepsen.store: Wrote /home/clock/Mestrado/2Sem/TF/Lab2/store/lin-kv/20220307T160041.000Z/results.edn
+2022-03-07 16:00:53,641{GMT}	INFO	[jepsen test runner] jepsen.core: {:perf {:latency-graph {:valid? true},
+        :rate-graph {:valid? true},
+        :valid? true},
+ :timeline {:valid? true},
+ :exceptions {:valid? true},
+ :stats {:valid? true,
+         :count 48,
+         :ok-count 36,
+         :fail-count 2,
+         :info-count 10,
+         :by-f {:cas {:valid? true,
+                      :count 12,
+                      :ok-count 2,
+                      :fail-count 0,
+                      :info-count 10},
+                :read {:valid? true,
+                       :count 27,
+                       :ok-count 25,
+                       :fail-count 2,
+                       :info-count 0},
+                :write {:valid? true,
+                        :count 9,
+                        :ok-count 9,
+                        :fail-count 0,
+                        :info-count 0}}},
+ :net {:all {:send-count 307,
+             :recv-count 307,
+             :msg-count 307,
+             :msgs-per-op 6.3958335},
+       :clients {:send-count 100, :recv-count 100, :msg-count 100},
+       :servers {:send-count 207,
+                 :recv-count 207,
+                 :msg-count 207,
+                 :msgs-per-op 4.3125},
+       :valid? true},
+ :workload {:valid? false,
+            :results {0 {:linearizable {:valid? false,
+                                        :configs ({:model #knossos.model.CASRegister{:value 3},
+                                                   :last-op {:process 0,
+                                                             :type :ok,
+                                                             :f :read,
+                                                             :value 3,
+                                                             :index 31,
+                                                             :time 3656593227},
+                                                   :pending [{:process 2,
+                                                              :type :invoke,
+                                                              :f :cas,
+                                                              :value [1
+                                                                      1],
+                                                              :index 32,
+                                                              :time 4024907014}
+                                                             {:process 3,
+                                                              :type :invoke,
+                                                              :f :cas,
+                                                              :value [2
+                                                                      2],
+                                                              :index 28,
+                                                              :time 3434644966}]}),
+                                        :final-paths ([{:op {:process 0,
+                                                             :type :ok,
+                                                             :f :read,
+                                                             :value 3,
+                                                             :index 31,
+                                                             :time 3656593227},
+                                                        :model #knossos.model.CASRegister{:value 3}}
+                                                       {:op {:process 3,
+                                                             :type :invoke,
+                                                             :f :cas,
+                                                             :value [2
+                                                                     2],
+                                                             :index 28,
+                                                             :time 3434644966},
+                                                        :model #knossos.model.Inconsistent{:msg "can't CAS 3 from 2 to 2"}}]
+                                                      [{:op {:process 0,
+                                                             :type :ok,
+                                                             :f :read,
+                                                             :value 3,
+                                                             :index 31,
+                                                             :time 3656593227},
+                                                        :model #knossos.model.CASRegister{:value 3}}
+                                                       {:op {:process 2,
+                                                             :type :ok,
+                                                             :f :cas,
+                                                             :value [1
+                                                                     1],
+                                                             :index 33,
+                                                             :time 4032699574},
+                                                        :model #knossos.model.Inconsistent{:msg "can't CAS 3 from 1 to 1"}}]),
+                                        :previous-ok {:process 0,
+                                                      :type :ok,
+                                                      :f :read,
+                                                      :value 3,
+                                                      :index 31,
+                                                      :time 3656593227},
+                                        :last-op {:process 0,
+                                                  :type :ok,
+                                                  :f :read,
+                                                  :value 3,
+                                                  :index 31,
+                                                  :time 3656593227},
+                                        :op {:process 2,
+                                             :type :ok,
+                                             :f :cas,
+                                             :value [1 1],
+                                             :index 33,
+                                             :time 4032699574}},
+                         :timeline {:valid? true},
+                         :valid? false}},
+            :failures [0]},
+ :valid? false}
+
+
+Analysis invalid! (ﾉಥ益ಥ）ﾉ ┻━┻
