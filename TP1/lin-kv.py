@@ -3,6 +3,7 @@
 # Simple 'echo' workload in Python for Maelstrom
 
 from asyncore import write
+from cgitb import text
 from cmath import log
 from distutils.log import info
 import imp
@@ -34,20 +35,19 @@ dic = dict()
 
 def handle(msg):
     # State
-    global node_id, node_ids, queue_pedidos, queue_respostas, waitingReads, current, currentReadQuorum
-    global writeLock, queue_locks_write, writeCurrent, currentWriteQuorum
+    global node_id, node_ids, queue_respostas, current, currentReadQuorum
+    global lock, queue_locks_write, writeCurrent, currentWriteQuorum
     global currentCasQuorum, casCurrent, queue_locks_cas
 
     if msg.body.type == "init":
         node_id = msg.body.node_id
         node_ids = msg.body.node_ids
-        waitingReads = False
-        queue_pedidos = []
         queue_respostas = []
-        writeLock = False
+        lock = False
         queue_locks_write = []
         currentWriteQuorum = []
         currentReadQuorum = []
+        queue_locks_cas = []
 
         logging.info("node %s initialized", node_id)
         reply(msg, type="init_ok")
@@ -57,50 +57,86 @@ def handle(msg):
         nodes = random.sample(node_ids, n_quorum)
         read_quorums = list(map(lambda x: x, nodes))
         write_quorums = list(map(lambda x: x, nodes))
+        cas_quorums = list(map(lambda x: x, nodes))
 
         if msg.body.type == "read":
-
             logging.info("node %s reading from %s", msg.src, msg.body.key)
             current = msg
-            waitingReads = True
             currentReadQuorum = read_quorums
             for node in read_quorums:
                 send(src=node_id, dest=node, type="read_server", key=msg.body.key)
 
         elif msg.body.type == "read_server":
             logging.info("server %s reading from %s", msg.src, msg.body.key)
-            if msg.body.key in dic:
-                reply(
-                    msg,
-                    type="read_server_ok",
-                    value={
-                        "value": dic[msg.body.key]["value"],
-                        "timestamp": dic[msg.body.key]["timestamp"],
-                    },
-                )
+            if not lock:
+                lock = True
+                if msg.body.key in dic:
+                    reply(
+                        msg,
+                        type="read_server_ok",
+                        value={
+                            "value": dic[msg.body.key]["value"],
+                            "timestamp": dic[msg.body.key]["timestamp"],
+                        },
+                    )
 
+                else:
+                    reply(msg, type="error_read", code=20, text="not found")
             else:
-                reply(msg, type="error_read", code=20, text="not found")
+                reply(msg, type="error_read_lock", text="already_locked")
 
         elif (
-            msg.body.type == "read_server_ok" or msg.body.type == "error_read"
-        ) and msg.src in currentReadQuorum:
-            value = (
-                (msg.body.value.value, msg.body.value.timestamp)
-                if msg.body.type != "error_read"
-                else (None, -1)
-            )
-            queue_respostas.append(value)
+            msg.body.type == "read_server_ok"
+            or msg.body.type == "error_read"
+            or msg.body.type == "error_read_lock"
+        ):
+            if msg.body.type == "read_server_ok":
+                queue_respostas.append(
+                    (msg.body.value.value, msg.body.value.timestamp, msg.src)
+                )
+            elif msg.body.type == "error_read":
+                queue_respostas.append((None, -1, msg.src))
+            else:
+                queue_respostas.append((None, -2, msg.src))
+
             if len(queue_respostas) == n_quorum:
                 maximum = max(queue_respostas, key=lambda x: x[1])
-                if maximum[1] == -1:
-                    reply(current, type="error", code=20, text="not found")
+                minimum = min(queue_respostas, key=lambda x: x[1])
+                if minimum[1] == -2:
+                    for node in queue_respostas:
+                        if node[1] != -2:
+                            send(src=node_id, dest=node[2], type="unlock")
+                    reply(current, type="error", code=11, text="locked state")
+
+                elif maximum[1] == -1:
+                    for node in queue_respostas:
+                        send(src=node_id, dest=node[2], type="unlock_read", code=20)
                 else:
-                    reply(current, type="read_ok", value=maximum[0])
-                waitingReads = False
+                    for node in queue_respostas:
+                        send(
+                            src=node_id,
+                            dest=node[2],
+                            type="unlock_read",
+                            code=0,
+                            value=maximum[0],
+                        )
                 queue_respostas = []
-                if len(queue_pedidos) > 0:
-                    handle(queue_pedidos.pop(0))
+
+        elif msg.body.type == "unlock_read":
+            lock = False
+            if msg.body.code == 0:
+                reply(msg, type="unlock_read_ok", code=0, value=msg.body.value)
+            else:
+                reply(msg, type="unlock_read_ok", code=msg.body.code)
+
+        elif msg.body.type == "unlock_read_ok":
+            queue_respostas.append(msg)
+            if len(queue_respostas) == n_quorum:
+                if msg.body.code == 0:
+                    reply(current, type="read_ok", value=msg.body.value)
+                elif msg.body.code == 20:
+                    reply(current, type="error", code=20, text="not found")
+                queue_respostas = []
 
         elif msg.body.type == "write":
             logging.info("node %s writing to %s", msg.src, msg.body.key)
@@ -117,8 +153,8 @@ def handle(msg):
                 )
 
         elif msg.body.type == "read_lock":
-            if not writeLock:
-                writeLock = True
+            if not lock:
+                lock = True
                 if msg.body.key in dic:
                     reply(
                         msg,
@@ -132,18 +168,18 @@ def handle(msg):
                 else:
                     reply(msg, type="noKey", text="not found")
             else:
-                reply(msg, type="error", code=11, text="already locked")
+                reply(msg, type="error_write_lock", text="already locked")
 
         elif (
             msg.body.type == "lock_ok"
-            or (msg.body.type == "error" and msg.body.code == 11)
+            or msg.body.type == "error_write_lock"
             or msg.body.type == "noKey"
         ):
             if msg.body.type == "lock_ok":
                 queue_locks_write.append(
                     (msg.body.value.value, msg.body.value.timestamp, msg.src)
                 )
-            elif msg.body.type == "error":
+            elif msg.body.type == "error_write_lock":
                 queue_locks_write.append((None, -2, msg.src))
             else:
                 queue_locks_write.append((None, -1, msg.src))
@@ -151,9 +187,10 @@ def handle(msg):
                 maximum = max(queue_locks_write, key=lambda x: x[1])
                 minimum = min(queue_locks_write, key=lambda x: x[1])
                 if minimum[1] == -2:
-                    reply(writeCurrent, type="error", code=11, text="locked state")
                     for node in queue_locks_write:
-                        send(src=node, dest=node[2], type="unlock")
+                        if node[1] != -2:
+                            send(src=node_id, dest=node[2], type="unlock")
+                    reply(writeCurrent, type="error", code=11, text="locked_state")
                 else:
                     new_value = (writeCurrent.body.value, maximum[1] + 1)
                     for node in currentWriteQuorum:
@@ -176,14 +213,10 @@ def handle(msg):
                     "value": msg.body.value,
                     "timestamp": msg.body.timestamp,
                 }
-            writeLock = False
+            lock = False
             reply(msg, type="write_server_ok")
 
-        elif msg.body.type == "unlock":
-            writeLock = False
-            reply(msg, type="unlock_ok")
-
-        elif msg.body.type == "write_server_ok" or msg.body.type == "unlock_ok":
+        elif msg.body.type == "write_server_ok":
             queue_locks_write.append(msg)
             if len(queue_locks_write) == n_quorum:
                 reply(writeCurrent, type="write_ok")
@@ -192,7 +225,7 @@ def handle(msg):
         elif msg.body.type == "cas":
             logging.info("node %s comparing and setting", msg.src)
 
-            currentCasQuorum = write_quorums + read_quorums
+            currentCasQuorum = cas_quorums
             casCurrent = msg
             for node in currentCasQuorum:
                 send(
@@ -205,8 +238,8 @@ def handle(msg):
                 )
 
         elif msg.body.type == "cas_lock":
-            if not writeLock:
-                writeLock = True
+            if not lock:
+                lock = True
                 if msg.body.key not in dic:
                     reply(msg, type="noKeyCas")
 
@@ -222,12 +255,76 @@ def handle(msg):
                             "timestamp": dic[msg.body.key]["timestamp"],
                         },
                     )
-
             else:
-                reply(msg, type="error", code=11, text="already locked")
+                reply(msg, type="error_cas_lock", text="already locked")
 
-        else:
-            queue_pedidos.append(msg)
+        elif (
+            msg.body.type == "lock_ok_cas"
+            or msg.body.type == "noMatch"
+            or msg.body.type == "noKeyCas"
+            or msg.body.type == "error_cas_lock"
+        ):
+            if msg.body.type == "lock_ok_cas":
+                queue_locks_cas.append(
+                    (msg.body.value.value, msg.body.value.timestamp, msg.src)
+                )
+            elif msg.body.type == "error_cas_lock":
+                queue_locks_cas.append((None, -3, msg.src))
+            elif msg.body.type == "noKeyCas":
+                queue_locks_cas.append((None, -1, msg.src))
+            elif msg.body.type == "noMatch":
+                queue_locks_cas.append((None, -2, msg.src))
+
+            if len(queue_locks_cas) == n_quorum:
+                maximum = max(queue_locks_cas, key=lambda x: x[1])
+                minimum = min(queue_locks_cas, key=lambda x: x[1])
+                if minimum[1] == -3:
+                    for node in queue_locks_cas:
+                        if node[1] != -2:
+                            send(src=node_id, dest=node[2], type="unlock")
+                    reply(casCurrent, type="error", code=11, text="locked state")
+                elif maximum[1] == -2:
+                    for node in queue_locks_cas:
+                        send(src=node_id, dest=node[2], type="unlock_cas", code=22)
+                elif maximum[1] == -1:
+                    for node in queue_locks_cas:
+                        send(src=node_id, dest=node[2], type="unlock_cas", code=20)
+                else:
+                    for node in currentCasQuorum:
+                        send(
+                            src=node_id,
+                            dest=node,
+                            type="cas_server",
+                            key=casCurrent.body.key,
+                            **{"from": getattr(casCurrent.body, "from")},
+                            to=casCurrent.body.to,
+                            timestamp=maximum[1] + 1
+                        )
+                queue_locks_cas = []
+
+        elif msg.body.type == "unlock_cas":
+            lock = False
+            reply(msg, type="unlock_cas_ok", code=msg.body.code)
+
+        elif msg.body.type == "cas_server":
+            dic[msg.body.key] = {"value": msg.body.to, "timestamp": msg.body.timestamp}
+            lock = False
+            reply(msg, type="cas_server_ok")
+
+        elif msg.body.type == "cas_server_ok" or msg.body.type == "unlock_cas_ok":
+            queue_locks_cas.append(msg)
+            if len(queue_locks_cas) == n_quorum:
+                if msg.body.type == "cas_server_ok":
+                    reply(casCurrent, type="cas_ok")
+                else:
+                    if msg.body.code == 20:
+                        reply(casCurrent, type="error", code=20, text="not found")
+                    elif msg.body.code == 22:
+                        reply(casCurrent, type="error", code=22, text="does not match")
+                queue_locks_cas = []
+
+        elif msg.body.type == "unlock":
+            lock = False
 
 
 # Main loop
