@@ -1,0 +1,556 @@
+/home/clock/Mestrado/2Sem/TF/TP/TP1/lin-kv.py:9: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+DEBUG:root:received {"id":1,"src":"c1","dest":"n0","body":{"type":"init","node_id":"n0","node_ids":["n0","n1","n2"],"msg_id":1}}
+INFO:root:node n0 initialized
+DEBUG:root:sending {"dest": "c1", "src": "n0", "body": {"msg_id": 1, "in_reply_to": 1, "type": "init_ok"}}
+DEBUG:root:received {"id":14,"src":"n1","dest":"n0","body":{"msg_id":3,"type":"read_server","key":0}}
+INFO:root:server n1 reading from 0
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 2, "in_reply_to": 3, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":17,"src":"c9","dest":"n0","body":{"key":0,"type":"read","msg_id":1}}
+INFO:root:node c9 reading from 0
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 3, "type": "read_server", "key": 0}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 4, "type": "read_server", "key": 0}}
+DEBUG:root:received {"id":24,"src":"n0","dest":"n0","body":{"msg_id":3,"type":"read_server","key":0}}
+DEBUG:root:received {"id":26,"src":"c10","dest":"n0","body":{"key":0,"value":4,"type":"write","msg_id":1}}
+INFO:root:server n0 reading from 0
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 5, "in_reply_to": 3, "type": "error_read_lock", "text": "already_locked"}}
+INFO:root:node c10 writing to 0
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 6, "type": "read_lock", "key": 0, "value": 4}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 7, "type": "read_lock", "key": 0, "value": 4}}
+DEBUG:root:received {"id":31,"src":"n0","dest":"n0","body":{"msg_id":5,"in_reply_to":3,"type":"error_read_lock","text":"already_locked"}}
+DEBUG:root:received {"id":32,"src":"n1","dest":"n0","body":{"msg_id":7,"type":"cas_lock","key":0,"from":2,"to":2}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 8, "in_reply_to": 7, "type": "error_cas_lock", "text": "already locked"}}
+DEBUG:root:received {"id":36,"src":"n2","dest":"n0","body":{"msg_id":14,"in_reply_to":4,"type":"error_read","code":20,"text":"not found"}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 9, "type": "unlock"}}
+DEBUG:root:sending {"dest": "c9", "src": "n0", "body": {"msg_id": 10, "in_reply_to": 1, "type": "error", "code": 11, "text": "locked state"}}
+DEBUG:root:received {"id":39,"src":"n1","dest":"n0","body":{"msg_id":10,"type":"unlock"}}
+DEBUG:root:received {"id":44,"src":"n2","dest":"n0","body":{"msg_id":16,"type":"cas_lock","key":0,"from":4,"to":1}}
+DEBUG:root:received {"id":54,"src":"c9","dest":"n0","body":{"key":0,"type":"read","msg_id":2}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 11, "in_reply_to": 16, "type": "noKeyCas"}}
+DEBUG:root:received {"id":45,"src":"n1","dest":"n0","body":{"msg_id":12,"type":"read_server","key":0}}
+DEBUG:root:received {"id":46,"src":"n2","dest":"n0","body":{"msg_id":17,"in_reply_to":7,"type":"noKey","text":"not found"}}
+INFO:root:node c9 reading from 0
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 12, "type": "read_server", "key": 0}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 13, "type": "read_server", "key": 0}}
+INFO:root:server n1 reading from 0
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 14, "in_reply_to": 12, "type": "error_read_lock", "text": "already_locked"}}
+DEBUG:root:received {"id":53,"src":"n1","dest":"n0","body":{"msg_id":14,"in_reply_to":6,"type":"noKey","text":"not found"}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 15, "type": "write_server", "key": 0, "value": 4, "timestamp": 0}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 16, "type": "write_server", "key": 0, "value": 4, "timestamp": 0}}
+DEBUG:root:received {"id":58,"src":"n2","dest":"n0","body":{"msg_id":21,"type":"read_server","key":0}}
+INFO:root:server n2 reading from 0
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 17, "in_reply_to": 21, "type": "error_read_lock", "text": "already_locked"}}
+DEBUG:root:received {"id":64,"src":"n1","dest":"n0","body":{"msg_id":16,"type":"unlock"}}
+DEBUG:root:received {"id":71,"src":"n2","dest":"n0","body":{"msg_id":23,"type":"unlock"}}
+DEBUG:root:received {"id":72,"src":"n1","dest":"n0","body":{"msg_id":19,"in_reply_to":12,"type":"error_read_lock","text":"already_locked"}}
+DEBUG:root:received {"id":77,"src":"n2","dest":"n0","body":{"msg_id":27,"in_reply_to":13,"type":"error_read_lock","text":"already_locked"}}
+DEBUG:root:received {"id":78,"src":"n1","dest":"n0","body":{"msg_id":21,"type":"cas_lock","key":0,"from":3,"to":4}}
+DEBUG:root:received {"id":79,"src":"n2","dest":"n0","body":{"msg_id":28,"in_reply_to":16,"type":"write_server_ok"}}
+DEBUG:root:received {"id":81,"src":"n1","dest":"n0","body":{"msg_id":23,"in_reply_to":15,"type":"write_server_ok"}}
+DEBUG:root:sending {"dest": "c9", "src": "n0", "body": {"msg_id": 18, "in_reply_to": 2, "type": "error", "code": 11, "text": "locked state"}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 19, "in_reply_to": 21, "type": "noKeyCas"}}
+DEBUG:root:sending {"dest": "c10", "src": "n0", "body": {"msg_id": 20, "in_reply_to": 1, "type": "write_ok"}}
+DEBUG:root:received {"id":86,"src":"n2","dest":"n0","body":{"msg_id":29,"type":"cas_lock","key":0,"from":4,"to":1}}
+DEBUG:root:received {"id":94,"src":"c10","dest":"n0","body":{"key":0,"from":1,"to":0,"type":"cas","msg_id":2}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 21, "in_reply_to": 29, "type": "error_cas_lock", "text": "already locked"}}
+INFO:root:node c10 comparing and setting
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 22, "type": "cas_lock", "key": 0, "from": 1, "to": 0}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 23, "type": "cas_lock", "key": 0, "from": 1, "to": 0}}
+DEBUG:root:received {"id":96,"src":"c9","dest":"n0","body":{"key":0,"type":"read","msg_id":3}}
+INFO:root:node c9 reading from 0
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 24, "type": "read_server", "key": 0}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 25, "type": "read_server", "key": 0}}
+DEBUG:root:received {"id":102,"src":"n1","dest":"n0","body":{"msg_id":29,"type":"unlock_cas","code":20}}
+DEBUG:root:received {"id":104,"src":"n0","dest":"n0","body":{"msg_id":22,"type":"cas_lock","key":0,"from":1,"to":0}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 26, "in_reply_to": 29, "type": "unlock_cas_ok", "code": 20}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 27, "in_reply_to": 22, "type": "noKeyCas"}}
+DEBUG:root:received {"id":108,"src":"n0","dest":"n0","body":{"msg_id":25,"type":"read_server","key":0}}
+INFO:root:server n0 reading from 0
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 28, "in_reply_to": 25, "type": "error_read_lock", "text": "already_locked"}}
+DEBUG:root:received {"id":111,"src":"n0","dest":"n0","body":{"msg_id":27,"in_reply_to":22,"type":"noKeyCas"}}
+DEBUG:root:received {"id":114,"src":"n0","dest":"n0","body":{"msg_id":28,"in_reply_to":25,"type":"error_read_lock","text":"already_locked"}}
+DEBUG:root:received {"id":115,"src":"n2","dest":"n0","body":{"msg_id":38,"type":"unlock"}}
+DEBUG:root:received {"id":120,"src":"n1","dest":"n0","body":{"msg_id":34,"in_reply_to":23,"type":"error_cas_lock","text":"already locked"}}
+DEBUG:root:received {"id":121,"src":"n2","dest":"n0","body":{"msg_id":41,"in_reply_to":24,"type":"error_read_lock","text":"already_locked"}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 29, "type": "unlock"}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 30, "type": "unlock"}}
+DEBUG:root:sending {"dest": "c10", "src": "n0", "body": {"msg_id": 31, "in_reply_to": 2, "type": "error", "code": 11, "text": "locked state"}}
+DEBUG:root:sending {"dest": "c9", "src": "n0", "body": {"msg_id": 32, "in_reply_to": 3, "type": "error", "code": 11, "text": "locked state"}}
+DEBUG:root:received {"id":124,"src":"n1","dest":"n0","body":{"msg_id":35,"type":"read_server","key":0}}
+INFO:root:server n1 reading from 0
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 33, "in_reply_to": 35, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":135,"src":"c9","dest":"n0","body":{"key":0,"type":"read","msg_id":4}}
+DEBUG:root:received {"id":137,"src":"c10","dest":"n0","body":{"key":0,"value":1,"type":"write","msg_id":3}}
+INFO:root:node c9 reading from 0
+DEBUG:root:received {"id":125,"src":"n2","dest":"n0","body":{"msg_id":42,"type":"cas_lock","key":0,"from":0,"to":2}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 34, "type": "read_server", "key": 0}}
+DEBUG:root:received {"id":126,"src":"n0","dest":"n0","body":{"msg_id":29,"type":"unlock"}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 35, "type": "read_server", "key": 0}}
+INFO:root:node c10 writing to 0
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 36, "type": "read_lock", "key": 0, "value": 1}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 37, "type": "read_lock", "key": 0, "value": 1}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 38, "in_reply_to": 42, "type": "error_cas_lock", "text": "already locked"}}
+DEBUG:root:received {"id":142,"src":"n0","dest":"n0","body":{"msg_id":34,"type":"read_server","key":0}}
+INFO:root:server n0 reading from 0
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 39, "in_reply_to": 34, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":148,"src":"n0","dest":"n0","body":{"msg_id":37,"type":"read_lock","key":0,"value":1}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 40, "in_reply_to": 37, "type": "error_write_lock", "text": "already locked"}}
+DEBUG:root:received {"id":150,"src":"n0","dest":"n0","body":{"msg_id":39,"in_reply_to":34,"type":"error_read","code":20,"text":"not found"}}
+DEBUG:root:received {"id":151,"src":"n1","dest":"n0","body":{"msg_id":43,"type":"unlock"}}
+DEBUG:root:received {"id":152,"src":"n0","dest":"n0","body":{"msg_id":40,"in_reply_to":37,"type":"error_write_lock","text":"already locked"}}
+DEBUG:root:received {"id":156,"src":"n2","dest":"n0","body":{"msg_id":48,"in_reply_to":35,"type":"error_read_lock","text":"already_locked"}}
+DEBUG:root:received {"id":157,"src":"n1","dest":"n0","body":{"msg_id":46,"in_reply_to":36,"type":"error_write_lock","text":"already locked"}}
+DEBUG:root:received {"id":160,"src":"n2","dest":"n0","body":{"msg_id":51,"type":"unlock"}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 41, "type": "unlock"}}
+DEBUG:root:received {"id":165,"src":"n2","dest":"n0","body":{"msg_id":53,"type":"read_server","key":0}}
+DEBUG:root:sending {"dest": "c9", "src": "n0", "body": {"msg_id": 42, "in_reply_to": 4, "type": "error", "code": 11, "text": "locked state"}}
+DEBUG:root:received {"id":168,"src":"n2","dest":"n0","body":{"msg_id":56,"type":"cas_lock","key":0,"from":3,"to":1}}
+DEBUG:root:sending {"dest": "c10", "src": "n0", "body": {"msg_id": 43, "in_reply_to": 3, "type": "error", "code": 11, "text": "locked_state"}}
+INFO:root:server n2 reading from 0
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 44, "in_reply_to": 53, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 45, "in_reply_to": 56, "type": "error_cas_lock", "text": "already locked"}}
+DEBUG:root:received {"id":170,"src":"n0","dest":"n0","body":{"msg_id":41,"type":"unlock"}}
+DEBUG:root:received {"id":180,"src":"c9","dest":"n0","body":{"key":0,"type":"read","msg_id":5}}
+DEBUG:root:received {"id":181,"src":"c10","dest":"n0","body":{"key":0,"value":0,"type":"write","msg_id":4}}
+DEBUG:root:received {"id":171,"src":"n1","dest":"n0","body":{"msg_id":48,"type":"read_server","key":0}}
+INFO:root:node c9 reading from 0
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 46, "type": "read_server", "key": 0}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 47, "type": "read_server", "key": 0}}
+INFO:root:node c10 writing to 0
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 48, "type": "read_lock", "key": 0, "value": 0}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 49, "type": "read_lock", "key": 0, "value": 0}}
+INFO:root:server n1 reading from 0
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 50, "in_reply_to": 48, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":186,"src":"n0","dest":"n0","body":{"msg_id":47,"type":"read_server","key":0}}
+DEBUG:root:received {"id":187,"src":"n2","dest":"n0","body":{"msg_id":60,"type":"unlock"}}
+DEBUG:root:received {"id":189,"src":"n0","dest":"n0","body":{"msg_id":49,"type":"read_lock","key":0,"value":0}}
+DEBUG:root:received {"id":193,"src":"n2","dest":"n0","body":{"msg_id":63,"type":"unlock"}}
+INFO:root:server n0 reading from 0
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 51, "in_reply_to": 47, "type": "error_read_lock", "text": "already_locked"}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 52, "in_reply_to": 49, "type": "noKey", "text": "not found"}}
+DEBUG:root:received {"id":198,"src":"n2","dest":"n0","body":{"msg_id":65,"in_reply_to":46,"type":"read_server_ok","value":{"value":4,"timestamp":0}}}
+DEBUG:root:received {"id":199,"src":"n0","dest":"n0","body":{"msg_id":51,"in_reply_to":47,"type":"error_read_lock","text":"already_locked"}}
+DEBUG:root:received {"id":201,"src":"n0","dest":"n0","body":{"msg_id":52,"in_reply_to":49,"type":"noKey","text":"not found"}}
+DEBUG:root:received {"id":202,"src":"n1","dest":"n0","body":{"msg_id":55,"type":"unlock_read","code":0,"value":4}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 53, "type": "unlock"}}
+DEBUG:root:received {"id":207,"src":"n2","dest":"n0","body":{"msg_id":70,"in_reply_to":48,"type":"error_write_lock","text":"already locked"}}
+DEBUG:root:sending {"dest": "c9", "src": "n0", "body": {"msg_id": 54, "in_reply_to": 5, "type": "error", "code": 11, "text": "locked state"}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 55, "in_reply_to": 55, "type": "unlock_read_ok", "code": 0, "value": 4}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 56, "type": "unlock"}}
+DEBUG:root:sending {"dest": "c10", "src": "n0", "body": {"msg_id": 57, "in_reply_to": 4, "type": "error", "code": 11, "text": "locked_state"}}
+DEBUG:root:received {"id":213,"src":"n1","dest":"n0","body":{"msg_id":57,"type":"cas_lock","key":0,"from":4,"to":2}}
+DEBUG:root:received {"id":221,"src":"c9","dest":"n0","body":{"key":0,"type":"read","msg_id":6}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 58, "in_reply_to": 57, "type": "noKeyCas"}}
+DEBUG:root:received {"id":222,"src":"c10","dest":"n0","body":{"key":0,"from":2,"to":1,"type":"cas","msg_id":5}}
+DEBUG:root:received {"id":218,"src":"n0","dest":"n0","body":{"msg_id":56,"type":"unlock"}}
+INFO:root:node c9 reading from 0
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 59, "type": "read_server", "key": 0}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 60, "type": "read_server", "key": 0}}
+INFO:root:node c10 comparing and setting
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 61, "type": "cas_lock", "key": 0, "from": 2, "to": 1}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 62, "type": "cas_lock", "key": 0, "from": 2, "to": 1}}
+DEBUG:root:received {"id":235,"src":"n1","dest":"n0","body":{"msg_id":62,"type":"read_server","key":0}}
+INFO:root:server n1 reading from 0
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 63, "in_reply_to": 62, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":237,"src":"n2","dest":"n0","body":{"msg_id":77,"in_reply_to":59,"type":"error_read_lock","text":"already_locked"}}
+DEBUG:root:received {"id":238,"src":"n1","dest":"n0","body":{"msg_id":64,"type":"cas_server","key":0,"from":4,"to":2,"timestamp":1}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 64, "in_reply_to": 64, "type": "cas_server_ok"}}
+DEBUG:root:received {"id":244,"src":"n2","dest":"n0","body":{"msg_id":81,"in_reply_to":61,"type":"noMatch"}}
+DEBUG:root:received {"id":245,"src":"n1","dest":"n0","body":{"msg_id":67,"in_reply_to":60,"type":"read_server_ok","value":{"value":4,"timestamp":0}}}
+DEBUG:root:received {"id":246,"src":"n1","dest":"n0","body":{"msg_id":68,"in_reply_to":62,"type":"error_cas_lock","text":"already locked"}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 65, "type": "unlock"}}
+DEBUG:root:sending {"dest": "c9", "src": "n0", "body": {"msg_id": 66, "in_reply_to": 6, "type": "error", "code": 11, "text": "locked state"}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 67, "type": "unlock"}}
+DEBUG:root:sending {"dest": "c10", "src": "n0", "body": {"msg_id": 68, "in_reply_to": 5, "type": "error", "code": 11, "text": "locked state"}}
+DEBUG:root:received {"id":259,"src":"c9","dest":"n0","body":{"key":0,"type":"read","msg_id":7}}
+INFO:root:node c9 reading from 0
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 69, "type": "read_server", "key": 0}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 70, "type": "read_server", "key": 0}}
+DEBUG:root:received {"id":260,"src":"c10","dest":"n0","body":{"key":0,"from":3,"to":0,"type":"cas","msg_id":6}}
+INFO:root:node c10 comparing and setting
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 71, "type": "cas_lock", "key": 0, "from": 3, "to": 0}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 72, "type": "cas_lock", "key": 0, "from": 3, "to": 0}}
+DEBUG:root:received {"id":262,"src":"n0","dest":"n0","body":{"msg_id":70,"type":"read_server","key":0}}
+INFO:root:server n0 reading from 0
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 73, "in_reply_to": 70, "type": "read_server_ok", "value": {"value": 2, "timestamp": 1}}}
+DEBUG:root:received {"id":263,"src":"n0","dest":"n0","body":{"msg_id":71,"type":"cas_lock","key":0,"from":3,"to":0}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 74, "in_reply_to": 71, "type": "error_cas_lock", "text": "already locked"}}
+DEBUG:root:received {"id":265,"src":"n1","dest":"n0","body":{"msg_id":70,"type":"unlock"}}
+DEBUG:root:received {"id":274,"src":"n1","dest":"n0","body":{"msg_id":74,"type":"read_server","key":0}}
+INFO:root:server n1 reading from 0
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 75, "in_reply_to": 74, "type": "read_server_ok", "value": {"value": 2, "timestamp": 1}}}
+DEBUG:root:received {"id":277,"src":"n0","dest":"n0","body":{"msg_id":73,"in_reply_to":70,"type":"read_server_ok","value":{"value":2,"timestamp":1}}}
+DEBUG:root:received {"id":278,"src":"n1","dest":"n0","body":{"msg_id":75,"in_reply_to":69,"type":"read_server_ok","value":{"value":4,"timestamp":0}}}
+DEBUG:root:received {"id":279,"src":"n1","dest":"n0","body":{"msg_id":76,"type":"read_lock","key":0,"value":4}}
+DEBUG:root:received {"id":281,"src":"n0","dest":"n0","body":{"msg_id":74,"in_reply_to":71,"type":"error_cas_lock","text":"already locked"}}
+DEBUG:root:received {"id":282,"src":"n1","dest":"n0","body":{"msg_id":78,"in_reply_to":72,"type":"error_cas_lock","text":"already locked"}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 76, "type": "unlock_read", "code": 0, "value": 2}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 77, "type": "unlock_read", "code": 0, "value": 2}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 78, "in_reply_to": 76, "type": "error_write_lock", "text": "already locked"}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 79, "type": "unlock"}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 80, "type": "unlock"}}
+DEBUG:root:sending {"dest": "c10", "src": "n0", "body": {"msg_id": 81, "in_reply_to": 6, "type": "error", "code": 11, "text": "locked state"}}
+DEBUG:root:received {"id":290,"src":"n0","dest":"n0","body":{"msg_id":76,"type":"unlock_read","code":0,"value":2}}
+DEBUG:root:received {"id":296,"src":"c10","dest":"n0","body":{"key":1,"from":1,"to":1,"type":"cas","msg_id":7}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 82, "in_reply_to": 76, "type": "unlock_read_ok", "code": 0, "value": 2}}
+DEBUG:root:received {"id":293,"src":"n0","dest":"n0","body":{"msg_id":79,"type":"unlock"}}
+INFO:root:node c10 comparing and setting
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 83, "type": "cas_lock", "key": 1, "from": 1, "to": 1}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 84, "type": "cas_lock", "key": 1, "from": 1, "to": 1}}
+DEBUG:root:received {"id":300,"src":"n1","dest":"n0","body":{"msg_id":83,"type":"unlock_read","code":0,"value":2}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 85, "in_reply_to": 83, "type": "unlock_read_ok", "code": 0, "value": 2}}
+DEBUG:root:received {"id":302,"src":"n0","dest":"n0","body":{"msg_id":82,"in_reply_to":76,"type":"unlock_read_ok","code":0,"value":2}}
+DEBUG:root:received {"id":304,"src":"n1","dest":"n0","body":{"msg_id":85,"in_reply_to":77,"type":"unlock_read_ok","code":0,"value":2}}
+DEBUG:root:received {"id":305,"src":"n0","dest":"n0","body":{"msg_id":84,"type":"cas_lock","key":1,"from":1,"to":1}}
+DEBUG:root:sending {"dest": "c9", "src": "n0", "body": {"msg_id": 86, "in_reply_to": 7, "type": "read_ok", "value": 2}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 87, "in_reply_to": 84, "type": "noKeyCas"}}
+DEBUG:root:received {"id":310,"src":"n2","dest":"n0","body":{"msg_id":96,"type":"read_server","key":1}}
+DEBUG:root:received {"id":322,"src":"c9","dest":"n0","body":{"key":1,"type":"read","msg_id":8}}
+INFO:root:server n2 reading from 1
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 88, "in_reply_to": 96, "type": "error_read_lock", "text": "already_locked"}}
+INFO:root:node c9 reading from 1
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 89, "type": "read_server", "key": 1}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 90, "type": "read_server", "key": 1}}
+DEBUG:root:received {"id":318,"src":"n1","dest":"n0","body":{"msg_id":89,"type":"cas_lock","key":1,"from":1,"to":1}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 91, "in_reply_to": 89, "type": "error_cas_lock", "text": "already locked"}}
+DEBUG:root:received {"id":319,"src":"n0","dest":"n0","body":{"msg_id":87,"in_reply_to":84,"type":"noKeyCas"}}
+DEBUG:root:received {"id":320,"src":"n1","dest":"n0","body":{"msg_id":90,"in_reply_to":83,"type":"noKeyCas"}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 92, "type": "unlock_cas", "code": 20}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 93, "type": "unlock_cas", "code": 20}}
+DEBUG:root:received {"id":325,"src":"n0","dest":"n0","body":{"msg_id":89,"type":"read_server","key":1}}
+INFO:root:server n0 reading from 1
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 94, "in_reply_to": 89, "type": "error_read_lock", "text": "already_locked"}}
+DEBUG:root:received {"id":329,"src":"n2","dest":"n0","body":{"msg_id":100,"type":"cas_lock","key":1,"from":3,"to":4}}
+DEBUG:root:received {"id":330,"src":"n0","dest":"n0","body":{"msg_id":92,"type":"unlock_cas","code":20}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 95, "in_reply_to": 100, "type": "error_cas_lock", "text": "already locked"}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 96, "in_reply_to": 92, "type": "unlock_cas_ok", "code": 20}}
+DEBUG:root:received {"id":335,"src":"n0","dest":"n0","body":{"msg_id":94,"in_reply_to":89,"type":"error_read_lock","text":"already_locked"}}
+DEBUG:root:received {"id":337,"src":"n1","dest":"n0","body":{"msg_id":93,"in_reply_to":90,"type":"error_read","code":20,"text":"not found"}}
+DEBUG:root:received {"id":338,"src":"n1","dest":"n0","body":{"msg_id":94,"type":"read_server","key":1}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 97, "type": "unlock"}}
+DEBUG:root:received {"id":341,"src":"n0","dest":"n0","body":{"msg_id":96,"in_reply_to":92,"type":"unlock_cas_ok","code":20}}
+DEBUG:root:received {"id":344,"src":"n1","dest":"n0","body":{"msg_id":97,"in_reply_to":93,"type":"unlock_cas_ok","code":20}}
+DEBUG:root:sending {"dest": "c9", "src": "n0", "body": {"msg_id": 98, "in_reply_to": 8, "type": "error", "code": 11, "text": "locked state"}}
+DEBUG:root:received {"id":345,"src":"n1","dest":"n0","body":{"msg_id":98,"type":"unlock"}}
+INFO:root:server n1 reading from 1
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 99, "in_reply_to": 94, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:sending {"dest": "c10", "src": "n0", "body": {"msg_id": 100, "in_reply_to": 7, "type": "error", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":355,"src":"n2","dest":"n0","body":{"msg_id":105,"type":"read_server","key":1}}
+DEBUG:root:received {"id":361,"src":"c9","dest":"n0","body":{"key":1,"type":"read","msg_id":9}}
+DEBUG:root:received {"id":363,"src":"c10","dest":"n0","body":{"key":1,"from":0,"to":4,"type":"cas","msg_id":8}}
+DEBUG:root:received {"id":356,"src":"n2","dest":"n0","body":{"msg_id":106,"type":"unlock"}}
+INFO:root:server n2 reading from 1
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 101, "in_reply_to": 105, "type": "error_read", "code": 20, "text": "not found"}}
+INFO:root:node c9 reading from 1
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 102, "type": "read_server", "key": 1}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 103, "type": "read_server", "key": 1}}
+INFO:root:node c10 comparing and setting
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 104, "type": "cas_lock", "key": 1, "from": 0, "to": 4}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 105, "type": "cas_lock", "key": 1, "from": 0, "to": 4}}
+DEBUG:root:received {"id":372,"src":"n1","dest":"n0","body":{"msg_id":106,"type":"unlock_read","code":20}}
+DEBUG:root:received {"id":373,"src":"n0","dest":"n0","body":{"msg_id":104,"type":"cas_lock","key":1,"from":0,"to":4}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 106, "in_reply_to": 106, "type": "unlock_read_ok", "code": 20}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 107, "in_reply_to": 104, "type": "noKeyCas"}}
+DEBUG:root:received {"id":378,"src":"n0","dest":"n0","body":{"msg_id":107,"in_reply_to":104,"type":"noKeyCas"}}
+DEBUG:root:received {"id":379,"src":"n2","dest":"n0","body":{"msg_id":113,"in_reply_to":102,"type":"error_read_lock","text":"already_locked"}}
+DEBUG:root:received {"id":382,"src":"n2","dest":"n0","body":{"msg_id":115,"type":"unlock"}}
+DEBUG:root:received {"id":386,"src":"n1","dest":"n0","body":{"msg_id":111,"in_reply_to":103,"type":"error_read_lock","text":"already_locked"}}
+DEBUG:root:received {"id":387,"src":"n1","dest":"n0","body":{"msg_id":112,"in_reply_to":105,"type":"error_cas_lock","text":"already locked"}}
+DEBUG:root:sending {"dest": "c9", "src": "n0", "body": {"msg_id": 108, "in_reply_to": 9, "type": "error", "code": 11, "text": "locked state"}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 109, "type": "unlock"}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 110, "type": "unlock"}}
+DEBUG:root:sending {"dest": "c10", "src": "n0", "body": {"msg_id": 111, "in_reply_to": 8, "type": "error", "code": 11, "text": "locked state"}}
+DEBUG:root:received {"id":396,"src":"n0","dest":"n0","body":{"msg_id":109,"type":"unlock"}}
+DEBUG:root:received {"id":402,"src":"c10","dest":"n0","body":{"key":1,"value":4,"type":"write","msg_id":9}}
+DEBUG:root:received {"id":404,"src":"c9","dest":"n0","body":{"key":1,"type":"read","msg_id":10}}
+INFO:root:node c10 writing to 1
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 112, "type": "read_lock", "key": 1, "value": 4}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 113, "type": "read_lock", "key": 1, "value": 4}}
+INFO:root:node c9 reading from 1
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 114, "type": "read_server", "key": 1}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 115, "type": "read_server", "key": 1}}
+DEBUG:root:received {"id":405,"src":"n1","dest":"n0","body":{"msg_id":115,"type":"read_server","key":1}}
+INFO:root:server n1 reading from 1
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 116, "in_reply_to": 115, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":410,"src":"n2","dest":"n0","body":{"msg_id":124,"type":"cas_lock","key":1,"from":2,"to":3}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 117, "in_reply_to": 124, "type": "error_cas_lock", "text": "already locked"}}
+DEBUG:root:received {"id":419,"src":"n1","dest":"n0","body":{"msg_id":119,"in_reply_to":112,"type":"noKey","text":"not found"}}
+DEBUG:root:received {"id":421,"src":"n2","dest":"n0","body":{"msg_id":127,"in_reply_to":113,"type":"error_write_lock","text":"already locked"}}
+DEBUG:root:received {"id":422,"src":"n1","dest":"n0","body":{"msg_id":120,"type":"cas_lock","key":1,"from":4,"to":3}}
+DEBUG:root:received {"id":426,"src":"n2","dest":"n0","body":{"msg_id":130,"in_reply_to":114,"type":"error_read_lock","text":"already_locked"}}
+DEBUG:root:received {"id":428,"src":"n1","dest":"n0","body":{"msg_id":123,"in_reply_to":115,"type":"error_read_lock","text":"already_locked"}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 118, "type": "unlock"}}
+DEBUG:root:sending {"dest": "c10", "src": "n0", "body": {"msg_id": 119, "in_reply_to": 9, "type": "error", "code": 11, "text": "locked_state"}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 120, "in_reply_to": 120, "type": "error_cas_lock", "text": "already locked"}}
+DEBUG:root:sending {"dest": "c9", "src": "n0", "body": {"msg_id": 121, "in_reply_to": 10, "type": "error", "code": 11, "text": "locked state"}}
+DEBUG:root:received {"id":429,"src":"n1","dest":"n0","body":{"msg_id":124,"type":"unlock_read","code":20}}
+DEBUG:root:received {"id":441,"src":"c10","dest":"n0","body":{"key":1,"value":1,"type":"write","msg_id":10}}
+DEBUG:root:received {"id":443,"src":"c9","dest":"n0","body":{"key":1,"type":"read","msg_id":11}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 122, "in_reply_to": 124, "type": "unlock_read_ok", "code": 20}}
+INFO:root:node c10 writing to 1
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 123, "type": "read_lock", "key": 1, "value": 1}}
+DEBUG:root:received {"id":435,"src":"n2","dest":"n0","body":{"msg_id":132,"type":"unlock"}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 124, "type": "read_lock", "key": 1, "value": 1}}
+INFO:root:node c9 reading from 1
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 125, "type": "read_server", "key": 1}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 126, "type": "read_server", "key": 1}}
+DEBUG:root:received {"id":449,"src":"n0","dest":"n0","body":{"msg_id":124,"type":"read_lock","key":1,"value":1}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 127, "in_reply_to": 124, "type": "noKey", "text": "not found"}}
+DEBUG:root:received {"id":452,"src":"n1","dest":"n0","body":{"msg_id":128,"type":"unlock"}}
+DEBUG:root:received {"id":454,"src":"n0","dest":"n0","body":{"msg_id":126,"type":"read_server","key":1}}
+INFO:root:server n0 reading from 1
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 128, "in_reply_to": 126, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":460,"src":"n1","dest":"n0","body":{"msg_id":132,"type":"read_lock","key":1,"value":1}}
+DEBUG:root:received {"id":462,"src":"n0","dest":"n0","body":{"msg_id":127,"in_reply_to":124,"type":"noKey","text":"not found"}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 129, "in_reply_to": 132, "type": "error_write_lock", "text": "already locked"}}
+DEBUG:root:received {"id":463,"src":"n2","dest":"n0","body":{"msg_id":141,"type":"read_server","key":1}}
+DEBUG:root:received {"id":464,"src":"n2","dest":"n0","body":{"msg_id":142,"in_reply_to":123,"type":"error_write_lock","text":"already locked"}}
+DEBUG:root:received {"id":467,"src":"n0","dest":"n0","body":{"msg_id":128,"in_reply_to":126,"type":"error_read","code":20,"text":"not found"}}
+DEBUG:root:received {"id":468,"src":"n1","dest":"n0","body":{"msg_id":135,"in_reply_to":125,"type":"error_read_lock","text":"already_locked"}}
+INFO:root:server n2 reading from 1
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 130, "in_reply_to": 141, "type": "error_read_lock", "text": "already_locked"}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 131, "type": "unlock"}}
+DEBUG:root:sending {"dest": "c10", "src": "n0", "body": {"msg_id": 132, "in_reply_to": 10, "type": "error", "code": 11, "text": "locked_state"}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 133, "type": "unlock"}}
+DEBUG:root:sending {"dest": "c9", "src": "n0", "body": {"msg_id": 134, "in_reply_to": 11, "type": "error", "code": 11, "text": "locked state"}}
+DEBUG:root:received {"id":478,"src":"n0","dest":"n0","body":{"msg_id":131,"type":"unlock"}}
+DEBUG:root:received {"id":482,"src":"c10","dest":"n0","body":{"key":1,"value":2,"type":"write","msg_id":11}}
+DEBUG:root:received {"id":483,"src":"c9","dest":"n0","body":{"key":1,"type":"read","msg_id":12}}
+INFO:root:node c10 writing to 1
+DEBUG:root:received {"id":480,"src":"n0","dest":"n0","body":{"msg_id":133,"type":"unlock"}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 135, "type": "read_lock", "key": 1, "value": 2}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 136, "type": "read_lock", "key": 1, "value": 2}}
+INFO:root:node c9 reading from 1
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 137, "type": "read_server", "key": 1}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 138, "type": "read_server", "key": 1}}
+DEBUG:root:received {"id":492,"src":"n0","dest":"n0","body":{"msg_id":136,"type":"read_lock","key":1,"value":2}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 139, "in_reply_to": 136, "type": "noKey", "text": "not found"}}
+DEBUG:root:received {"id":494,"src":"n0","dest":"n0","body":{"msg_id":138,"type":"read_server","key":1}}
+INFO:root:server n0 reading from 1
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 140, "in_reply_to": 138, "type": "error_read_lock", "text": "already_locked"}}
+DEBUG:root:received {"id":498,"src":"n0","dest":"n0","body":{"msg_id":139,"in_reply_to":136,"type":"noKey","text":"not found"}}
+DEBUG:root:received {"id":501,"src":"n0","dest":"n0","body":{"msg_id":140,"in_reply_to":138,"type":"error_read_lock","text":"already_locked"}}
+DEBUG:root:received {"id":502,"src":"n2","dest":"n0","body":{"msg_id":149,"type":"read_server","key":1}}
+INFO:root:server n2 reading from 1
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 141, "in_reply_to": 149, "type": "error_read_lock", "text": "already_locked"}}
+DEBUG:root:received {"id":505,"src":"n2","dest":"n0","body":{"msg_id":152,"in_reply_to":135,"type":"noKey","text":"not found"}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 142, "type": "write_server", "key": 1, "value": 2, "timestamp": 0}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 143, "type": "write_server", "key": 1, "value": 2, "timestamp": 0}}
+DEBUG:root:received {"id":506,"src":"n2","dest":"n0","body":{"msg_id":153,"in_reply_to":137,"type":"error_read_lock","text":"already_locked"}}
+DEBUG:root:sending {"dest": "c9", "src": "n0", "body": {"msg_id": 144, "in_reply_to": 12, "type": "error", "code": 11, "text": "locked state"}}
+DEBUG:root:received {"id":511,"src":"n2","dest":"n0","body":{"msg_id":155,"type":"cas_lock","key":1,"from":0,"to":4}}
+DEBUG:root:received {"id":520,"src":"c9","dest":"n0","body":{"key":1,"type":"read","msg_id":13}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 145, "in_reply_to": 155, "type": "error_cas_lock", "text": "already locked"}}
+DEBUG:root:received {"id":514,"src":"n1","dest":"n0","body":{"msg_id":148,"type":"read_server","key":1}}
+INFO:root:node c9 reading from 1
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 146, "type": "read_server", "key": 1}}
+DEBUG:root:received {"id":518,"src":"n0","dest":"n0","body":{"msg_id":143,"type":"write_server","key":1,"value":2,"timestamp":0}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 147, "type": "read_server", "key": 1}}
+INFO:root:server n1 reading from 1
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 148, "in_reply_to": 148, "type": "error_read_lock", "text": "already_locked"}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 149, "in_reply_to": 143, "type": "write_server_ok"}}
+DEBUG:root:received {"id":529,"src":"n0","dest":"n0","body":{"msg_id":147,"type":"read_server","key":1}}
+INFO:root:server n0 reading from 1
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 150, "in_reply_to": 147, "type": "read_server_ok", "value": {"value": 2, "timestamp": 0}}}
+DEBUG:root:received {"id":530,"src":"n2","dest":"n0","body":{"msg_id":158,"in_reply_to":142,"type":"write_server_ok"}}
+DEBUG:root:received {"id":532,"src":"n0","dest":"n0","body":{"msg_id":149,"in_reply_to":143,"type":"write_server_ok"}}
+DEBUG:root:sending {"dest": "c10", "src": "n0", "body": {"msg_id": 151, "in_reply_to": 11, "type": "write_ok"}}
+DEBUG:root:received {"id":535,"src":"n0","dest":"n0","body":{"msg_id":150,"in_reply_to":147,"type":"read_server_ok","value":{"value":2,"timestamp":0}}}
+DEBUG:root:received {"id":546,"src":"c10","dest":"n0","body":{"key":2,"value":3,"type":"write","msg_id":12}}
+DEBUG:root:received {"id":537,"src":"n2","dest":"n0","body":{"msg_id":159,"type":"read_server","key":2}}
+INFO:root:node c10 writing to 2
+DEBUG:root:received {"id":536,"src":"n1","dest":"n0","body":{"msg_id":155,"type":"read_lock","key":2,"value":2}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 152, "type": "read_lock", "key": 2, "value": 3}}
+DEBUG:root:received {"id":542,"src":"n2","dest":"n0","body":{"msg_id":161,"in_reply_to":146,"type":"read_server_ok","value":{"value":2,"timestamp":0}}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 153, "type": "read_lock", "key": 2, "value": 3}}
+DEBUG:root:received {"id":543,"src":"n2","dest":"n0","body":{"msg_id":162,"type":"unlock"}}
+INFO:root:server n2 reading from 2
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 154, "in_reply_to": 159, "type": "error_read_lock", "text": "already_locked"}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 155, "in_reply_to": 155, "type": "error_write_lock", "text": "already locked"}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 156, "type": "unlock_read", "code": 0, "value": 2}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 157, "type": "unlock_read", "code": 0, "value": 2}}
+DEBUG:root:received {"id":555,"src":"n0","dest":"n0","body":{"msg_id":153,"type":"read_lock","key":2,"value":3}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 158, "in_reply_to": 153, "type": "noKey", "text": "not found"}}
+DEBUG:root:received {"id":556,"src":"n1","dest":"n0","body":{"msg_id":160,"type":"read_server","key":2}}
+DEBUG:root:received {"id":561,"src":"n0","dest":"n0","body":{"msg_id":156,"type":"unlock_read","code":0,"value":2}}
+INFO:root:server n1 reading from 2
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 159, "in_reply_to": 160, "type": "error_read_lock", "text": "already_locked"}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 160, "in_reply_to": 156, "type": "unlock_read_ok", "code": 0, "value": 2}}
+DEBUG:root:received {"id":563,"src":"n0","dest":"n0","body":{"msg_id":158,"in_reply_to":153,"type":"noKey","text":"not found"}}
+DEBUG:root:received {"id":564,"src":"n1","dest":"n0","body":{"msg_id":163,"in_reply_to":152,"type":"error_write_lock","text":"already locked"}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 161, "type": "unlock"}}
+DEBUG:root:sending {"dest": "c10", "src": "n0", "body": {"msg_id": 162, "in_reply_to": 12, "type": "error", "code": 11, "text": "locked_state"}}
+DEBUG:root:received {"id":571,"src":"n0","dest":"n0","body":{"msg_id":160,"in_reply_to":156,"type":"unlock_read_ok","code":0,"value":2}}
+DEBUG:root:received {"id":574,"src":"n2","dest":"n0","body":{"msg_id":172,"in_reply_to":157,"type":"unlock_read_ok","code":0,"value":2}}
+DEBUG:root:sending {"dest": "c9", "src": "n0", "body": {"msg_id": 163, "in_reply_to": 13, "type": "read_ok", "value": 2}}
+DEBUG:root:received {"id":578,"src":"n0","dest":"n0","body":{"msg_id":161,"type":"unlock"}}
+DEBUG:root:received {"id":584,"src":"c10","dest":"n0","body":{"key":2,"from":3,"to":3,"type":"cas","msg_id":13}}
+DEBUG:root:received {"id":589,"src":"c9","dest":"n0","body":{"key":2,"type":"read","msg_id":14}}
+DEBUG:root:received {"id":580,"src":"n1","dest":"n0","body":{"msg_id":167,"type":"cas_lock","key":2,"from":2,"to":2}}
+INFO:root:node c10 comparing and setting
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 164, "type": "cas_lock", "key": 2, "from": 3, "to": 3}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 165, "type": "cas_lock", "key": 2, "from": 3, "to": 3}}
+INFO:root:node c9 reading from 2
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 166, "type": "read_server", "key": 2}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 167, "type": "read_server", "key": 2}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 168, "in_reply_to": 167, "type": "noKeyCas"}}
+DEBUG:root:received {"id":594,"src":"n0","dest":"n0","body":{"msg_id":166,"type":"read_server","key":2}}
+INFO:root:server n0 reading from 2
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 169, "in_reply_to": 166, "type": "error_read_lock", "text": "already_locked"}}
+DEBUG:root:received {"id":603,"src":"n1","dest":"n0","body":{"msg_id":174,"in_reply_to":164,"type":"error_cas_lock","text":"already locked"}}
+DEBUG:root:received {"id":604,"src":"n0","dest":"n0","body":{"msg_id":169,"in_reply_to":166,"type":"error_read_lock","text":"already_locked"}}
+DEBUG:root:received {"id":605,"src":"n2","dest":"n0","body":{"msg_id":180,"in_reply_to":165,"type":"error_cas_lock","text":"already locked"}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 170, "type": "unlock"}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 171, "type": "unlock"}}
+DEBUG:root:sending {"dest": "c10", "src": "n0", "body": {"msg_id": 172, "in_reply_to": 13, "type": "error", "code": 11, "text": "locked state"}}
+DEBUG:root:received {"id":606,"src":"n1","dest":"n0","body":{"msg_id":175,"in_reply_to":167,"type":"error_read_lock","text":"already_locked"}}
+DEBUG:root:received {"id":608,"src":"n1","dest":"n0","body":{"msg_id":177,"type":"unlock_cas","code":20}}
+DEBUG:root:sending {"dest": "c9", "src": "n0", "body": {"msg_id": 173, "in_reply_to": 14, "type": "error", "code": 11, "text": "locked state"}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 174, "in_reply_to": 177, "type": "unlock_cas_ok", "code": 20}}
+DEBUG:root:received {"id":626,"src":"c9","dest":"n0","body":{"key":2,"type":"read","msg_id":15}}
+INFO:root:node c9 reading from 2
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 175, "type": "read_server", "key": 2}}
+DEBUG:root:received {"id":627,"src":"c10","dest":"n0","body":{"key":2,"from":1,"to":3,"type":"cas","msg_id":14}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 176, "type": "read_server", "key": 2}}
+INFO:root:node c10 comparing and setting
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 177, "type": "cas_lock", "key": 2, "from": 1, "to": 3}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 178, "type": "cas_lock", "key": 2, "from": 1, "to": 3}}
+DEBUG:root:received {"id":629,"src":"n2","dest":"n0","body":{"msg_id":190,"type":"read_server","key":2}}
+INFO:root:server n2 reading from 2
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 179, "in_reply_to": 190, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":632,"src":"n0","dest":"n0","body":{"msg_id":176,"type":"read_server","key":2}}
+DEBUG:root:received {"id":634,"src":"n0","dest":"n0","body":{"msg_id":178,"type":"cas_lock","key":2,"from":1,"to":3}}
+INFO:root:server n0 reading from 2
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 180, "in_reply_to": 176, "type": "error_read_lock", "text": "already_locked"}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 181, "in_reply_to": 178, "type": "error_cas_lock", "text": "already locked"}}
+DEBUG:root:received {"id":642,"src":"n0","dest":"n0","body":{"msg_id":180,"in_reply_to":176,"type":"error_read_lock","text":"already_locked"}}
+DEBUG:root:received {"id":644,"src":"n1","dest":"n0","body":{"msg_id":184,"in_reply_to":175,"type":"error_read_lock","text":"already_locked"}}
+DEBUG:root:received {"id":643,"src":"n0","dest":"n0","body":{"msg_id":181,"in_reply_to":178,"type":"error_cas_lock","text":"already locked"}}
+DEBUG:root:received {"id":646,"src":"n1","dest":"n0","body":{"msg_id":185,"in_reply_to":177,"type":"error_cas_lock","text":"already locked"}}
+DEBUG:root:sending {"dest": "c9", "src": "n0", "body": {"msg_id": 182, "in_reply_to": 15, "type": "error", "code": 11, "text": "locked state"}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 183, "type": "unlock"}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 184, "type": "unlock"}}
+DEBUG:root:sending {"dest": "c10", "src": "n0", "body": {"msg_id": 185, "in_reply_to": 14, "type": "error", "code": 11, "text": "locked state"}}
+DEBUG:root:received {"id":649,"src":"n1","dest":"n0","body":{"msg_id":187,"type":"cas_lock","key":2,"from":2,"to":0}}
+DEBUG:root:received {"id":660,"src":"c9","dest":"n0","body":{"key":2,"type":"read","msg_id":16}}
+DEBUG:root:received {"id":661,"src":"c10","dest":"n0","body":{"key":2,"from":2,"to":1,"type":"cas","msg_id":15}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 186, "in_reply_to": 187, "type": "error_cas_lock", "text": "already locked"}}
+INFO:root:node c9 reading from 2
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 187, "type": "read_server", "key": 2}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 188, "type": "read_server", "key": 2}}
+INFO:root:node c10 comparing and setting
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 189, "type": "cas_lock", "key": 2, "from": 2, "to": 1}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 190, "type": "cas_lock", "key": 2, "from": 2, "to": 1}}
+DEBUG:root:received {"id":651,"src":"n2","dest":"n0","body":{"msg_id":194,"type":"unlock"}}
+DEBUG:root:received {"id":656,"src":"n0","dest":"n0","body":{"msg_id":183,"type":"unlock"}}
+DEBUG:root:received {"id":673,"src":"n2","dest":"n0","body":{"msg_id":200,"type":"read_server","key":2}}
+INFO:root:server n2 reading from 2
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 191, "in_reply_to": 200, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":674,"src":"n2","dest":"n0","body":{"msg_id":201,"in_reply_to":188,"type":"read_server_ok","value":{"value":1,"timestamp":0}}}
+DEBUG:root:received {"id":676,"src":"n2","dest":"n0","body":{"msg_id":202,"in_reply_to":190,"type":"error_cas_lock","text":"already locked"}}
+DEBUG:root:received {"id":677,"src":"n1","dest":"n0","body":{"msg_id":193,"type":"read_server","key":2}}
+DEBUG:root:received {"id":678,"src":"n1","dest":"n0","body":{"msg_id":194,"type":"unlock"}}
+INFO:root:server n1 reading from 2
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 192, "in_reply_to": 193, "type": "error_read_lock", "text": "already_locked"}}
+DEBUG:root:received {"id":681,"src":"n1","dest":"n0","body":{"msg_id":197,"in_reply_to":187,"type":"read_server_ok","value":{"value":1,"timestamp":0}}}
+DEBUG:root:received {"id":682,"src":"n1","dest":"n0","body":{"msg_id":198,"in_reply_to":189,"type":"error_cas_lock","text":"already locked"}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 193, "type": "unlock_read", "code": 0, "value": 1}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 194, "type": "unlock_read", "code": 0, "value": 1}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 195, "type": "unlock"}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 196, "type": "unlock"}}
+DEBUG:root:sending {"dest": "c10", "src": "n0", "body": {"msg_id": 197, "in_reply_to": 15, "type": "error", "code": 11, "text": "locked state"}}
+DEBUG:root:received {"id":694,"src":"n2","dest":"n0","body":{"msg_id":205,"type":"read_lock","key":2,"value":4}}
+DEBUG:root:received {"id":701,"src":"c10","dest":"n0","body":{"key":2,"from":1,"to":2,"type":"cas","msg_id":16}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 198, "in_reply_to": 205, "type": "noKey", "text": "not found"}}
+DEBUG:root:received {"id":699,"src":"n2","dest":"n0","body":{"msg_id":207,"type":"unlock"}}
+INFO:root:node c10 comparing and setting
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 199, "type": "cas_lock", "key": 2, "from": 1, "to": 2}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 200, "type": "cas_lock", "key": 2, "from": 1, "to": 2}}
+DEBUG:root:received {"id":705,"src":"n1","dest":"n0","body":{"msg_id":204,"in_reply_to":194,"type":"unlock_read_ok","code":0,"value":1}}
+DEBUG:root:received {"id":713,"src":"n2","dest":"n0","body":{"msg_id":211,"type":"read_server","key":2}}
+INFO:root:server n2 reading from 2
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 201, "in_reply_to": 211, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":714,"src":"n2","dest":"n0","body":{"msg_id":212,"in_reply_to":193,"type":"unlock_read_ok","code":0,"value":1}}
+DEBUG:root:sending {"dest": "c9", "src": "n0", "body": {"msg_id": 202, "in_reply_to": 16, "type": "read_ok", "value": 1}}
+DEBUG:root:received {"id":716,"src":"n1","dest":"n0","body":{"msg_id":207,"type":"read_server","key":2}}
+DEBUG:root:received {"id":727,"src":"c9","dest":"n0","body":{"key":2,"type":"read","msg_id":17}}
+INFO:root:server n1 reading from 2
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 203, "in_reply_to": 207, "type": "error_read_lock", "text": "already_locked"}}
+INFO:root:node c9 reading from 2
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 204, "type": "read_server", "key": 2}}
+DEBUG:root:received {"id":721,"src":"n2","dest":"n0","body":{"msg_id":213,"type":"write_server","key":2,"value":4,"timestamp":1}}
+DEBUG:root:received {"id":723,"src":"n1","dest":"n0","body":{"msg_id":211,"in_reply_to":199,"type":"error_cas_lock","text":"already locked"}}
+DEBUG:root:received {"id":725,"src":"n2","dest":"n0","body":{"msg_id":215,"in_reply_to":200,"type":"lock_ok_cas","value":{"value":1,"timestamp":0}}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 205, "type": "read_server", "key": 2}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 206, "in_reply_to": 213, "type": "write_server_ok"}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 207, "type": "unlock"}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 208, "type": "unlock"}}
+DEBUG:root:sending {"dest": "c10", "src": "n0", "body": {"msg_id": 209, "in_reply_to": 16, "type": "error", "code": 11, "text": "locked state"}}
+DEBUG:root:received {"id":729,"src":"n0","dest":"n0","body":{"msg_id":204,"type":"read_server","key":2}}
+DEBUG:root:received {"id":742,"src":"c10","dest":"n0","body":{"key":2,"value":4,"type":"write","msg_id":17}}
+DEBUG:root:received {"id":730,"src":"n2","dest":"n0","body":{"msg_id":216,"type":"unlock"}}
+DEBUG:root:received {"id":735,"src":"n1","dest":"n0","body":{"msg_id":214,"type":"cas_lock","key":2,"from":1,"to":4}}
+INFO:root:server n0 reading from 2
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 210, "in_reply_to": 204, "type": "read_server_ok", "value": {"value": 4, "timestamp": 1}}}
+INFO:root:node c10 writing to 2
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 211, "type": "read_lock", "key": 2, "value": 4}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 212, "type": "read_lock", "key": 2, "value": 4}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 213, "in_reply_to": 214, "type": "noMatch"}}
+DEBUG:root:received {"id":744,"src":"n2","dest":"n0","body":{"msg_id":218,"in_reply_to":205,"type":"error_read_lock","text":"already_locked"}}
+DEBUG:root:received {"id":746,"src":"n0","dest":"n0","body":{"msg_id":210,"in_reply_to":204,"type":"read_server_ok","value":{"value":4,"timestamp":1}}}
+DEBUG:root:received {"id":751,"src":"n2","dest":"n0","body":{"msg_id":220,"type":"read_server","key":2}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 214, "type": "unlock"}}
+DEBUG:root:sending {"dest": "c9", "src": "n0", "body": {"msg_id": 215, "in_reply_to": 17, "type": "error", "code": 11, "text": "locked state"}}
+INFO:root:server n2 reading from 2
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 216, "in_reply_to": 220, "type": "error_read_lock", "text": "already_locked"}}
+DEBUG:root:received {"id":755,"src":"n0","dest":"n0","body":{"msg_id":214,"type":"unlock"}}
+DEBUG:root:received {"id":767,"src":"c9","dest":"n0","body":{"key":2,"type":"read","msg_id":18}}
+DEBUG:root:received {"id":756,"src":"n2","dest":"n0","body":{"msg_id":222,"in_reply_to":211,"type":"lock_ok","value":{"value":1,"timestamp":0}}}
+INFO:root:node c9 reading from 2
+DEBUG:root:received {"id":762,"src":"n1","dest":"n0","body":{"msg_id":220,"in_reply_to":212,"type":"lock_ok","value":{"value":4,"timestamp":1}}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 217, "type": "read_server", "key": 2}}
+DEBUG:root:received {"id":763,"src":"n2","dest":"n0","body":{"msg_id":224,"type":"cas_lock","key":2,"from":1,"to":1}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 218, "type": "read_server", "key": 2}}
+DEBUG:root:received {"id":765,"src":"n1","dest":"n0","body":{"msg_id":222,"type":"unlock_cas","code":22}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 219, "type": "write_server", "key": 2, "value": 4, "timestamp": 2}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 220, "type": "write_server", "key": 2, "value": 4, "timestamp": 2}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 221, "in_reply_to": 224, "type": "noMatch"}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 222, "in_reply_to": 222, "type": "unlock_cas_ok", "code": 22}}
+DEBUG:root:received {"id":772,"src":"n0","dest":"n0","body":{"msg_id":217,"type":"read_server","key":2}}
+INFO:root:server n0 reading from 2
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 223, "in_reply_to": 217, "type": "read_server_ok", "value": {"value": 4, "timestamp": 1}}}
+DEBUG:root:received {"id":781,"src":"n2","dest":"n0","body":{"msg_id":229,"type":"read_server","key":2}}
+INFO:root:server n2 reading from 2
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 224, "in_reply_to": 229, "type": "error_read_lock", "text": "already_locked"}}
+DEBUG:root:received {"id":783,"src":"n0","dest":"n0","body":{"msg_id":223,"in_reply_to":217,"type":"read_server_ok","value":{"value":4,"timestamp":1}}}
+DEBUG:root:received {"id":784,"src":"n2","dest":"n0","body":{"msg_id":230,"in_reply_to":218,"type":"error_read_lock","text":"already_locked"}}
+DEBUG:root:received {"id":785,"src":"n2","dest":"n0","body":{"msg_id":231,"in_reply_to":219,"type":"write_server_ok"}}
+DEBUG:root:received {"id":786,"src":"n1","dest":"n0","body":{"msg_id":227,"in_reply_to":220,"type":"write_server_ok"}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 225, "type": "unlock"}}
+DEBUG:root:sending {"dest": "c9", "src": "n0", "body": {"msg_id": 226, "in_reply_to": 18, "type": "error", "code": 11, "text": "locked state"}}
+DEBUG:root:sending {"dest": "c10", "src": "n0", "body": {"msg_id": 227, "in_reply_to": 17, "type": "write_ok"}}
+DEBUG:root:received {"id":797,"src":"n2","dest":"n0","body":{"msg_id":235,"type":"read_lock","key":2,"value":4}}
+DEBUG:root:received {"id":805,"src":"c10","dest":"n0","body":{"key":2,"value":4,"type":"write","msg_id":18}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 228, "in_reply_to": 235, "type": "error_write_lock", "text": "already locked"}}
+DEBUG:root:received {"id":807,"src":"c9","dest":"n0","body":{"key":2,"type":"read","msg_id":19}}
+INFO:root:node c10 writing to 2
+DEBUG:root:received {"id":799,"src":"n0","dest":"n0","body":{"msg_id":225,"type":"unlock"}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 229, "type": "read_lock", "key": 2, "value": 4}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 230, "type": "read_lock", "key": 2, "value": 4}}
+INFO:root:node c9 reading from 2
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 231, "type": "read_server", "key": 2}}
+DEBUG:root:sending {"dest": "n1", "src": "n0", "body": {"msg_id": 232, "type": "read_server", "key": 2}}
+DEBUG:root:received {"id":812,"src":"n0","dest":"n0","body":{"msg_id":229,"type":"read_lock","key":2,"value":4}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 233, "in_reply_to": 229, "type": "lock_ok", "value": {"value": 4, "timestamp": 1}}}
+DEBUG:root:received {"id":821,"src":"n0","dest":"n0","body":{"msg_id":233,"in_reply_to":229,"type":"lock_ok","value":{"value":4,"timestamp":1}}}
+DEBUG:root:received {"id":822,"src":"n2","dest":"n0","body":{"msg_id":243,"in_reply_to":230,"type":"lock_ok","value":{"value":4,"timestamp":2}}}
+DEBUG:root:received {"id":823,"src":"n1","dest":"n0","body":{"msg_id":237,"in_reply_to":232,"type":"error_read_lock","text":"already_locked"}}
+DEBUG:root:received {"id":824,"src":"n2","dest":"n0","body":{"msg_id":244,"in_reply_to":231,"type":"error_read_lock","text":"already_locked"}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 234, "type": "write_server", "key": 2, "value": 4, "timestamp": 3}}
+DEBUG:root:sending {"dest": "n2", "src": "n0", "body": {"msg_id": 235, "type": "write_server", "key": 2, "value": 4, "timestamp": 3}}
+DEBUG:root:sending {"dest": "c9", "src": "n0", "body": {"msg_id": 236, "in_reply_to": 19, "type": "error", "code": 11, "text": "locked state"}}
+DEBUG:root:received {"id":828,"src":"n0","dest":"n0","body":{"msg_id":234,"type":"write_server","key":2,"value":4,"timestamp":3}}
+DEBUG:root:sending {"dest": "n0", "src": "n0", "body": {"msg_id": 237, "in_reply_to": 234, "type": "write_server_ok"}}
+DEBUG:root:received {"id":832,"src":"n0","dest":"n0","body":{"msg_id":237,"in_reply_to":234,"type":"write_server_ok"}}
+DEBUG:root:received {"id":831,"src":"n2","dest":"n0","body":{"msg_id":245,"in_reply_to":235,"type":"write_server_ok"}}
+DEBUG:root:sending {"dest": "c10", "src": "n0", "body": {"msg_id": 238, "in_reply_to": 18, "type": "write_ok"}}

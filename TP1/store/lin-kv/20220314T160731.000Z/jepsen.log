@@ -1,0 +1,281 @@
+2022-03-14 16:07:31,538{GMT}	INFO	[jepsen test runner] jepsen.core: Test version 27d9579673cbbd3e3fc3b39bf6527f054a0fab24 (plus uncommitted changes)
+2022-03-14 16:07:31,538{GMT}	INFO	[jepsen test runner] jepsen.core: Command line:
+lein run test --bin lin-kv.py --time-limit 10 --node-count 3 --concurrency 6 --workload lin-kv
+2022-03-14 16:07:31,617{GMT}	INFO	[jepsen test runner] jepsen.core: Running test:
+{:args []
+ :remote
+ #jepsen.control.retry.Remote{:remote #jepsen.control.scp.Remote{:cmd-remote #jepsen.control.clj_ssh.Remote{:concurrency-limit 8,
+                                                                                                            :conn-spec nil,
+                                                                                                            :session nil,
+                                                                                                            :semaphore nil},
+                                                                 :conn-spec nil},
+                              :conn nil}
+ :log-net-send false
+ :node-count 3
+ :max-txn-length 4
+ :concurrency 6
+ :db
+ #object[maelstrom.db$db$reify__16817
+         "0x4e4ee99"
+         "maelstrom.db$db$reify__16817@4e4ee99"]
+ :max-writes-per-key 16
+ :leave-db-running? false
+ :name "lin-kv"
+ :logging-json? false
+ :start-time
+ #object[org.joda.time.DateTime "0xa6cb2c9" "2022-03-14T16:07:31.000Z"]
+ :nemesis-interval 10
+ :net
+ #object[maelstrom.net$jepsen_net$reify__15673
+         "0x3c32f3d8"
+         "maelstrom.net$jepsen_net$reify__15673@3c32f3d8"]
+ :client
+ #object[maelstrom.workload.lin_kv$client$reify__17684
+         "0x46700301"
+         "maelstrom.workload.lin_kv$client$reify__17684@46700301"]
+ :barrier
+ #object[java.util.concurrent.CyclicBarrier
+         "0x17f4276b"
+         "java.util.concurrent.CyclicBarrier@17f4276b"]
+ :log-stderr false
+ :pure-generators true
+ :ssh {:dummy? true}
+ :rate 5
+ :checker
+ #object[jepsen.checker$compose$reify__8787
+         "0x786125a6"
+         "jepsen.checker$compose$reify__8787@786125a6"]
+ :argv
+ ("test"
+  "--bin"
+  "lin-kv.py"
+  "--time-limit"
+  "10"
+  "--node-count"
+  "3"
+  "--concurrency"
+  "6"
+  "--workload"
+  "lin-kv")
+ :nemesis
+ (jepsen.nemesis.ReflCompose
+  {:fm {:start-partition 0,
+        :stop-partition 0,
+        :kill 1,
+        :start 1,
+        :pause 1,
+        :resume 1},
+   :nemeses [#unprintable "jepsen.nemesis.combined$partition_nemesis$reify__17089@53e6b541"
+             #unprintable "jepsen.nemesis.combined$db_nemesis$reify__17070@1548dc37"]})
+ :nodes ["n0" "n1" "n2"]
+ :test-count 1
+ :latency {:mean 0, :dist :constant}
+ :bin "lin-kv.py"
+ :generator
+ (jepsen.generator.TimeLimit
+  {:limit 10000000000,
+   :cutoff nil,
+   :gen (jepsen.generator.Any
+         {:gens [(jepsen.generator.OnThreads {:f #{:nemesis}, :gen nil})
+                 (jepsen.generator.OnThreads
+                  {:f #object[clojure.core$complement$fn__5654
+                              "0x222af5ff"
+                              "clojure.core$complement$fn__5654@222af5ff"],
+                   :gen (jepsen.generator.Stagger
+                         {:dt 400000000,
+                          :next-time nil,
+                          :gen (jepsen.generator.OnThreads
+                                {:f #object[clojure.core$complement$fn__5654
+                                            "0x70721c2d"
+                                            "clojure.core$complement$fn__5654@70721c2d"],
+                                 :gen (jepsen.independent.ConcurrentGenerator
+                                       {:n 6,
+                                        :fgen #object[jepsen.tests.linearizable_register$test$fn__17484
+                                                      "0x73e21fb5"
+                                                      "jepsen.tests.linearizable_register$test$fn__17484@73e21fb5"],
+                                        :group->threads nil,
+                                        :thread->group nil,
+                                        :keys (0 1 2 3 4 5 6 7 ...),
+                                        :gens nil})})})})]})})
+ :log-net-recv false
+ :os
+ #object[maelstrom.net$jepsen_os$reify__15676
+         "0x17478cec"
+         "maelstrom.net$jepsen_os$reify__15676@17478cec"]
+ :time-limit 10
+ :workload :lin-kv
+ :consistency-models [:strict-serializable]
+ :topology :grid}
+
+2022-03-14 16:07:31,623{GMT}	INFO	[jepsen node n0] maelstrom.net: Starting Maelstrom network
+2022-03-14 16:07:31,624{GMT}	INFO	[jepsen test runner] jepsen.db: Tearing down DB
+2022-03-14 16:07:31,626{GMT}	INFO	[jepsen test runner] jepsen.db: Setting up DB
+2022-03-14 16:07:31,627{GMT}	INFO	[jepsen node n1] maelstrom.db: Setting up n1
+2022-03-14 16:07:31,627{GMT}	INFO	[jepsen node n2] maelstrom.db: Setting up n2
+2022-03-14 16:07:31,627{GMT}	INFO	[jepsen node n1] maelstrom.process: launching lin-kv.py []
+2022-03-14 16:07:31,627{GMT}	INFO	[jepsen node n2] maelstrom.process: launching lin-kv.py []
+2022-03-14 16:07:31,632{GMT}	INFO	[jepsen node n0] maelstrom.service: Starting services: (lin-kv lin-tso lww-kv seq-kv)
+2022-03-14 16:07:31,649{GMT}	INFO	[jepsen node n0] maelstrom.db: Setting up n0
+2022-03-14 16:07:31,650{GMT}	INFO	[jepsen node n0] maelstrom.process: launching lin-kv.py []
+2022-03-14 16:07:32,073{GMT}	INFO	[jepsen test runner] jepsen.core: Relative time begins now
+2022-03-14 16:07:32,108{GMT}	INFO	[jepsen worker 3] jepsen.util: 3	:invoke	:cas	[0 [2 1]]
+2022-03-14 16:07:32,111{GMT}	INFO	[jepsen worker 5] jepsen.util: 5	:invoke	:cas	[0 [2 2]]
+2022-03-14 16:07:32,142{GMT}	INFO	[jepsen worker 5] jepsen.util: 5	:info	:cas	[0 [2 2]]	[:unknown "not found"]
+2022-03-14 16:07:32,142{GMT}	INFO	[jepsen worker 3] jepsen.util: 3	:info	:cas	[0 [2 1]]	[:unknown "locked state"]
+2022-03-14 16:07:32,306{GMT}	INFO	[jepsen worker 4] jepsen.util: 4	:invoke	:cas	[0 [2 1]]
+2022-03-14 16:07:32,314{GMT}	INFO	[jepsen worker 4] jepsen.util: 4	:info	:cas	[0 [2 1]]	[:unknown "not found"]
+2022-03-14 16:07:32,661{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-14 16:07:32,683{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[0 nil]	[:unknown "not found"]
+2022-03-14 16:07:32,808{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-14 16:07:32,815{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[0 nil]	[:unknown "not found"]
+2022-03-14 16:07:33,003{GMT}	INFO	[jepsen worker 4] jepsen.util: 10	:invoke	:write	[0 3]
+2022-03-14 16:07:33,019{GMT}	INFO	[jepsen worker 3] jepsen.util: 9	:invoke	:cas	[0 [1 2]]
+2022-03-14 16:07:33,023{GMT}	INFO	[jepsen worker 4] jepsen.util: 10	:ok	:write	[0 3]
+2022-03-14 16:07:33,041{GMT}	INFO	[jepsen worker 3] jepsen.util: 9	:info	:cas	[0 [1 2]]	[:unknown "not found"]
+2022-03-14 16:07:33,413{GMT}	INFO	[jepsen worker 5] jepsen.util: 11	:invoke	:cas	[0 [0 3]]
+2022-03-14 16:07:33,423{GMT}	INFO	[jepsen worker 5] jepsen.util: 11	:info	:cas	[0 [0 3]]	[:unknown "not found"]
+2022-03-14 16:07:33,619{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-14 16:07:33,638{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 3]
+2022-03-14 16:07:33,869{GMT}	INFO	[jepsen worker 5] jepsen.util: 17	:invoke	:cas	[0 [4 3]]
+2022-03-14 16:07:33,888{GMT}	INFO	[jepsen worker 5] jepsen.util: 17	:info	:cas	[0 [4 3]]	[:unknown "does not match"]
+2022-03-14 16:07:34,141{GMT}	INFO	[jepsen worker 4] jepsen.util: 10	:invoke	:cas	[0 [4 1]]
+2022-03-14 16:07:34,153{GMT}	INFO	[jepsen worker 4] jepsen.util: 10	:info	:cas	[0 [4 1]]	[:unknown "not found"]
+2022-03-14 16:07:34,428{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[0 nil]
+2022-03-14 16:07:34,438{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:ok	:read	[0 3]
+2022-03-14 16:07:34,711{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-14 16:07:34,719{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 3]
+2022-03-14 16:07:35,079{GMT}	INFO	[jepsen worker 3] jepsen.util: 15	:invoke	:cas	[0 [1 0]]
+2022-03-14 16:07:35,092{GMT}	INFO	[jepsen worker 3] jepsen.util: 15	:info	:cas	[0 [1 0]]	[:unknown "does not match"]
+2022-03-14 16:07:35,442{GMT}	INFO	[jepsen worker 5] jepsen.util: 23	:invoke	:cas	[0 [2 1]]
+2022-03-14 16:07:35,460{GMT}	INFO	[jepsen worker 5] jepsen.util: 23	:info	:cas	[0 [2 1]]	[:unknown "does not match"]
+2022-03-14 16:07:35,720{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-14 16:07:35,729{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 3]
+2022-03-14 16:07:35,926{GMT}	INFO	[jepsen worker 4] jepsen.util: 16	:invoke	:cas	[0 [2 1]]
+2022-03-14 16:07:35,945{GMT}	INFO	[jepsen worker 4] jepsen.util: 16	:info	:cas	[0 [2 1]]	[:unknown "not found"]
+2022-03-14 16:07:36,290{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-14 16:07:36,300{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 3]
+2022-03-14 16:07:36,624{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-14 16:07:36,642{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 3]
+2022-03-14 16:07:36,760{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-14 16:07:36,767{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 3]
+2022-03-14 16:07:37,104{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-14 16:07:37,121{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 3]
+2022-03-14 16:07:37,499{GMT}	INFO	[jepsen worker 5] jepsen.util: 29	:invoke	:cas	[0 [2 0]]
+2022-03-14 16:07:37,507{GMT}	INFO	[jepsen worker 5] jepsen.util: 29	:info	:cas	[0 [2 0]]	[:unknown "not found"]
+2022-03-14 16:07:37,766{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-14 16:07:37,782{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 3]
+2022-03-14 16:07:38,026{GMT}	INFO	[jepsen worker 5] jepsen.util: 35	:invoke	:write	[0 4]
+2022-03-14 16:07:38,044{GMT}	INFO	[jepsen worker 5] jepsen.util: 35	:ok	:write	[0 4]
+2022-03-14 16:07:38,366{GMT}	INFO	[jepsen worker 3] jepsen.util: 21	:invoke	:cas	[0 [0 3]]
+2022-03-14 16:07:38,382{GMT}	INFO	[jepsen worker 3] jepsen.util: 21	:info	:cas	[0 [0 3]]	[:unknown "not found"]
+2022-03-14 16:07:38,528{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-14 16:07:38,537{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 4]
+2022-03-14 16:07:38,667{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-14 16:07:38,682{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 4]
+2022-03-14 16:07:38,826{GMT}	INFO	[jepsen worker 4] jepsen.util: 22	:invoke	:cas	[0 [3 2]]
+2022-03-14 16:07:38,844{GMT}	INFO	[jepsen worker 4] jepsen.util: 22	:info	:cas	[0 [3 2]]	[:unknown "not found"]
+2022-03-14 16:07:39,151{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-14 16:07:39,163{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 4]
+2022-03-14 16:07:39,466{GMT}	INFO	[jepsen worker 3] jepsen.util: 27	:invoke	:cas	[0 [4 1]]
+2022-03-14 16:07:39,480{GMT}	INFO	[jepsen worker 3] jepsen.util: 27	:ok	:cas	[0 [4 1]]
+2022-03-14 16:07:39,590{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-14 16:07:39,602{GMT}	INFO	[jepsen worker 4] jepsen.util: 28	:invoke	:cas	[0 [4 0]]
+2022-03-14 16:07:39,604{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 1]
+2022-03-14 16:07:39,618{GMT}	INFO	[jepsen worker 4] jepsen.util: 28	:info	:cas	[0 [4 0]]	[:unknown "does not match"]
+2022-03-14 16:07:39,809{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[0 nil]
+2022-03-14 16:07:39,825{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:ok	:read	[0 1]
+2022-03-14 16:07:40,159{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-14 16:07:40,167{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 1]
+2022-03-14 16:07:40,490{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-14 16:07:40,499{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 1]
+2022-03-14 16:07:40,632{GMT}	INFO	[jepsen worker 3] jepsen.util: 27	:invoke	:write	[0 0]
+2022-03-14 16:07:40,648{GMT}	INFO	[jepsen worker 3] jepsen.util: 27	:ok	:write	[0 0]
+2022-03-14 16:07:41,003{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-14 16:07:41,017{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 0]
+2022-03-14 16:07:41,098{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[0 nil]
+2022-03-14 16:07:41,111{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:ok	:read	[0 0]
+2022-03-14 16:07:41,422{GMT}	INFO	[jepsen worker 5] jepsen.util: 35	:invoke	:cas	[0 [3 3]]
+2022-03-14 16:07:41,429{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-14 16:07:41,433{GMT}	INFO	[jepsen worker 5] jepsen.util: 35	:info	:cas	[0 [3 3]]	[:unknown "does not match"]
+2022-03-14 16:07:41,436{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 0]
+2022-03-14 16:07:41,512{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[1 nil]
+2022-03-14 16:07:41,527{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[1 nil]	[:unknown "not found"]
+2022-03-14 16:07:41,722{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[1 nil]
+2022-03-14 16:07:41,738{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[1 nil]	[:unknown "not found"]
+2022-03-14 16:07:41,771{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[1 nil]
+2022-03-14 16:07:41,785{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[1 nil]	[:unknown "not found"]
+2022-03-14 16:07:41,957{GMT}	INFO	[jepsen worker 5] jepsen.util: 41	:invoke	:write	[1 1]
+2022-03-14 16:07:41,970{GMT}	INFO	[jepsen worker 5] jepsen.util: 41	:ok	:write	[1 1]
+2022-03-14 16:07:42,029{GMT}	INFO	[jepsen worker 3] jepsen.util: 27	:invoke	:write	[1 1]
+2022-03-14 16:07:42,041{GMT}	INFO	[jepsen worker 3] jepsen.util: 27	:ok	:write	[1 1]
+2022-03-14 16:07:42,054{GMT}	INFO	[jepsen node n0] maelstrom.db: Tearing down n0
+2022-03-14 16:07:42,054{GMT}	INFO	[jepsen node n2] maelstrom.db: Tearing down n2
+2022-03-14 16:07:42,054{GMT}	INFO	[jepsen node n1] maelstrom.db: Tearing down n1
+2022-03-14 16:07:43,657{GMT}	INFO	[jepsen node n0] maelstrom.net: Shutting down Maelstrom network
+2022-03-14 16:07:43,659{GMT}	INFO	[jepsen test runner] jepsen.core: Run complete, writing
+2022-03-14 16:07:43,670{GMT}	INFO	[jepsen test runner] jepsen.core: Analyzing...
+2022-03-14 16:07:43,754{GMT}	INFO	[clojure-agent-send-pool-1] jepsen.independent: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220314T160731.000Z/independent/1/results.edn
+2022-03-14 16:07:43,756{GMT}	INFO	[clojure-agent-send-pool-1] jepsen.independent: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220314T160731.000Z/independent/1/history.edn
+2022-03-14 16:07:43,797{GMT}	INFO	[clojure-agent-send-pool-0] jepsen.independent: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220314T160731.000Z/independent/0/results.edn
+2022-03-14 16:07:43,801{GMT}	INFO	[clojure-agent-send-pool-0] jepsen.independent: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220314T160731.000Z/independent/0/history.edn
+2022-03-14 16:07:43,918{GMT}	INFO	[jepsen test runner] jepsen.core: Analysis complete
+2022-03-14 16:07:43,933{GMT}	INFO	[jepsen results] jepsen.store: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220314T160731.000Z/results.edn
+2022-03-14 16:07:43,950{GMT}	INFO	[jepsen test runner] jepsen.core: {:perf {:latency-graph {:valid? true},
+        :rate-graph {:valid? true},
+        :valid? true},
+ :timeline {:valid? true},
+ :exceptions {:valid? true},
+ :stats {:valid? true,
+         :count 45,
+         :ok-count 25,
+         :fail-count 5,
+         :info-count 15,
+         :by-f {:cas {:valid? true,
+                      :count 16,
+                      :ok-count 1,
+                      :fail-count 0,
+                      :info-count 15},
+                :read {:valid? true,
+                       :count 24,
+                       :ok-count 19,
+                       :fail-count 5,
+                       :info-count 0},
+                :write {:valid? true,
+                        :count 5,
+                        :ok-count 5,
+                        :fail-count 0,
+                        :info-count 0}}},
+ :net {:all {:send-count 454,
+             :recv-count 454,
+             :msg-count 454,
+             :msgs-per-op 10.088889},
+       :clients {:send-count 96, :recv-count 96, :msg-count 96},
+       :servers {:send-count 358,
+                 :recv-count 358,
+                 :msg-count 358,
+                 :msgs-per-op 7.9555554},
+       :valid? true},
+ :workload {:valid? true,
+            :results {0 {:linearizable {:valid? true,
+                                        :model #knossos.model.CASRegister{:value 3},
+                                        :final-paths (),
+                                        :configs ()},
+                         :timeline {:valid? true},
+                         :valid? true},
+                      1 {:linearizable {:valid? true,
+                                        :configs ({:model #knossos.model.CASRegister{:value 1},
+                                                   :last-op {:process 27,
+                                                             :type :ok,
+                                                             :f :write,
+                                                             :value 1,
+                                                             :index 89,
+                                                             :time 9969122790},
+                                                   :pending []}),
+                                        :final-paths ()},
+                         :timeline {:valid? true},
+                         :valid? true}},
+            :failures []},
+ :valid? true}
+
+
+Everything looks good! ヽ(‘ー`)ノ

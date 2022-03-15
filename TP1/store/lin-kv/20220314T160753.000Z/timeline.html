@@ -1,0 +1,474 @@
+<html><head><style>.ops        { position: absolute; }
+.op         { position: absolute; padding: 2px; border-radius: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); transition: all 0.3s cubic-bezier(.25,.8,.25,1); overflow: hidden; }
+.op.invoke  { background: #eeeeee; }
+.op.ok      { background: #6DB6FE; }
+.op.info    { background: #FFAA26; }
+.op.fail    { background: #FEB5DA; }
+.op:target  { box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); }
+</style></head><body><div><a href="/">jepsen</a> / <a href="/files/lin-kv">lin-kv</a> / <a href="/files/lin-kv/20220314T160753.000Z">20220314T160753.000Z</a> / <a href="/files/lin-kv/20220314T160753.000Z/">independent</a> / <a href="/files/lin-kv/20220314T160753.000Z/independent/"></a></div><h1>lin-kv key </h1><div class="ops"><a href="#i1"><div class="op fail" id="i1" style="width:100;left:106;top:0;height:16" title="Dur: 23 ms
+Err: [:unknown &quot;not found&quot;]
+Wall-clock Time: 2022-03-14T16:07:53.034Z
+
+Op:
+{:process 1
+ :type :fail
+ :f :read
+ :index 1
+ :error [:unknown &quot;not found&quot;]
+ :value [0 nil]}">1 read [0 nil]</div></a><a href="#i3"><div class="op fail" id="i3" style="width:100;left:0;top:32;height:16" title="Dur: 7 ms
+Err: [:unknown &quot;not found&quot;]
+Wall-clock Time: 2022-03-14T16:07:53.042Z
+
+Op:
+{:process 0
+ :type :fail
+ :f :read
+ :index 3
+ :error [:unknown &quot;not found&quot;]
+ :value [0 nil]}">0 read [0 nil]</div></a><a href="#i5"><div class="op ok" id="i5" style="width:100;left:318;top:64;height:16" title="Dur: 7 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:07:53.096Z
+
+Op:
+{:process 3
+ :type :ok
+ :f :write
+ :index 5
+ :value [0 4]}">3 write [0 4]</div></a><a href="#i7"><div class="op ok" id="i7" style="width:100;left:0;top:96;height:16" title="Dur: 20 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:07:53.272Z
+
+Op:
+{:process 0
+ :type :ok
+ :f :read
+ :index 7
+ :value [0 4]}">0 read [0 4]</div></a><a href="#i9"><div class="op ok" id="i9" style="width:100;left:0;top:128;height:16" title="Dur: 11 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:07:53.596Z
+
+Op:
+{:process 0
+ :type :ok
+ :f :read
+ :index 9
+ :value [0 4]}">0 read [0 4]</div></a><a href="#i11"><div class="op ok" id="i11" style="width:100;left:318;top:160;height:16" title="Dur: 19 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:07:53.911Z
+
+Op:
+{:process 3
+ :type :ok
+ :f :write
+ :index 11
+ :value [0 0]}">3 write [0 0]</div></a><a href="#i13"><div class="op info" id="i13" style="width:100;left:530;top:192;height:1424" title="Dur: 13 ms
+Err: [:unknown &quot;does not match&quot;]
+Wall-clock Time: 2022-03-14T16:07:54.235Z
+
+Op:
+{:process 5
+ :type :info
+ :f :cas
+ :index 13
+ :error [:unknown &quot;does not match&quot;]
+ :value [0 [1 4]]}">5 cas [0 [1 4]]</div></a><a href="#i15"><div class="op ok" id="i15" style="width:100;left:0;top:224;height:16" title="Dur: 18 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:07:54.465Z
+
+Op:
+{:process 0
+ :type :ok
+ :f :read
+ :index 15
+ :value [0 0]}">0 read [0 0]</div></a><a href="#i17"><div class="op ok" id="i17" style="width:100;left:318;top:256;height:16" title="Dur: 20 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:07:54.649Z
+
+Op:
+{:process 3
+ :type :ok
+ :f :cas
+ :index 17
+ :value [0 [0 0]]}">3 cas [0 [0 0]]</div></a><a href="#i19"><div class="op info" id="i19" style="width:100;left:848;top:288;height:1328" title="Dur: 10 ms
+Err: [:unknown &quot;does not match&quot;]
+Wall-clock Time: 2022-03-14T16:07:54.970Z
+
+Op:
+{:process 11
+ :type :info
+ :f :cas
+ :index 19
+ :error [:unknown &quot;does not match&quot;]
+ :value [0 [3 1]]}">11 cas [0 [3 1]]</div></a><a href="#i21"><div class="op ok" id="i21" style="width:100;left:106;top:320;height:16" title="Dur: 19 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:07:55.095Z
+
+Op:
+{:process 1
+ :type :ok
+ :f :read
+ :index 21
+ :value [0 0]}">1 read [0 0]</div></a><a href="#i23"><div class="op info" id="i23" style="width:100;left:318;top:352;height:1264" title="Dur: 18 ms
+Err: [:unknown &quot;does not match&quot;]
+Wall-clock Time: 2022-03-14T16:07:55.278Z
+
+Op:
+{:process 3
+ :type :info
+ :f :cas
+ :index 23
+ :error [:unknown &quot;does not match&quot;]
+ :value [0 [4 0]]}">3 cas [0 [4 0]]</div></a><a href="#i25"><div class="op ok" id="i25" style="width:100;left:0;top:384;height:16" title="Dur: 11 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:07:55.586Z
+
+Op:
+{:process 0
+ :type :ok
+ :f :read
+ :index 25
+ :value [0 0]}">0 read [0 0]</div></a><a href="#i27"><div class="op ok" id="i27" style="width:100;left:212;top:416;height:16" title="Dur: 18 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:07:55.772Z
+
+Op:
+{:process 2
+ :type :ok
+ :f :read
+ :index 27
+ :value [0 0]}">2 read [0 0]</div></a><a href="#i29"><div class="op ok" id="i29" style="width:100;left:212;top:448;height:16" title="Dur: 16 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:07:55.795Z
+
+Op:
+{:process 2
+ :type :ok
+ :f :read
+ :index 29
+ :value [0 0]}">2 read [0 0]</div></a><a href="#i31"><div class="op ok" id="i31" style="width:100;left:0;top:480;height:16" title="Dur: 16 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:07:55.929Z
+
+Op:
+{:process 0
+ :type :ok
+ :f :read
+ :index 31
+ :value [0 0]}">0 read [0 0]</div></a><a href="#i33"><div class="op ok" id="i33" style="width:100;left:212;top:512;height:16" title="Dur: 17 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:07:55.963Z
+
+Op:
+{:process 2
+ :type :ok
+ :f :read
+ :index 33
+ :value [0 0]}">2 read [0 0]</div></a><a href="#i35"><div class="op ok" id="i35" style="width:100;left:1166;top:544;height:16" title="Dur: 16 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:07:56.092Z
+
+Op:
+{:process 17
+ :type :ok
+ :f :write
+ :index 35
+ :value [0 3]}">17 write [0 3]</div></a><a href="#i38"><div class="op ok" id="i38" style="width:100;left:212;top:576;height:32" title="Dur: 19 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:07:56.365Z
+
+Op:
+{:process 2
+ :type :ok
+ :f :read
+ :index 38
+ :value [0 3]}">2 read [0 3]</div></a><a href="#i39"><div class="op info" id="i39" style="width:100;left:1166;top:592;height:1024" title="Dur: 18 ms
+Err: [:unknown &quot;does not match&quot;]
+Wall-clock Time: 2022-03-14T16:07:56.379Z
+
+Op:
+{:process 17
+ :type :info
+ :f :cas
+ :index 39
+ :error [:unknown &quot;does not match&quot;]
+ :value [0 [1 3]]}">17 cas [0 [1 3]]</div></a><a href="#i41"><div class="op info" id="i41" style="width:100;left:636;top:640;height:976" title="Dur: 17 ms
+Err: [:unknown &quot;does not match&quot;]
+Wall-clock Time: 2022-03-14T16:07:56.775Z
+
+Op:
+{:process 9
+ :type :info
+ :f :cas
+ :index 41
+ :error [:unknown &quot;does not match&quot;]
+ :value [0 [2 4]]}">9 cas [0 [2 4]]</div></a><a href="#i43"><div class="op ok" id="i43" style="width:100;left:0;top:672;height:16" title="Dur: 17 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:07:57.118Z
+
+Op:
+{:process 0
+ :type :ok
+ :f :read
+ :index 43
+ :value [0 3]}">0 read [0 3]</div></a><a href="#i45"><div class="op ok" id="i45" style="width:100;left:0;top:704;height:16" title="Dur: 15 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:07:57.155Z
+
+Op:
+{:process 0
+ :type :ok
+ :f :read
+ :index 45
+ :value [0 3]}">0 read [0 3]</div></a><a href="#i47"><div class="op ok" id="i47" style="width:100;left:212;top:736;height:16" title="Dur: 9 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:07:57.487Z
+
+Op:
+{:process 2
+ :type :ok
+ :f :read
+ :index 47
+ :value [0 3]}">2 read [0 3]</div></a><a href="#i49"><div class="op ok" id="i49" style="width:100;left:1484;top:768;height:16" title="Dur: 13 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:07:57.712Z
+
+Op:
+{:process 23
+ :type :ok
+ :f :write
+ :index 49
+ :value [0 3]}">23 write [0 3]</div></a><a href="#i51"><div class="op info" id="i51" style="width:100;left:424;top:800;height:816" title="Dur: 11 ms
+Err: [:unknown &quot;does not match&quot;]
+Wall-clock Time: 2022-03-14T16:07:57.827Z
+
+Op:
+{:process 4
+ :type :info
+ :f :cas
+ :index 51
+ :error [:unknown &quot;does not match&quot;]
+ :value [0 [0 3]]}">4 cas [0 [0 3]]</div></a><a href="#i53"><div class="op ok" id="i53" style="width:100;left:0;top:832;height:16" title="Dur: 15 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:07:58.132Z
+
+Op:
+{:process 0
+ :type :ok
+ :f :read
+ :index 53
+ :value [0 3]}">0 read [0 3]</div></a><a href="#i55"><div class="op ok" id="i55" style="width:100;left:0;top:864;height:16" title="Dur: 14 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:07:58.289Z
+
+Op:
+{:process 0
+ :type :ok
+ :f :read
+ :index 55
+ :value [0 3]}">0 read [0 3]</div></a><a href="#i57"><div class="op info" id="i57" style="width:100;left:742;top:896;height:720" title="Dur: 18 ms
+Err: [:unknown &quot;does not match&quot;]
+Wall-clock Time: 2022-03-14T16:07:58.672Z
+
+Op:
+{:process 10
+ :type :info
+ :f :cas
+ :index 57
+ :error [:unknown &quot;does not match&quot;]
+ :value [0 [0 4]]}">10 cas [0 [0 4]]</div></a><a href="#i59"><div class="op ok" id="i59" style="width:100;left:106;top:928;height:16" title="Dur: 16 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:07:58.796Z
+
+Op:
+{:process 1
+ :type :ok
+ :f :read
+ :index 59
+ :value [0 3]}">1 read [0 3]</div></a><a href="#i61"><div class="op info" id="i61" style="width:100;left:954;top:960;height:656" title="Dur: 17 ms
+Err: [:unknown &quot;does not match&quot;]
+Wall-clock Time: 2022-03-14T16:07:58.989Z
+
+Op:
+{:process 15
+ :type :info
+ :f :cas
+ :index 61
+ :error [:unknown &quot;does not match&quot;]
+ :value [0 [2 3]]}">15 cas [0 [2 3]]</div></a><a href="#i63"><div class="op ok" id="i63" style="width:100;left:106;top:992;height:16" title="Dur: 10 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:07:59.297Z
+
+Op:
+{:process 1
+ :type :ok
+ :f :read
+ :index 63
+ :value [0 3]}">1 read [0 3]</div></a><a href="#i65"><div class="op ok" id="i65" style="width:100;left:106;top:1024;height:16" title="Dur: 18 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:07:59.633Z
+
+Op:
+{:process 1
+ :type :ok
+ :f :read
+ :index 65
+ :value [0 3]}">1 read [0 3]</div></a><a href="#i67"><div class="op ok" id="i67" style="width:100;left:0;top:1056;height:16" title="Dur: 15 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:07:59.713Z
+
+Op:
+{:process 0
+ :type :ok
+ :f :read
+ :index 67
+ :value [0 3]}">0 read [0 3]</div></a><a href="#i69"><div class="op info" id="i69" style="width:100;left:1060;top:1088;height:528" title="Dur: 6 ms
+Err: [:unknown &quot;does not match&quot;]
+Wall-clock Time: 2022-03-14T16:07:59.823Z
+
+Op:
+{:process 16
+ :type :info
+ :f :cas
+ :index 69
+ :error [:unknown &quot;does not match&quot;]
+ :value [0 [0 2]]}">16 cas [0 [0 2]]</div></a><a href="#i71"><div class="op info" id="i71" style="width:100;left:1484;top:1120;height:496" title="Dur: 16 ms
+Err: [:unknown &quot;does not match&quot;]
+Wall-clock Time: 2022-03-14T16:07:59.917Z
+
+Op:
+{:process 23
+ :type :info
+ :f :cas
+ :index 71
+ :error [:unknown &quot;does not match&quot;]
+ :value [0 [1 3]]}">23 cas [0 [1 3]]</div></a><a href="#i73"><div class="op info" id="i73" style="width:100;left:1590;top:1152;height:464" title="Dur: 4 ms
+Err: [:unknown &quot;does not match&quot;]
+Wall-clock Time: 2022-03-14T16:08:00.021Z
+
+Op:
+{:process 29
+ :type :info
+ :f :cas
+ :index 73
+ :error [:unknown &quot;does not match&quot;]
+ :value [0 [1 1]]}">29 cas [0 [1 1]]</div></a><a href="#i75"><div class="op info" id="i75" style="width:100;left:1696;top:1184;height:432" title="Dur: 5 ms
+Err: [:unknown &quot;does not match&quot;]
+Wall-clock Time: 2022-03-14T16:08:00.080Z
+
+Op:
+{:process 35
+ :type :info
+ :f :cas
+ :index 75
+ :error [:unknown &quot;does not match&quot;]
+ :value [0 [2 3]]}">35 cas [0 [2 3]]</div></a><a href="#i77"><div class="op ok" id="i77" style="width:100;left:106;top:1216;height:16" title="Dur: 15 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:08:00.320Z
+
+Op:
+{:process 1
+ :type :ok
+ :f :read
+ :index 77
+ :value [0 3]}">1 read [0 3]</div></a><a href="#i79"><div class="op ok" id="i79" style="width:100;left:106;top:1248;height:16" title="Dur: 10 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:08:00.458Z
+
+Op:
+{:process 1
+ :type :ok
+ :f :read
+ :index 79
+ :value [0 3]}">1 read [0 3]</div></a><a href="#i81"><div class="op ok" id="i81" style="width:100;left:1802;top:1280;height:16" title="Dur: 16 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:08:00.650Z
+
+Op:
+{:process 41
+ :type :ok
+ :f :write
+ :index 81
+ :value [0 2]}">41 write [0 2]</div></a><a href="#i83"><div class="op ok" id="i83" style="width:100;left:1378;top:1312;height:16" title="Dur: 10 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:08:00.871Z
+
+Op:
+{:process 22
+ :type :ok
+ :f :write
+ :index 83
+ :value [0 2]}">22 write [0 2]</div></a><a href="#i85"><div class="op ok" id="i85" style="width:100;left:0;top:1344;height:16" title="Dur: 11 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:08:00.946Z
+
+Op:
+{:process 0
+ :type :ok
+ :f :read
+ :index 85
+ :value [0 2]}">0 read [0 2]</div></a><a href="#i87"><div class="op ok" id="i87" style="width:100;left:212;top:1376;height:16" title="Dur: 8 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:08:01.274Z
+
+Op:
+{:process 2
+ :type :ok
+ :f :read
+ :index 87
+ :value [0 2]}">2 read [0 2]</div></a><a href="#i89"><div class="op ok" id="i89" style="width:100;left:1802;top:1408;height:16" title="Dur: 10 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:08:01.451Z
+
+Op:
+{:process 41
+ :type :ok
+ :f :write
+ :index 89
+ :value [0 3]}">41 write [0 3]</div></a><a href="#i91"><div class="op info" id="i91" style="width:100;left:1378;top:1440;height:176" title="Dur: 16 ms
+Err: [:unknown &quot;does not match&quot;]
+Wall-clock Time: 2022-03-14T16:08:01.825Z
+
+Op:
+{:process 22
+ :type :info
+ :f :cas
+ :index 91
+ :error [:unknown &quot;does not match&quot;]
+ :value [0 [4 3]]}">22 cas [0 [4 3]]</div></a><a href="#i93"><div class="op ok" id="i93" style="width:100;left:1802;top:1472;height:16" title="Dur: 15 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:08:02.082Z
+
+Op:
+{:process 41
+ :type :ok
+ :f :write
+ :index 93
+ :value [0 0]}">41 write [0 0]</div></a><a href="#i95"><div class="op ok" id="i95" style="width:100;left:106;top:1504;height:16" title="Dur: 16 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:08:02.278Z
+
+Op:
+{:process 1
+ :type :ok
+ :f :read
+ :index 95
+ :value [0 0]}">1 read [0 0]</div></a><a href="#i97"><div class="op ok" id="i97" style="width:100;left:1272;top:1536;height:16" title="Dur: 15 ms
+Err: nil
+Wall-clock Time: 2022-03-14T16:08:02.649Z
+
+Op:
+{:process 21
+ :type :ok
+ :f :cas
+ :index 97
+ :value [0 [0 0]]}">21 cas [0 [0 0]]</div></a><a href="#i99"><div class="op info" id="i99" style="width:100;left:1272;top:1568;height:48" title="Dur: 10 ms
+Err: [:unknown &quot;does not match&quot;]
+Wall-clock Time: 2022-03-14T16:08:03.003Z
+
+Op:
+{:process 21
+ :type :info
+ :f :cas
+ :index 99
+ :error [:unknown &quot;does not match&quot;]
+ :value [0 [1 4]]}">21 cas [0 [1 4]]</div></a></div></body></html>

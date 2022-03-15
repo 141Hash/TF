@@ -1,0 +1,96 @@
+{:type :invoke, :f :write, :value [0 3], :time 10277489, :process 5, :index 0}
+{:type :invoke, :f :cas, :value [0 [0 3]], :time 19270784, :process 4, :index 1}
+{:type :ok, :f :write, :value [0 3], :time 45141015, :process 5, :index 2}
+{:type :info, :f :cas, :value [0 [0 3]], :time 48365390, :process 4, :error [:unknown "not found"], :index 3}
+{:type :invoke, :f :read, :time 159015775, :process 1, :value [0 nil], :index 4}
+{:type :ok, :f :read, :time 168670686, :process 1, :value [0 3], :index 5}
+{:type :invoke, :f :read, :time 273203453, :process 1, :value [0 nil], :index 6}
+{:type :ok, :f :read, :time 281086344, :process 1, :value [0 3], :index 7}
+{:type :invoke, :f :read, :time 640918536, :process 0, :value [0 nil], :index 8}
+{:type :ok, :f :read, :time 649769480, :process 0, :value [0 3], :index 9}
+{:type :invoke, :f :write, :value [0 4], :time 956333937, :process 5, :index 10}
+{:type :ok, :f :write, :value [0 4], :time 976838308, :process 5, :index 11}
+{:type :invoke, :f :cas, :value [0 [1 0]], :time 1161340055, :process 5, :index 12}
+{:type :info, :f :cas, :value [0 [1 0]], :time 1168868788, :process 5, :error [:unknown "does not match"], :index 13}
+{:type :invoke, :f :read, :time 1473326156, :process 2, :value [0 nil], :index 14}
+{:type :ok, :f :read, :time 1495967225, :process 2, :value [0 4], :index 15}
+{:type :invoke, :f :read, :time 1843148166, :process 2, :value [0 nil], :index 16}
+{:type :ok, :f :read, :time 1854815089, :process 2, :value [0 4], :index 17}
+{:type :invoke, :f :read, :time 1866057132, :process 2, :value [0 nil], :index 18}
+{:type :ok, :f :read, :time 1874344036, :process 2, :value [0 4], :index 19}
+{:type :invoke, :f :read, :time 2087878873, :process 0, :value [0 nil], :index 20}
+{:type :ok, :f :read, :time 2106283796, :process 0, :value [0 4], :index 21}
+{:type :invoke, :f :write, :value [0 0], :time 2470036762, :process 11, :index 22}
+{:type :ok, :f :write, :value [0 0], :time 2483467903, :process 11, :index 23}
+{:type :invoke, :f :cas, :value [0 [0 1]], :time 2532477698, :process 3, :index 24}
+{:type :invoke, :f :read, :time 2551259341, :process 1, :value [0 nil], :index 25}
+{:type :ok, :f :cas, :value [0 [0 1]], :time 2553716315, :process 3, :index 26}
+{:type :ok, :f :read, :time 2569211818, :process 1, :value [0 1], :index 27}
+{:type :invoke, :f :read, :time 2861927178, :process 0, :value [0 nil], :index 28}
+{:type :ok, :f :read, :time 2875423706, :process 0, :value [0 1], :index 29}
+{:type :invoke, :f :cas, :value [0 [4 1]], :time 3141506760, :process 10, :index 30}
+{:type :ok, :f :cas, :value [0 [4 1]], :time 3159401651, :process 10, :index 31}
+{:type :invoke, :f :cas, :value [0 [3 3]], :time 3322601693, :process 11, :index 32}
+{:type :info, :f :cas, :value [0 [3 3]], :time 3340454720, :process 11, :error [:unknown "does not match"], :index 33}
+{:type :invoke, :f :cas, :value [0 [0 0]], :time 3705292510, :process 10, :index 34}
+{:type :info, :f :cas, :value [0 [0 0]], :time 3719007515, :process 10, :error [:unknown "does not match"], :index 35}
+{:type :invoke, :f :read, :time 3731233180, :process 1, :value [0 nil], :index 36}
+{:type :ok, :f :read, :time 3737129115, :process 1, :value [0 1], :index 37}
+{:type :invoke, :f :cas, :value [0 [0 1]], :time 4064887899, :process 3, :index 38}
+{:type :info, :f :cas, :value [0 [0 1]], :time 4073573142, :process 3, :error [:unknown "does not match"], :index 39}
+{:type :invoke, :f :cas, :value [0 [3 3]], :time 4371838945, :process 9, :index 40}
+{:type :info, :f :cas, :value [0 [3 3]], :time 4389205796, :process 9, :error [:unknown "does not match"], :index 41}
+{:type :invoke, :f :read, :time 4457925556, :process 0, :value [0 nil], :index 42}
+{:type :ok, :f :read, :time 4464125196, :process 0, :value [0 1], :index 43}
+{:type :invoke, :f :write, :value [0 3], :time 4803241846, :process 17, :index 44}
+{:type :ok, :f :write, :value [0 3], :time 4815546875, :process 17, :index 45}
+{:type :invoke, :f :read, :time 4866629190, :process 2, :value [0 nil], :index 46}
+{:type :ok, :f :read, :time 4872612437, :process 2, :value [0 3], :index 47}
+{:type :invoke, :f :cas, :value [0 [1 0]], :time 5256570943, :process 16, :index 48}
+{:type :info, :f :cas, :value [0 [1 0]], :time 5269977635, :process 16, :error [:unknown "does not match"], :index 49}
+{:type :invoke, :f :cas, :value [0 [4 1]], :time 5436153156, :process 17, :index 50}
+{:type :info, :f :cas, :value [0 [4 1]], :time 5448122598, :process 17, :error [:unknown "does not match"], :index 51}
+{:type :invoke, :f :cas, :value [0 [4 0]], :time 5497772687, :process 23, :index 52}
+{:type :info, :f :cas, :value [0 [4 0]], :time 5517573336, :process 23, :error [:unknown "does not match"], :index 53}
+{:type :invoke, :f :read, :time 5849370571, :process 1, :value [0 nil], :index 54}
+{:type :ok, :f :read, :time 5866624497, :process 1, :value [0 3], :index 55}
+{:type :invoke, :f :write, :value [0 0], :time 5882099493, :process 22, :index 56}
+{:type :ok, :f :write, :value [0 0], :time 5894533253, :process 22, :index 57}
+{:type :invoke, :f :write, :value [0 0], :time 6064469860, :process 15, :index 58}
+{:type :ok, :f :write, :value [0 0], :time 6082041911, :process 15, :index 59}
+{:type :invoke, :f :cas, :value [0 [1 0]], :time 6178692449, :process 29, :index 60}
+{:type :info, :f :cas, :value [0 [1 0]], :time 6195933063, :process 29, :error [:unknown "does not match"], :index 61}
+{:type :invoke, :f :cas, :value [0 [2 3]], :time 6312560071, :process 22, :index 62}
+{:type :info, :f :cas, :value [0 [2 3]], :time 6329620261, :process 22, :error [:unknown "does not match"], :index 63}
+{:type :invoke, :f :write, :value [0 1], :time 6663470133, :process 35, :index 64}
+{:type :ok, :f :write, :value [0 1], :time 6673844484, :process 35, :index 65}
+{:type :invoke, :f :read, :time 6717144499, :process 0, :value [0 nil], :index 66}
+{:type :invoke, :f :read, :time 6720619060, :process 1, :value [0 nil], :index 67}
+{:type :ok, :f :read, :time 6727530539, :process 0, :value [0 1], :index 68}
+{:type :fail, :f :read, :time 6728259170, :process 1, :value [0 nil], :error [:unknown "locked state"], :index 69}
+{:type :invoke, :f :cas, :value [0 [0 2]], :time 6993570137, :process 35, :index 70}
+{:type :info, :f :cas, :value [0 [0 2]], :time 7010628831, :process 35, :error [:unknown "does not match"], :index 71}
+{:type :invoke, :f :read, :time 7367160565, :process 1, :value [0 nil], :index 72}
+{:type :ok, :f :read, :time 7381488895, :process 1, :value [0 1], :index 73}
+{:type :invoke, :f :cas, :value [0 [0 4]], :time 7592521939, :process 28, :index 74}
+{:type :info, :f :cas, :value [0 [0 4]], :time 7608258169, :process 28, :error [:unknown "does not match"], :index 75}
+{:type :invoke, :f :read, :time 7931925973, :process 1, :value [0 nil], :index 76}
+{:type :ok, :f :read, :time 7939718437, :process 1, :value [0 1], :index 77}
+{:type :invoke, :f :read, :time 8077283555, :process 1, :value [0 nil], :index 78}
+{:type :ok, :f :read, :time 8091808028, :process 1, :value [0 1], :index 79}
+{:type :invoke, :f :cas, :value [0 [2 0]], :time 8148920427, :process 41, :index 80}
+{:type :info, :f :cas, :value [0 [2 0]], :time 8163887626, :process 41, :error [:unknown "does not match"], :index 81}
+{:type :invoke, :f :write, :value [0 4], :time 8537999767, :process 47, :index 82}
+{:type :invoke, :f :cas, :value [0 [4 0]], :time 8541505324, :process 15, :index 83}
+{:type :ok, :f :write, :value [0 4], :time 8548081667, :process 47, :index 84}
+{:type :info, :f :cas, :value [0 [4 0]], :time 8548708984, :process 15, :error [:unknown "does not match"], :index 85}
+{:type :invoke, :f :read, :time 8927291921, :process 1, :value [1 nil], :index 86}
+{:type :fail, :f :read, :time 8945381895, :process 1, :value [1 nil], :error [:unknown "not found"], :index 87}
+{:type :invoke, :f :read, :time 9229282638, :process 0, :value [1 nil], :index 88}
+{:type :fail, :f :read, :time 9236469493, :process 0, :value [1 nil], :error [:unknown "not found"], :index 89}
+{:type :invoke, :f :cas, :value [1 [1 4]], :time 9530855923, :process 34, :index 90}
+{:type :info, :f :cas, :value [1 [1 4]], :time 9546651073, :process 34, :error [:unknown "not found"], :index 91}
+{:type :invoke, :f :cas, :value [1 [0 0]], :time 9624107199, :process 40, :index 92}
+{:type :info, :f :cas, :value [1 [0 0]], :time 9639038692, :process 40, :error [:unknown "not found"], :index 93}
+{:type :invoke, :f :read, :time 9979223151, :process 1, :value [1 nil], :index 94}
+{:type :fail, :f :read, :time 9995857352, :process 1, :value [1 nil], :error [:unknown "not found"], :index 95}

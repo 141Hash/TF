@@ -1,0 +1,422 @@
+2022-03-15 09:08:22,949{GMT}	INFO	[jepsen test runner] jepsen.core: Test version f88ae9bc7fe6ec2e97f6a8e32be7d5f0a3d07165 (plus uncommitted changes)
+2022-03-15 09:08:22,949{GMT}	INFO	[jepsen test runner] jepsen.core: Command line:
+lein run test --bin lin-kv.py --time-limit 10 --node-count 3 --concurrency 6 --workload lin-kv
+2022-03-15 09:08:23,021{GMT}	INFO	[jepsen test runner] jepsen.core: Running test:
+{:args []
+ :remote
+ #jepsen.control.retry.Remote{:remote #jepsen.control.scp.Remote{:cmd-remote #jepsen.control.clj_ssh.Remote{:concurrency-limit 8,
+                                                                                                            :conn-spec nil,
+                                                                                                            :session nil,
+                                                                                                            :semaphore nil},
+                                                                 :conn-spec nil},
+                              :conn nil}
+ :log-net-send false
+ :node-count 3
+ :max-txn-length 4
+ :concurrency 6
+ :db
+ #object[maelstrom.db$db$reify__16817
+         "0x73344f4a"
+         "maelstrom.db$db$reify__16817@73344f4a"]
+ :max-writes-per-key 16
+ :leave-db-running? false
+ :name "lin-kv"
+ :logging-json? false
+ :start-time
+ #object[org.joda.time.DateTime "0x295f115d" "2022-03-15T09:08:22.000Z"]
+ :nemesis-interval 10
+ :net
+ #object[maelstrom.net$jepsen_net$reify__15673
+         "0xa6cb2c9"
+         "maelstrom.net$jepsen_net$reify__15673@a6cb2c9"]
+ :client
+ #object[maelstrom.workload.lin_kv$client$reify__17684
+         "0x3c32f3d8"
+         "maelstrom.workload.lin_kv$client$reify__17684@3c32f3d8"]
+ :barrier
+ #object[java.util.concurrent.CyclicBarrier
+         "0x46700301"
+         "java.util.concurrent.CyclicBarrier@46700301"]
+ :log-stderr false
+ :pure-generators true
+ :ssh {:dummy? true}
+ :rate 5
+ :checker
+ #object[jepsen.checker$compose$reify__8787
+         "0x17f4276b"
+         "jepsen.checker$compose$reify__8787@17f4276b"]
+ :argv
+ ("test"
+  "--bin"
+  "lin-kv.py"
+  "--time-limit"
+  "10"
+  "--node-count"
+  "3"
+  "--concurrency"
+  "6"
+  "--workload"
+  "lin-kv")
+ :nemesis
+ (jepsen.nemesis.ReflCompose
+  {:fm {:start-partition 0,
+        :stop-partition 0,
+        :kill 1,
+        :start 1,
+        :pause 1,
+        :resume 1},
+   :nemeses [#unprintable "jepsen.nemesis.combined$partition_nemesis$reify__17089@786125a6"
+             #unprintable "jepsen.nemesis.combined$db_nemesis$reify__17070@53e6b541"]})
+ :nodes ["n0" "n1" "n2"]
+ :test-count 1
+ :latency {:mean 0, :dist :constant}
+ :bin "lin-kv.py"
+ :generator
+ (jepsen.generator.TimeLimit
+  {:limit 10000000000,
+   :cutoff nil,
+   :gen (jepsen.generator.Any
+         {:gens [(jepsen.generator.OnThreads {:f #{:nemesis}, :gen nil})
+                 (jepsen.generator.OnThreads
+                  {:f #object[clojure.core$complement$fn__5654
+                              "0x642ebd4c"
+                              "clojure.core$complement$fn__5654@642ebd4c"],
+                   :gen (jepsen.generator.Stagger
+                         {:dt 400000000,
+                          :next-time nil,
+                          :gen (jepsen.generator.OnThreads
+                                {:f #object[clojure.core$complement$fn__5654
+                                            "0x222af5ff"
+                                            "clojure.core$complement$fn__5654@222af5ff"],
+                                 :gen (jepsen.independent.ConcurrentGenerator
+                                       {:n 6,
+                                        :fgen #object[jepsen.tests.linearizable_register$test$fn__17484
+                                                      "0x70721c2d"
+                                                      "jepsen.tests.linearizable_register$test$fn__17484@70721c2d"],
+                                        :group->threads nil,
+                                        :thread->group nil,
+                                        :keys (0 1 2 3 4 5 6 7 ...),
+                                        :gens nil})})})})]})})
+ :log-net-recv false
+ :os
+ #object[maelstrom.net$jepsen_os$reify__15676
+         "0x62371858"
+         "maelstrom.net$jepsen_os$reify__15676@62371858"]
+ :time-limit 10
+ :workload :lin-kv
+ :consistency-models [:strict-serializable]
+ :topology :grid}
+
+2022-03-15 09:08:23,030{GMT}	INFO	[jepsen node n0] maelstrom.net: Starting Maelstrom network
+2022-03-15 09:08:23,040{GMT}	INFO	[jepsen test runner] jepsen.db: Tearing down DB
+2022-03-15 09:08:23,050{GMT}	INFO	[jepsen test runner] jepsen.db: Setting up DB
+2022-03-15 09:08:23,052{GMT}	INFO	[jepsen node n1] maelstrom.db: Setting up n1
+2022-03-15 09:08:23,053{GMT}	INFO	[jepsen node n1] maelstrom.process: launching lin-kv.py []
+2022-03-15 09:08:23,055{GMT}	INFO	[jepsen node n2] maelstrom.db: Setting up n2
+2022-03-15 09:08:23,055{GMT}	INFO	[jepsen node n2] maelstrom.process: launching lin-kv.py []
+2022-03-15 09:08:23,062{GMT}	INFO	[jepsen node n0] maelstrom.service: Starting services: (lin-kv lin-tso lww-kv seq-kv)
+2022-03-15 09:08:23,097{GMT}	INFO	[jepsen node n0] maelstrom.db: Setting up n0
+2022-03-15 09:08:23,098{GMT}	INFO	[jepsen node n0] maelstrom.process: launching lin-kv.py []
+2022-03-15 09:08:23,661{GMT}	INFO	[jepsen test runner] jepsen.core: Relative time begins now
+2022-03-15 09:08:23,689{GMT}	INFO	[jepsen worker 5] jepsen.util: 5	:invoke	:write	[0 3]
+2022-03-15 09:08:23,689{GMT}	INFO	[jepsen worker 4] jepsen.util: 4	:invoke	:cas	[0 [0 3]]
+2022-03-15 09:08:23,705{GMT}	INFO	[jepsen worker 5] jepsen.util: 5	:ok	:write	[0 3]
+2022-03-15 09:08:23,708{GMT}	INFO	[jepsen worker 4] jepsen.util: 4	:info	:cas	[0 [0 3]]	[:unknown "not found"]
+2022-03-15 09:08:23,820{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-15 09:08:23,829{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 3]
+2022-03-15 09:08:23,934{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-15 09:08:23,941{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 3]
+2022-03-15 09:08:24,302{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-15 09:08:24,310{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 3]
+2022-03-15 09:08:24,619{GMT}	INFO	[jepsen worker 5] jepsen.util: 5	:invoke	:write	[0 4]
+2022-03-15 09:08:24,637{GMT}	INFO	[jepsen worker 5] jepsen.util: 5	:ok	:write	[0 4]
+2022-03-15 09:08:24,822{GMT}	INFO	[jepsen worker 5] jepsen.util: 5	:invoke	:cas	[0 [1 0]]
+2022-03-15 09:08:24,829{GMT}	INFO	[jepsen worker 5] jepsen.util: 5	:info	:cas	[0 [1 0]]	[:unknown "does not match"]
+2022-03-15 09:08:25,135{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[0 nil]
+2022-03-15 09:08:25,156{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:ok	:read	[0 4]
+2022-03-15 09:08:25,505{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[0 nil]
+2022-03-15 09:08:25,515{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:ok	:read	[0 4]
+2022-03-15 09:08:25,527{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[0 nil]
+2022-03-15 09:08:25,534{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:ok	:read	[0 4]
+2022-03-15 09:08:25,750{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-15 09:08:25,766{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 4]
+2022-03-15 09:08:26,132{GMT}	INFO	[jepsen worker 5] jepsen.util: 11	:invoke	:write	[0 0]
+2022-03-15 09:08:26,144{GMT}	INFO	[jepsen worker 5] jepsen.util: 11	:ok	:write	[0 0]
+2022-03-15 09:08:26,194{GMT}	INFO	[jepsen worker 3] jepsen.util: 3	:invoke	:cas	[0 [0 1]]
+2022-03-15 09:08:26,213{GMT}	INFO	[jepsen worker 3] jepsen.util: 3	:ok	:cas	[0 [0 1]]
+2022-03-15 09:08:26,214{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-15 09:08:26,229{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 1]
+2022-03-15 09:08:26,524{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-15 09:08:26,535{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 1]
+2022-03-15 09:08:26,804{GMT}	INFO	[jepsen worker 4] jepsen.util: 10	:invoke	:cas	[0 [4 1]]
+2022-03-15 09:08:26,820{GMT}	INFO	[jepsen worker 4] jepsen.util: 10	:ok	:cas	[0 [4 1]]
+2022-03-15 09:08:26,985{GMT}	INFO	[jepsen worker 5] jepsen.util: 11	:invoke	:cas	[0 [3 3]]
+2022-03-15 09:08:27,001{GMT}	INFO	[jepsen worker 5] jepsen.util: 11	:info	:cas	[0 [3 3]]	[:unknown "does not match"]
+2022-03-15 09:08:27,367{GMT}	INFO	[jepsen worker 4] jepsen.util: 10	:invoke	:cas	[0 [0 0]]
+2022-03-15 09:08:27,379{GMT}	INFO	[jepsen worker 4] jepsen.util: 10	:info	:cas	[0 [0 0]]	[:unknown "does not match"]
+2022-03-15 09:08:27,392{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-15 09:08:27,397{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 1]
+2022-03-15 09:08:27,727{GMT}	INFO	[jepsen worker 3] jepsen.util: 3	:invoke	:cas	[0 [0 1]]
+2022-03-15 09:08:27,734{GMT}	INFO	[jepsen worker 3] jepsen.util: 3	:info	:cas	[0 [0 1]]	[:unknown "does not match"]
+2022-03-15 09:08:28,034{GMT}	INFO	[jepsen worker 3] jepsen.util: 9	:invoke	:cas	[0 [3 3]]
+2022-03-15 09:08:28,049{GMT}	INFO	[jepsen worker 3] jepsen.util: 9	:info	:cas	[0 [3 3]]	[:unknown "does not match"]
+2022-03-15 09:08:28,119{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-15 09:08:28,124{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 1]
+2022-03-15 09:08:28,465{GMT}	INFO	[jepsen worker 5] jepsen.util: 17	:invoke	:write	[0 3]
+2022-03-15 09:08:28,476{GMT}	INFO	[jepsen worker 5] jepsen.util: 17	:ok	:write	[0 3]
+2022-03-15 09:08:28,527{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[0 nil]
+2022-03-15 09:08:28,533{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:ok	:read	[0 3]
+2022-03-15 09:08:28,919{GMT}	INFO	[jepsen worker 4] jepsen.util: 16	:invoke	:cas	[0 [1 0]]
+2022-03-15 09:08:28,930{GMT}	INFO	[jepsen worker 4] jepsen.util: 16	:info	:cas	[0 [1 0]]	[:unknown "does not match"]
+2022-03-15 09:08:29,098{GMT}	INFO	[jepsen worker 5] jepsen.util: 17	:invoke	:cas	[0 [4 1]]
+2022-03-15 09:08:29,108{GMT}	INFO	[jepsen worker 5] jepsen.util: 17	:info	:cas	[0 [4 1]]	[:unknown "does not match"]
+2022-03-15 09:08:29,160{GMT}	INFO	[jepsen worker 5] jepsen.util: 23	:invoke	:cas	[0 [4 0]]
+2022-03-15 09:08:29,178{GMT}	INFO	[jepsen worker 5] jepsen.util: 23	:info	:cas	[0 [4 0]]	[:unknown "does not match"]
+2022-03-15 09:08:29,511{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-15 09:08:29,527{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 3]
+2022-03-15 09:08:29,544{GMT}	INFO	[jepsen worker 4] jepsen.util: 22	:invoke	:write	[0 0]
+2022-03-15 09:08:29,555{GMT}	INFO	[jepsen worker 4] jepsen.util: 22	:ok	:write	[0 0]
+2022-03-15 09:08:29,726{GMT}	INFO	[jepsen worker 3] jepsen.util: 15	:invoke	:write	[0 0]
+2022-03-15 09:08:29,742{GMT}	INFO	[jepsen worker 3] jepsen.util: 15	:ok	:write	[0 0]
+2022-03-15 09:08:29,841{GMT}	INFO	[jepsen worker 5] jepsen.util: 29	:invoke	:cas	[0 [1 0]]
+2022-03-15 09:08:29,856{GMT}	INFO	[jepsen worker 5] jepsen.util: 29	:info	:cas	[0 [1 0]]	[:unknown "does not match"]
+2022-03-15 09:08:29,974{GMT}	INFO	[jepsen worker 4] jepsen.util: 22	:invoke	:cas	[0 [2 3]]
+2022-03-15 09:08:29,990{GMT}	INFO	[jepsen worker 4] jepsen.util: 22	:info	:cas	[0 [2 3]]	[:unknown "does not match"]
+2022-03-15 09:08:30,325{GMT}	INFO	[jepsen worker 5] jepsen.util: 35	:invoke	:write	[0 1]
+2022-03-15 09:08:30,334{GMT}	INFO	[jepsen worker 5] jepsen.util: 35	:ok	:write	[0 1]
+2022-03-15 09:08:30,379{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-15 09:08:30,382{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-15 09:08:30,388{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 1]
+2022-03-15 09:08:30,388{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[0 nil]	[:unknown "locked state"]
+2022-03-15 09:08:30,656{GMT}	INFO	[jepsen worker 5] jepsen.util: 35	:invoke	:cas	[0 [0 2]]
+2022-03-15 09:08:30,671{GMT}	INFO	[jepsen worker 5] jepsen.util: 35	:info	:cas	[0 [0 2]]	[:unknown "does not match"]
+2022-03-15 09:08:31,029{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-15 09:08:31,042{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 1]
+2022-03-15 09:08:31,254{GMT}	INFO	[jepsen worker 4] jepsen.util: 28	:invoke	:cas	[0 [0 4]]
+2022-03-15 09:08:31,268{GMT}	INFO	[jepsen worker 4] jepsen.util: 28	:info	:cas	[0 [0 4]]	[:unknown "does not match"]
+2022-03-15 09:08:31,594{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-15 09:08:31,600{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 1]
+2022-03-15 09:08:31,739{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-15 09:08:31,752{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 1]
+2022-03-15 09:08:31,810{GMT}	INFO	[jepsen worker 5] jepsen.util: 41	:invoke	:cas	[0 [2 0]]
+2022-03-15 09:08:31,824{GMT}	INFO	[jepsen worker 5] jepsen.util: 41	:info	:cas	[0 [2 0]]	[:unknown "does not match"]
+2022-03-15 09:08:32,200{GMT}	INFO	[jepsen worker 5] jepsen.util: 47	:invoke	:write	[0 4]
+2022-03-15 09:08:32,203{GMT}	INFO	[jepsen worker 3] jepsen.util: 15	:invoke	:cas	[0 [4 0]]
+2022-03-15 09:08:32,208{GMT}	INFO	[jepsen worker 5] jepsen.util: 47	:ok	:write	[0 4]
+2022-03-15 09:08:32,209{GMT}	INFO	[jepsen worker 3] jepsen.util: 15	:info	:cas	[0 [4 0]]	[:unknown "does not match"]
+2022-03-15 09:08:32,590{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[1 nil]
+2022-03-15 09:08:32,606{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[1 nil]	[:unknown "not found"]
+2022-03-15 09:08:32,891{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[1 nil]
+2022-03-15 09:08:32,896{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[1 nil]	[:unknown "not found"]
+2022-03-15 09:08:33,193{GMT}	INFO	[jepsen worker 4] jepsen.util: 34	:invoke	:cas	[1 [1 4]]
+2022-03-15 09:08:33,207{GMT}	INFO	[jepsen worker 4] jepsen.util: 34	:info	:cas	[1 [1 4]]	[:unknown "not found"]
+2022-03-15 09:08:33,286{GMT}	INFO	[jepsen worker 4] jepsen.util: 40	:invoke	:cas	[1 [0 0]]
+2022-03-15 09:08:33,299{GMT}	INFO	[jepsen worker 4] jepsen.util: 40	:info	:cas	[1 [0 0]]	[:unknown "not found"]
+2022-03-15 09:08:33,641{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[1 nil]
+2022-03-15 09:08:33,656{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[1 nil]	[:unknown "not found"]
+2022-03-15 09:08:33,668{GMT}	INFO	[jepsen node n0] maelstrom.db: Tearing down n0
+2022-03-15 09:08:33,668{GMT}	INFO	[jepsen node n1] maelstrom.db: Tearing down n1
+2022-03-15 09:08:33,668{GMT}	INFO	[jepsen node n2] maelstrom.db: Tearing down n2
+2022-03-15 09:08:35,104{GMT}	INFO	[jepsen node n0] maelstrom.net: Shutting down Maelstrom network
+2022-03-15 09:08:35,106{GMT}	INFO	[jepsen test runner] jepsen.core: Run complete, writing
+2022-03-15 09:08:35,119{GMT}	INFO	[jepsen test runner] jepsen.core: Analyzing...
+2022-03-15 09:08:35,231{GMT}	INFO	[clojure-agent-send-pool-1] jepsen.independent: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220315T090822.000Z/independent/1/results.edn
+2022-03-15 09:08:35,234{GMT}	INFO	[clojure-agent-send-pool-1] jepsen.independent: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220315T090822.000Z/independent/1/history.edn
+2022-03-15 09:08:35,391{GMT}	INFO	[clojure-agent-send-pool-0] jepsen.independent: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220315T090822.000Z/independent/0/results.edn
+2022-03-15 09:08:35,395{GMT}	INFO	[clojure-agent-send-pool-0] jepsen.independent: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220315T090822.000Z/independent/0/history.edn
+2022-03-15 09:08:35,434{GMT}	INFO	[jepsen test runner] jepsen.core: Analysis complete
+2022-03-15 09:08:35,475{GMT}	INFO	[jepsen results] jepsen.store: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220315T090822.000Z/results.edn
+2022-03-15 09:08:35,510{GMT}	INFO	[jepsen test runner] jepsen.core: {:perf {:latency-graph {:valid? true},
+        :rate-graph {:valid? true},
+        :valid? true},
+ :timeline {:valid? true},
+ :exceptions {:valid? true},
+ :stats {:valid? true,
+         :count 48,
+         :ok-count 27,
+         :fail-count 4,
+         :info-count 17,
+         :by-f {:cas {:valid? true,
+                      :count 19,
+                      :ok-count 2,
+                      :fail-count 0,
+                      :info-count 17},
+                :read {:valid? true,
+                       :count 21,
+                       :ok-count 17,
+                       :fail-count 4,
+                       :info-count 0},
+                :write {:valid? true,
+                        :count 8,
+                        :ok-count 8,
+                        :fail-count 0,
+                        :info-count 0}}},
+ :net {:all {:send-count 482,
+             :recv-count 482,
+             :msg-count 482,
+             :msgs-per-op 10.041667},
+       :clients {:send-count 102, :recv-count 102, :msg-count 102},
+       :servers {:send-count 380,
+                 :recv-count 380,
+                 :msg-count 380,
+                 :msgs-per-op 7.9166665},
+       :valid? true},
+ :workload {:valid? false,
+            :results {0 {:linearizable {:valid? false,
+                                        :configs ({:model #knossos.model.CASRegister{:value 1},
+                                                   :last-op {:process 0,
+                                                             :type :ok,
+                                                             :f :read,
+                                                             :value 1,
+                                                             :index 29,
+                                                             :time 2875423706},
+                                                   :pending [{:process 4,
+                                                              :type :invoke,
+                                                              :f :cas,
+                                                              :value [0
+                                                                      3],
+                                                              :index 1,
+                                                              :time 19270784}
+                                                             {:process 5,
+                                                              :type :invoke,
+                                                              :f :cas,
+                                                              :value [1
+                                                                      0],
+                                                              :index 12,
+                                                              :time 1161340055}
+                                                             {:process 10,
+                                                              :type :invoke,
+                                                              :f :cas,
+                                                              :value [4
+                                                                      1],
+                                                              :index 30,
+                                                              :time 3141506760}]}),
+                                        :final-paths ([{:op {:process 0,
+                                                             :type :ok,
+                                                             :f :read,
+                                                             :value 1,
+                                                             :index 29,
+                                                             :time 2875423706},
+                                                        :model #knossos.model.CASRegister{:value 1}}
+                                                       {:op {:process 4,
+                                                             :type :invoke,
+                                                             :f :cas,
+                                                             :value [0
+                                                                     3],
+                                                             :index 1,
+                                                             :time 19270784},
+                                                        :model #knossos.model.Inconsistent{:msg "can't CAS 1 from 0 to 3"}}]
+                                                      [{:op {:process 0,
+                                                             :type :ok,
+                                                             :f :read,
+                                                             :value 1,
+                                                             :index 29,
+                                                             :time 2875423706},
+                                                        :model #knossos.model.CASRegister{:value 1}}
+                                                       {:op {:process 5,
+                                                             :type :invoke,
+                                                             :f :cas,
+                                                             :value [1
+                                                                     0],
+                                                             :index 12,
+                                                             :time 1161340055},
+                                                        :model #knossos.model.CASRegister{:value 0}}
+                                                       {:op {:process 4,
+                                                             :type :invoke,
+                                                             :f :cas,
+                                                             :value [0
+                                                                     3],
+                                                             :index 1,
+                                                             :time 19270784},
+                                                        :model #knossos.model.CASRegister{:value 3}}
+                                                       {:op {:process 10,
+                                                             :type :ok,
+                                                             :f :cas,
+                                                             :value [4
+                                                                     1],
+                                                             :index 31,
+                                                             :time 3159401651},
+                                                        :model #knossos.model.Inconsistent{:msg "can't CAS 3 from 4 to 1"}}]
+                                                      [{:op {:process 0,
+                                                             :type :ok,
+                                                             :f :read,
+                                                             :value 1,
+                                                             :index 29,
+                                                             :time 2875423706},
+                                                        :model #knossos.model.CASRegister{:value 1}}
+                                                       {:op {:process 5,
+                                                             :type :invoke,
+                                                             :f :cas,
+                                                             :value [1
+                                                                     0],
+                                                             :index 12,
+                                                             :time 1161340055},
+                                                        :model #knossos.model.CASRegister{:value 0}}
+                                                       {:op {:process 10,
+                                                             :type :ok,
+                                                             :f :cas,
+                                                             :value [4
+                                                                     1],
+                                                             :index 31,
+                                                             :time 3159401651},
+                                                        :model #knossos.model.Inconsistent{:msg "can't CAS 0 from 4 to 1"}}]
+                                                      [{:op {:process 0,
+                                                             :type :ok,
+                                                             :f :read,
+                                                             :value 1,
+                                                             :index 29,
+                                                             :time 2875423706},
+                                                        :model #knossos.model.CASRegister{:value 1}}
+                                                       {:op {:process 10,
+                                                             :type :ok,
+                                                             :f :cas,
+                                                             :value [4
+                                                                     1],
+                                                             :index 31,
+                                                             :time 3159401651},
+                                                        :model #knossos.model.Inconsistent{:msg "can't CAS 1 from 4 to 1"}}]),
+                                        :previous-ok {:process 0,
+                                                      :type :ok,
+                                                      :f :read,
+                                                      :value 1,
+                                                      :index 29,
+                                                      :time 2875423706},
+                                        :last-op {:process 0,
+                                                  :type :ok,
+                                                  :f :read,
+                                                  :value 1,
+                                                  :index 29,
+                                                  :time 2875423706},
+                                        :op {:process 10,
+                                             :type :ok,
+                                             :f :cas,
+                                             :value [4 1],
+                                             :index 31,
+                                             :time 3159401651}},
+                         :timeline {:valid? true},
+                         :valid? false},
+                      1 {:linearizable {:valid? true,
+                                        :configs ({:model #knossos.model.CASRegister{:value nil},
+                                                   :last-op nil,
+                                                   :pending [{:process 34,
+                                                              :type :invoke,
+                                                              :f :cas,
+                                                              :value [1
+                                                                      4],
+                                                              :index 90,
+                                                              :time 9530855923}
+                                                             {:process 40,
+                                                              :type :invoke,
+                                                              :f :cas,
+                                                              :value [0
+                                                                      0],
+                                                              :index 92,
+                                                              :time 9624107199}]}),
+                                        :final-paths ()},
+                         :timeline {:valid? true},
+                         :valid? true}},
+            :failures [0]},
+ :valid? false}
+
+
+Analysis invalid! (ﾉಥ益ಥ）ﾉ ┻━┻

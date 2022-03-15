@@ -1,0 +1,80 @@
+{:type :invoke, :f :read, :time 34951711492, :process 0, :value nil, :index 324}
+{:type :invoke, :f :cas, :value [4 4], :time 35009504528, :process 124, :index 325}
+{:type :invoke, :f :read, :time 35094945208, :process 1, :value nil, :index 326}
+{:type :info, :f :cas, :value [4 4], :time 35219870092, :process 124, :error [:unknown "locked state"], :index 327}
+{:type :fail, :f :read, :time 35321379900, :process 1, :value nil, :error [:unknown "locked state"], :index 328}
+{:type :fail, :f :read, :time 35362902013, :process 0, :value nil, :error [:unknown "not found"], :index 329}
+{:type :invoke, :f :read, :time 35407560969, :process 2, :value nil, :index 330}
+{:type :invoke, :f :read, :time 35408624436, :process 1, :value nil, :index 331}
+{:type :fail, :f :read, :time 35618315125, :process 1, :value nil, :error [:unknown "locked state"], :index 332}
+{:type :invoke, :f :write, :value 2, :time 35696284858, :process 123, :index 333}
+{:type :invoke, :f :write, :value 3, :time 35821322576, :process 125, :index 334}
+{:type :fail, :f :read, :time 35822326714, :process 2, :value nil, :error [:unknown "not found"], :index 335}
+{:type :invoke, :f :cas, :value [1 3], :time 35999771595, :process 130, :index 336}
+{:type :info, :f :write, :value 3, :time 36030632010, :process 125, :error [:unknown "locked_state"], :index 337}
+{:type :ok, :f :write, :value 2, :time 36109141479, :process 123, :index 338}
+{:type :invoke, :f :read, :time 36139505515, :process 2, :value nil, :index 339}
+{:type :info, :f :cas, :value [1 3], :time 36209690363, :process 130, :error [:unknown "locked state"], :index 340}
+{:type :invoke, :f :cas, :value [2 4], :time 36359028979, :process 131, :index 341}
+{:type :ok, :f :read, :time 36550662477, :process 2, :value 2, :index 342}
+{:type :invoke, :f :cas, :value [3 1], :time 36706949531, :process 123, :index 343}
+{:type :invoke, :f :read, :time 36747596465, :process 2, :value nil, :index 344}
+{:type :ok, :f :cas, :value [2 4], :time 36856997329, :process 131, :index 345}
+{:type :invoke, :f :cas, :value [1 1], :time 36869975338, :process 136, :index 346}
+{:type :fail, :f :read, :time 36960165404, :process 2, :value nil, :error [:unknown "locked state"], :index 347}
+{:type :info, :f :cas, :value [1 1], :time 37079885888, :process 136, :error [:unknown "locked state"], :index 348}
+{:type :invoke, :f :cas, :value [0 2], :time 37099551388, :process 131, :index 349}
+{:type :info, :f :cas, :value [3 1], :time 37120127919, :process 123, :error [:unknown "does not match"], :index 350}
+{:type :invoke, :f :read, :time 37337029308, :process 2, :value nil, :index 351}
+{:type :invoke, :f :read, :time 37490056783, :process 0, :value nil, :index 352}
+{:type :invoke, :f :read, :time 37585281063, :process 1, :value nil, :index 353}
+{:type :fail, :f :read, :time 37591245502, :process 2, :value nil, :error [:unknown "locked state"], :index 354}
+{:type :info, :f :cas, :value [0 2], :time 37591503009, :process 131, :error [:unknown "does not match"], :index 355}
+{:type :fail, :f :read, :time 37802498887, :process 1, :value nil, :error [:unknown "locked state"], :index 356}
+{:type :ok, :f :read, :time 37901763428, :process 0, :value 4, :index 357}
+{:type :invoke, :f :write, :value 3, :time 37913138761, :process 142, :index 358}
+{:type :invoke, :f :cas, :value [1 1], :time 38149232593, :process 137, :index 359}
+{:type :ok, :f :write, :value 3, :time 38327351158, :process 142, :index 360}
+{:type :invoke, :f :write, :value 3, :time 38403558313, :process 129, :index 361}
+{:type :invoke, :f :read, :time 38471616858, :process 0, :value nil, :index 362}
+{:type :info, :f :cas, :value [1 1], :time 38559917195, :process 137, :error [:unknown "does not match"], :index 363}
+{:type :fail, :f :read, :time 38680052608, :process 0, :value nil, :error [:unknown "locked state"], :index 364}
+{:type :invoke, :f :cas, :value [3 1], :time 38725766839, :process 142, :index 365}
+{:type :ok, :f :write, :value 3, :time 38814781510, :process 129, :index 366}
+{:type :invoke, :f :read, :time 38834010908, :process 0, :value nil, :index 367}
+{:type :fail, :f :read, :time 39043393337, :process 0, :value nil, :error [:unknown "locked state"], :index 368}
+{:type :ok, :f :cas, :value [3 1], :time 39137930247, :process 142, :index 369}
+{:type :invoke, :f :cas, :value [1 1], :time 39172557284, :process 143, :index 370}
+{:type :invoke, :f :read, :time 39462881573, :process 1, :value nil, :index 371}
+{:type :ok, :f :cas, :value [1 1], :time 39584608152, :process 143, :index 372}
+{:type :invoke, :f :cas, :value [2 0], :time 39840565034, :process 142, :index 373}
+{:type :ok, :f :read, :time 39891230840, :process 1, :value 1, :index 374}
+{:type :invoke, :f :cas, :value [3 0], :time 40113765371, :process 143, :index 375}
+{:type :invoke, :f :cas, :value [3 0], :time 40213990515, :process 129, :index 376}
+{:type :info, :f :cas, :value [2 0], :time 40300358239, :process 142, :error [:unknown "does not match"], :index 377}
+{:type :invoke, :f :cas, :value [4 3], :time 40350403540, :process 148, :index 378}
+{:type :invoke, :f :read, :time 40466490871, :process 1, :value nil, :index 379}
+{:type :info, :f :cas, :value [3 0], :time 40503813981, :process 129, :error [:unknown "locked state"], :index 380}
+{:type :info, :f :cas, :value [3 0], :time 40606289906, :process 143, :error [:unknown "does not match"], :index 381}
+{:type :fail, :f :read, :time 40709518236, :process 1, :value nil, :error [:unknown "locked state"], :index 382}
+{:type :info, :f :cas, :value [4 3], :time 40810236527, :process 148, :error [:unknown "does not match"], :index 383}
+{:type :invoke, :f :cas, :value [0 0], :time 40850622846, :process 154, :index 384}
+{:type :invoke, :f :read, :time 41049529664, :process 1, :value nil, :index 385}
+{:type :invoke, :f :cas, :value [2 1], :time 41092477463, :process 149, :index 386}
+{:type :invoke, :f :read, :time 41143829237, :process 2, :value nil, :index 387}
+{:type :fail, :f :read, :time 41265186174, :process 1, :value nil, :error [:unknown "locked state"], :index 388}
+{:type :info, :f :cas, :value [0 0], :time 41268219212, :process 154, :error [:unknown "does not match"], :index 389}
+{:type :info, :f :cas, :value [2 1], :time 41369322243, :process 149, :error [:unknown "locked state"], :index 390}
+{:type :fail, :f :read, :time 41369743269, :process 2, :value nil, :error [:unknown "locked state"], :index 391}
+{:type :invoke, :f :read, :time 41415364482, :process 2, :value nil, :index 392}
+{:type :fail, :f :read, :time 41625138347, :process 2, :value nil, :error [:unknown "locked state"], :index 393}
+{:type :invoke, :f :read, :time 41717179162, :process 2, :value nil, :index 394}
+{:type :invoke, :f :cas, :value [3 3], :time 41718210935, :process 160, :index 395}
+{:type :fail, :f :read, :time 41927984396, :process 2, :value nil, :error [:unknown "locked state"], :index 396}
+{:type :info, :f :cas, :value [3 3], :time 41928266802, :process 160, :error [:unknown "locked state"], :index 397}
+{:type :invoke, :f :write, :value 1, :time 42062101167, :process 166, :index 398}
+{:type :invoke, :f :cas, :value [3 4], :time 42074277920, :process 155, :index 399}
+{:type :invoke, :f :read, :time 42364127974, :process 1, :value nil, :index 400}
+{:type :info, :f :cas, :value [3 4], :time 42371279771, :process 155, :error [:unknown "locked state"], :index 401}
+{:type :ok, :f :write, :value 1, :time 42471725234, :process 166, :index 402}
+{:type :fail, :f :read, :time 42571964408, :process 1, :value nil, :error [:unknown "locked state"], :index 404}

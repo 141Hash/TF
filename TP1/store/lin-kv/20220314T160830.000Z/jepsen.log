@@ -1,0 +1,845 @@
+2022-03-14 16:08:30,721{GMT}	INFO	[jepsen test runner] jepsen.core: Test version 27d9579673cbbd3e3fc3b39bf6527f054a0fab24 (plus uncommitted changes)
+2022-03-14 16:08:30,722{GMT}	INFO	[jepsen test runner] jepsen.core: Command line:
+lein run test --bin lin-kv.py --latency 100 --node-count 3 --concurrency 6 --workload lin-kv
+2022-03-14 16:08:30,812{GMT}	INFO	[jepsen test runner] jepsen.core: Running test:
+{:args []
+ :remote
+ #jepsen.control.retry.Remote{:remote #jepsen.control.scp.Remote{:cmd-remote #jepsen.control.clj_ssh.Remote{:concurrency-limit 8,
+                                                                                                            :conn-spec nil,
+                                                                                                            :session nil,
+                                                                                                            :semaphore nil},
+                                                                 :conn-spec nil},
+                              :conn nil}
+ :log-net-send false
+ :node-count 3
+ :max-txn-length 4
+ :concurrency 6
+ :db
+ #object[maelstrom.db$db$reify__16817
+         "0x73344f4a"
+         "maelstrom.db$db$reify__16817@73344f4a"]
+ :max-writes-per-key 16
+ :leave-db-running? false
+ :name "lin-kv"
+ :logging-json? false
+ :start-time
+ #object[org.joda.time.DateTime "0x295f115d" "2022-03-14T16:08:30.000Z"]
+ :nemesis-interval 10
+ :net
+ #object[maelstrom.net$jepsen_net$reify__15673
+         "0xa6cb2c9"
+         "maelstrom.net$jepsen_net$reify__15673@a6cb2c9"]
+ :client
+ #object[maelstrom.workload.lin_kv$client$reify__17684
+         "0x3c32f3d8"
+         "maelstrom.workload.lin_kv$client$reify__17684@3c32f3d8"]
+ :barrier
+ #object[java.util.concurrent.CyclicBarrier
+         "0x46700301"
+         "java.util.concurrent.CyclicBarrier@46700301"]
+ :log-stderr false
+ :pure-generators true
+ :ssh {:dummy? true}
+ :rate 5
+ :checker
+ #object[jepsen.checker$compose$reify__8787
+         "0x17f4276b"
+         "jepsen.checker$compose$reify__8787@17f4276b"]
+ :argv
+ ("test"
+  "--bin"
+  "lin-kv.py"
+  "--latency"
+  "100"
+  "--node-count"
+  "3"
+  "--concurrency"
+  "6"
+  "--workload"
+  "lin-kv")
+ :nemesis
+ (jepsen.nemesis.ReflCompose
+  {:fm {:start-partition 0,
+        :stop-partition 0,
+        :kill 1,
+        :start 1,
+        :pause 1,
+        :resume 1},
+   :nemeses [#unprintable "jepsen.nemesis.combined$partition_nemesis$reify__17089@786125a6"
+             #unprintable "jepsen.nemesis.combined$db_nemesis$reify__17070@53e6b541"]})
+ :nodes ["n0" "n1" "n2"]
+ :test-count 1
+ :latency {:mean 100, :dist :constant}
+ :bin "lin-kv.py"
+ :generator
+ (jepsen.generator.TimeLimit
+  {:limit 60000000000,
+   :cutoff nil,
+   :gen (jepsen.generator.Any
+         {:gens [(jepsen.generator.OnThreads {:f #{:nemesis}, :gen nil})
+                 (jepsen.generator.OnThreads
+                  {:f #object[clojure.core$complement$fn__5654
+                              "0x642ebd4c"
+                              "clojure.core$complement$fn__5654@642ebd4c"],
+                   :gen (jepsen.generator.Stagger
+                         {:dt 400000000,
+                          :next-time nil,
+                          :gen (jepsen.generator.OnThreads
+                                {:f #object[clojure.core$complement$fn__5654
+                                            "0x222af5ff"
+                                            "clojure.core$complement$fn__5654@222af5ff"],
+                                 :gen (jepsen.independent.ConcurrentGenerator
+                                       {:n 6,
+                                        :fgen #object[jepsen.tests.linearizable_register$test$fn__17484
+                                                      "0x70721c2d"
+                                                      "jepsen.tests.linearizable_register$test$fn__17484@70721c2d"],
+                                        :group->threads nil,
+                                        :thread->group nil,
+                                        :keys (0 1 2 3 4 5 6 7 ...),
+                                        :gens nil})})})})]})})
+ :log-net-recv false
+ :os
+ #object[maelstrom.net$jepsen_os$reify__15676
+         "0x62371858"
+         "maelstrom.net$jepsen_os$reify__15676@62371858"]
+ :time-limit 60
+ :workload :lin-kv
+ :consistency-models [:strict-serializable]
+ :topology :grid}
+
+2022-03-14 16:08:30,819{GMT}	INFO	[jepsen node n0] maelstrom.net: Starting Maelstrom network
+2022-03-14 16:08:30,820{GMT}	INFO	[jepsen test runner] jepsen.db: Tearing down DB
+2022-03-14 16:08:30,822{GMT}	INFO	[jepsen test runner] jepsen.db: Setting up DB
+2022-03-14 16:08:30,823{GMT}	INFO	[jepsen node n2] maelstrom.db: Setting up n2
+2022-03-14 16:08:30,823{GMT}	INFO	[jepsen node n1] maelstrom.db: Setting up n1
+2022-03-14 16:08:30,824{GMT}	INFO	[jepsen node n1] maelstrom.process: launching lin-kv.py []
+2022-03-14 16:08:30,824{GMT}	INFO	[jepsen node n2] maelstrom.process: launching lin-kv.py []
+2022-03-14 16:08:30,826{GMT}	INFO	[jepsen node n0] maelstrom.service: Starting services: (lin-kv lin-tso lww-kv seq-kv)
+2022-03-14 16:08:30,828{GMT}	INFO	[jepsen node n0] maelstrom.db: Setting up n0
+2022-03-14 16:08:30,829{GMT}	INFO	[jepsen node n0] maelstrom.process: launching lin-kv.py []
+2022-03-14 16:08:31,170{GMT}	INFO	[jepsen test runner] jepsen.core: Relative time begins now
+2022-03-14 16:08:31,194{GMT}	INFO	[jepsen worker 5] jepsen.util: 5	:invoke	:write	[0 0]
+2022-03-14 16:08:31,346{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-14 16:08:31,512{GMT}	INFO	[jepsen worker 3] jepsen.util: 3	:invoke	:cas	[0 [2 1]]
+2022-03-14 16:08:31,574{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[0 nil]	[:unknown "locked state"]
+2022-03-14 16:08:31,604{GMT}	INFO	[jepsen worker 5] jepsen.util: 5	:ok	:write	[0 0]
+2022-03-14 16:08:31,658{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[0 nil]
+2022-03-14 16:08:31,676{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-14 16:08:31,742{GMT}	INFO	[jepsen worker 4] jepsen.util: 4	:invoke	:write	[0 4]
+2022-03-14 16:08:31,764{GMT}	INFO	[jepsen worker 3] jepsen.util: 3	:info	:cas	[0 [2 1]]	[:unknown "locked state"]
+2022-03-14 16:08:31,874{GMT}	INFO	[jepsen worker 5] jepsen.util: 5	:invoke	:write	[0 4]
+2022-03-14 16:08:31,971{GMT}	INFO	[jepsen worker 3] jepsen.util: 9	:invoke	:cas	[0 [2 2]]
+2022-03-14 16:08:31,974{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[0 nil]	[:unknown "locked state"]
+2022-03-14 16:08:31,974{GMT}	INFO	[jepsen worker 4] jepsen.util: 4	:info	:write	[0 4]	[:unknown "locked_state"]
+2022-03-14 16:08:31,997{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-14 16:08:32,077{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:ok	:read	[0 0]
+2022-03-14 16:08:32,085{GMT}	INFO	[jepsen worker 5] jepsen.util: 5	:info	:write	[0 4]	[:unknown "locked_state"]
+2022-03-14 16:08:32,114{GMT}	INFO	[jepsen worker 4] jepsen.util: 10	:invoke	:cas	[0 [0 1]]
+2022-03-14 16:08:32,173{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-14 16:08:32,189{GMT}	INFO	[jepsen worker 3] jepsen.util: 9	:info	:cas	[0 [2 2]]	[:unknown "locked state"]
+2022-03-14 16:08:32,210{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[0 nil]	[:unknown "locked state"]
+2022-03-14 16:08:32,548{GMT}	INFO	[jepsen worker 3] jepsen.util: 15	:invoke	:write	[0 0]
+2022-03-14 16:08:32,600{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 0]
+2022-03-14 16:08:32,619{GMT}	INFO	[jepsen worker 4] jepsen.util: 10	:ok	:cas	[0 [0 1]]
+2022-03-14 16:08:32,820{GMT}	INFO	[jepsen worker 5] jepsen.util: 11	:invoke	:cas	[0 [4 0]]
+2022-03-14 16:08:33,008{GMT}	INFO	[jepsen worker 3] jepsen.util: 15	:ok	:write	[0 0]
+2022-03-14 16:08:33,144{GMT}	INFO	[jepsen worker 3] jepsen.util: 15	:invoke	:cas	[0 [4 1]]
+2022-03-14 16:08:33,317{GMT}	INFO	[jepsen worker 5] jepsen.util: 11	:info	:cas	[0 [4 0]]	[:unknown "does not match"]
+2022-03-14 16:08:33,515{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[0 nil]
+2022-03-14 16:08:33,624{GMT}	INFO	[jepsen worker 3] jepsen.util: 15	:info	:cas	[0 [4 1]]	[:unknown "does not match"]
+2022-03-14 16:08:33,776{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-14 16:08:33,932{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:ok	:read	[0 0]
+2022-03-14 16:08:34,096{GMT}	INFO	[jepsen worker 4] jepsen.util: 10	:invoke	:cas	[0 [0 4]]
+2022-03-14 16:08:34,112{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-14 16:08:34,241{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 0]
+2022-03-14 16:08:34,346{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[0 nil]	[:unknown "locked state"]
+2022-03-14 16:08:34,466{GMT}	INFO	[jepsen worker 5] jepsen.util: 17	:invoke	:cas	[0 [4 1]]
+2022-03-14 16:08:34,511{GMT}	INFO	[jepsen worker 4] jepsen.util: 10	:ok	:cas	[0 [0 4]]
+2022-03-14 16:08:34,722{GMT}	INFO	[jepsen worker 4] jepsen.util: 10	:invoke	:cas	[0 [0 2]]
+2022-03-14 16:08:34,881{GMT}	INFO	[jepsen worker 5] jepsen.util: 17	:ok	:cas	[0 [4 1]]
+2022-03-14 16:08:35,067{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-14 16:08:35,135{GMT}	INFO	[jepsen worker 4] jepsen.util: 10	:info	:cas	[0 [0 2]]	[:unknown "does not match"]
+2022-03-14 16:08:35,365{GMT}	INFO	[jepsen worker 3] jepsen.util: 21	:invoke	:write	[0 1]
+2022-03-14 16:08:35,481{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 1]
+2022-03-14 16:08:35,539{GMT}	INFO	[jepsen worker 5] jepsen.util: 17	:invoke	:cas	[0 [3 4]]
+2022-03-14 16:08:35,726{GMT}	INFO	[jepsen worker 4] jepsen.util: 16	:invoke	:cas	[0 [1 1]]
+2022-03-14 16:08:35,745{GMT}	INFO	[jepsen worker 5] jepsen.util: 17	:info	:cas	[0 [3 4]]	[:unknown "locked state"]
+2022-03-14 16:08:35,786{GMT}	INFO	[jepsen worker 3] jepsen.util: 21	:ok	:write	[0 1]
+2022-03-14 16:08:35,936{GMT}	INFO	[jepsen worker 4] jepsen.util: 16	:info	:cas	[0 [1 1]]	[:unknown "locked state"]
+2022-03-14 16:08:36,027{GMT}	INFO	[jepsen worker 5] jepsen.util: 23	:invoke	:write	[0 1]
+2022-03-14 16:08:36,425{GMT}	INFO	[jepsen worker 3] jepsen.util: 21	:invoke	:write	[0 1]
+2022-03-14 16:08:36,447{GMT}	INFO	[jepsen worker 5] jepsen.util: 23	:ok	:write	[0 1]
+2022-03-14 16:08:36,654{GMT}	INFO	[jepsen worker 5] jepsen.util: 23	:invoke	:cas	[0 [1 2]]
+2022-03-14 16:08:36,662{GMT}	INFO	[jepsen worker 4] jepsen.util: 22	:invoke	:cas	[0 [1 4]]
+2022-03-14 16:08:36,761{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-14 16:08:36,840{GMT}	INFO	[jepsen worker 3] jepsen.util: 21	:ok	:write	[0 1]
+2022-03-14 16:08:36,946{GMT}	INFO	[jepsen worker 4] jepsen.util: 22	:info	:cas	[0 [1 4]]	[:unknown "locked state"]
+2022-03-14 16:08:37,011{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[0 nil]
+2022-03-14 16:08:37,048{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[0 nil]	[:unknown "locked state"]
+2022-03-14 16:08:37,067{GMT}	INFO	[jepsen worker 5] jepsen.util: 23	:ok	:cas	[0 [1 2]]
+2022-03-14 16:08:37,409{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-14 16:08:37,477{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:ok	:read	[0 2]
+2022-03-14 16:08:37,783{GMT}	INFO	[jepsen worker 4] jepsen.util: 28	:invoke	:cas	[0 [2 1]]
+2022-03-14 16:08:37,821{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 2]
+2022-03-14 16:08:37,956{GMT}	INFO	[jepsen worker 5] jepsen.util: 23	:invoke	:cas	[0 [3 4]]
+2022-03-14 16:08:38,166{GMT}	INFO	[jepsen worker 5] jepsen.util: 23	:info	:cas	[0 [3 4]]	[:unknown "locked state"]
+2022-03-14 16:08:38,196{GMT}	INFO	[jepsen worker 4] jepsen.util: 28	:ok	:cas	[0 [2 1]]
+2022-03-14 16:08:38,261{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-14 16:08:38,511{GMT}	INFO	[jepsen worker 5] jepsen.util: 29	:invoke	:write	[0 4]
+2022-03-14 16:08:38,675{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 1]
+2022-03-14 16:08:38,715{GMT}	INFO	[jepsen worker 3] jepsen.util: 21	:invoke	:cas	[0 [1 1]]
+2022-03-14 16:08:38,926{GMT}	INFO	[jepsen worker 3] jepsen.util: 21	:info	:cas	[0 [1 1]]	[:unknown "locked state"]
+2022-03-14 16:08:38,979{GMT}	INFO	[jepsen worker 5] jepsen.util: 29	:ok	:write	[0 4]
+2022-03-14 16:08:39,107{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-14 16:08:39,256{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[0 nil]
+2022-03-14 16:08:39,310{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[0 nil]
+2022-03-14 16:08:39,467{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[0 nil]	[:unknown "locked state"]
+2022-03-14 16:08:39,520{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 4]
+2022-03-14 16:08:39,575{GMT}	INFO	[jepsen worker 4] jepsen.util: 28	:invoke	:write	[0 4]
+2022-03-14 16:08:39,774{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[0 4]
+2022-03-14 16:08:39,793{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-14 16:08:40,082{GMT}	INFO	[jepsen worker 4] jepsen.util: 28	:ok	:write	[0 4]
+2022-03-14 16:08:40,082{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[0 nil]	[:unknown "locked state"]
+2022-03-14 16:08:40,154{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[0 nil]
+2022-03-14 16:08:40,506{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-14 16:08:40,568{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:ok	:read	[0 4]
+2022-03-14 16:08:40,646{GMT}	INFO	[jepsen worker 4] jepsen.util: 28	:invoke	:write	[0 2]
+2022-03-14 16:08:40,921{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 4]
+2022-03-14 16:08:40,922{GMT}	INFO	[jepsen worker 4] jepsen.util: 28	:info	:write	[0 2]	[:unknown "locked_state"]
+2022-03-14 16:08:40,922{GMT}	INFO	[jepsen worker 3] jepsen.util: 27	:invoke	:write	[0 1]
+2022-03-14 16:08:41,225{GMT}	INFO	[jepsen worker 5] jepsen.util: 29	:invoke	:write	[0 0]
+2022-03-14 16:08:41,332{GMT}	INFO	[jepsen worker 3] jepsen.util: 27	:ok	:write	[0 1]
+2022-03-14 16:08:41,533{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-14 16:08:41,640{GMT}	INFO	[jepsen worker 5] jepsen.util: 29	:ok	:write	[0 0]
+2022-03-14 16:08:41,846{GMT}	INFO	[jepsen worker 5] jepsen.util: 29	:invoke	:cas	[0 [2 3]]
+2022-03-14 16:08:41,948{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 0]
+2022-03-14 16:08:42,020{GMT}	INFO	[jepsen worker 3] jepsen.util: 27	:invoke	:write	[0 3]
+2022-03-14 16:08:42,066{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[0 nil]
+2022-03-14 16:08:42,231{GMT}	INFO	[jepsen worker 3] jepsen.util: 27	:info	:write	[0 3]	[:unknown "locked_state"]
+2022-03-14 16:08:42,252{GMT}	INFO	[jepsen worker 3] jepsen.util: 33	:invoke	:cas	[0 [1 3]]
+2022-03-14 16:08:42,260{GMT}	INFO	[jepsen worker 5] jepsen.util: 29	:info	:cas	[0 [2 3]]	[:unknown "does not match"]
+2022-03-14 16:08:42,378{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[1 nil]
+2022-03-14 16:08:42,538{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[0 0]
+2022-03-14 16:08:42,539{GMT}	INFO	[jepsen worker 3] jepsen.util: 33	:info	:cas	[0 [1 3]]	[:unknown "locked state"]
+2022-03-14 16:08:42,588{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[1 nil]	[:unknown "locked state"]
+2022-03-14 16:08:42,646{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[1 nil]
+2022-03-14 16:08:42,900{GMT}	INFO	[jepsen worker 5] jepsen.util: 35	:invoke	:write	[1 1]
+2022-03-14 16:08:43,009{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[1 nil]
+2022-03-14 16:08:43,058{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[1 nil]	[:unknown "not found"]
+2022-03-14 16:08:43,193{GMT}	INFO	[jepsen worker 4] jepsen.util: 34	:invoke	:write	[1 3]
+2022-03-14 16:08:43,219{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[1 nil]	[:unknown "locked state"]
+2022-03-14 16:08:43,251{GMT}	INFO	[jepsen worker 3] jepsen.util: 39	:invoke	:write	[1 2]
+2022-03-14 16:08:43,363{GMT}	INFO	[jepsen worker 5] jepsen.util: 35	:ok	:write	[1 1]
+2022-03-14 16:08:43,423{GMT}	INFO	[jepsen worker 4] jepsen.util: 34	:info	:write	[1 3]	[:unknown "locked_state"]
+2022-03-14 16:08:43,527{GMT}	INFO	[jepsen worker 4] jepsen.util: 40	:invoke	:cas	[1 [3 2]]
+2022-03-14 16:08:43,670{GMT}	INFO	[jepsen worker 3] jepsen.util: 39	:ok	:write	[1 2]
+2022-03-14 16:08:43,801{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[1 nil]
+2022-03-14 16:08:43,978{GMT}	INFO	[jepsen worker 4] jepsen.util: 40	:info	:cas	[1 [3 2]]	[:unknown "does not match"]
+2022-03-14 16:08:44,004{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[1 nil]
+2022-03-14 16:08:44,214{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:ok	:read	[1 2]
+2022-03-14 16:08:44,215{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[1 nil]	[:unknown "locked state"]
+2022-03-14 16:08:44,269{GMT}	INFO	[jepsen worker 5] jepsen.util: 35	:invoke	:write	[1 4]
+2022-03-14 16:08:44,561{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[1 nil]
+2022-03-14 16:08:44,683{GMT}	INFO	[jepsen worker 5] jepsen.util: 35	:ok	:write	[1 4]
+2022-03-14 16:08:44,749{GMT}	INFO	[jepsen worker 5] jepsen.util: 35	:invoke	:cas	[1 [4 4]]
+2022-03-14 16:08:44,959{GMT}	INFO	[jepsen worker 5] jepsen.util: 35	:info	:cas	[1 [4 4]]	[:unknown "locked state"]
+2022-03-14 16:08:44,987{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[1 4]
+2022-03-14 16:08:45,017{GMT}	INFO	[jepsen worker 4] jepsen.util: 46	:invoke	:cas	[1 [3 1]]
+2022-03-14 16:08:45,106{GMT}	INFO	[jepsen worker 5] jepsen.util: 41	:invoke	:cas	[1 [0 4]]
+2022-03-14 16:08:45,365{GMT}	INFO	[jepsen worker 5] jepsen.util: 41	:info	:cas	[1 [0 4]]	[:unknown "locked state"]
+2022-03-14 16:08:45,466{GMT}	INFO	[jepsen worker 4] jepsen.util: 46	:info	:cas	[1 [3 1]]	[:unknown "does not match"]
+2022-03-14 16:08:45,504{GMT}	INFO	[jepsen worker 3] jepsen.util: 39	:invoke	:cas	[1 [1 1]]
+2022-03-14 16:08:45,605{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[1 nil]
+2022-03-14 16:08:45,714{GMT}	INFO	[jepsen worker 3] jepsen.util: 39	:info	:cas	[1 [1 1]]	[:unknown "locked state"]
+2022-03-14 16:08:45,757{GMT}	INFO	[jepsen worker 3] jepsen.util: 45	:invoke	:write	[1 4]
+2022-03-14 16:08:45,813{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[1 nil]	[:unknown "locked state"]
+2022-03-14 16:08:45,959{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[1 nil]
+2022-03-14 16:08:46,018{GMT}	INFO	[jepsen worker 3] jepsen.util: 45	:info	:write	[1 4]	[:unknown "locked_state"]
+2022-03-14 16:08:46,110{GMT}	INFO	[jepsen worker 3] jepsen.util: 51	:invoke	:cas	[1 [4 1]]
+2022-03-14 16:08:46,167{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[1 nil]	[:unknown "locked state"]
+2022-03-14 16:08:46,325{GMT}	INFO	[jepsen worker 3] jepsen.util: 51	:info	:cas	[1 [4 1]]	[:unknown "locked state"]
+2022-03-14 16:08:46,451{GMT}	INFO	[jepsen worker 4] jepsen.util: 52	:invoke	:cas	[1 [4 0]]
+2022-03-14 16:08:46,587{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[1 nil]
+2022-03-14 16:08:46,644{GMT}	INFO	[jepsen worker 3] jepsen.util: 57	:invoke	:cas	[1 [2 3]]
+2022-03-14 16:08:46,796{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[1 nil]	[:unknown "locked state"]
+2022-03-14 16:08:46,852{GMT}	INFO	[jepsen worker 3] jepsen.util: 57	:info	:cas	[1 [2 3]]	[:unknown "locked state"]
+2022-03-14 16:08:46,858{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[1 nil]
+2022-03-14 16:08:46,863{GMT}	INFO	[jepsen worker 4] jepsen.util: 52	:ok	:cas	[1 [4 0]]
+2022-03-14 16:08:47,058{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[1 nil]
+2022-03-14 16:08:47,080{GMT}	INFO	[jepsen worker 4] jepsen.util: 52	:invoke	:cas	[1 [2 3]]
+2022-03-14 16:08:47,271{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[1 nil]	[:unknown "locked state"]
+2022-03-14 16:08:47,271{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[1 0]
+2022-03-14 16:08:47,275{GMT}	INFO	[jepsen worker 5] jepsen.util: 47	:invoke	:cas	[1 [2 1]]
+2022-03-14 16:08:47,371{GMT}	INFO	[jepsen worker 4] jepsen.util: 52	:info	:cas	[1 [2 3]]	[:unknown "locked state"]
+2022-03-14 16:08:47,648{GMT}	INFO	[jepsen worker 4] jepsen.util: 58	:invoke	:write	[1 2]
+2022-03-14 16:08:47,689{GMT}	INFO	[jepsen worker 5] jepsen.util: 47	:info	:cas	[1 [2 1]]	[:unknown "does not match"]
+2022-03-14 16:08:47,874{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[1 nil]
+2022-03-14 16:08:47,962{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[1 nil]
+2022-03-14 16:08:48,059{GMT}	INFO	[jepsen worker 4] jepsen.util: 58	:ok	:write	[1 2]
+2022-03-14 16:08:48,186{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[1 nil]	[:unknown "locked state"]
+2022-03-14 16:08:48,286{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:ok	:read	[1 2]
+2022-03-14 16:08:48,316{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[1 nil]
+2022-03-14 16:08:48,525{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[1 nil]	[:unknown "locked state"]
+2022-03-14 16:08:48,614{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[1 nil]
+2022-03-14 16:08:48,931{GMT}	INFO	[jepsen worker 5] jepsen.util: 53	:invoke	:write	[1 4]
+2022-03-14 16:08:49,031{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[1 2]
+2022-03-14 16:08:49,139{GMT}	INFO	[jepsen worker 5] jepsen.util: 53	:info	:write	[1 4]	[:unknown "locked_state"]
+2022-03-14 16:08:49,203{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[1 nil]
+2022-03-14 16:08:49,446{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[1 nil]	[:unknown "locked state"]
+2022-03-14 16:08:49,564{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[1 nil]
+2022-03-14 16:08:49,648{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[1 nil]
+2022-03-14 16:08:49,773{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[1 nil]	[:unknown "locked state"]
+2022-03-14 16:08:49,857{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[1 nil]	[:unknown "locked state"]
+2022-03-14 16:08:50,037{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[1 nil]
+2022-03-14 16:08:50,182{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[1 nil]
+2022-03-14 16:08:50,245{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[1 nil]	[:unknown "locked state"]
+2022-03-14 16:08:50,391{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[1 nil]	[:unknown "locked state"]
+2022-03-14 16:08:50,562{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[1 nil]
+2022-03-14 16:08:50,962{GMT}	INFO	[jepsen worker 5] jepsen.util: 59	:invoke	:cas	[1 [4 3]]
+2022-03-14 16:08:50,973{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[1 2]
+2022-03-14 16:08:51,171{GMT}	INFO	[jepsen worker 5] jepsen.util: 59	:info	:cas	[1 [4 3]]	[:unknown "locked state"]
+2022-03-14 16:08:51,333{GMT}	INFO	[jepsen worker 5] jepsen.util: 65	:invoke	:cas	[1 [1 4]]
+2022-03-14 16:08:51,716{GMT}	INFO	[jepsen worker 4] jepsen.util: 58	:invoke	:write	[1 3]
+2022-03-14 16:08:51,746{GMT}	INFO	[jepsen worker 5] jepsen.util: 65	:info	:cas	[1 [1 4]]	[:unknown "does not match"]
+2022-03-14 16:08:51,924{GMT}	INFO	[jepsen worker 3] jepsen.util: 63	:invoke	:cas	[2 [3 2]]
+2022-03-14 16:08:51,926{GMT}	INFO	[jepsen worker 4] jepsen.util: 58	:info	:write	[1 3]	[:unknown "locked_state"]
+2022-03-14 16:08:51,927{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[2 nil]
+2022-03-14 16:08:52,133{GMT}	INFO	[jepsen worker 3] jepsen.util: 63	:info	:cas	[2 [3 2]]	[:unknown "locked state"]
+2022-03-14 16:08:52,233{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[2 nil]	[:unknown "locked state"]
+2022-03-14 16:08:52,262{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[2 nil]
+2022-03-14 16:08:52,539{GMT}	INFO	[jepsen worker 3] jepsen.util: 69	:invoke	:write	[2 2]
+2022-03-14 16:08:52,744{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[2 nil]	[:unknown "not found"]
+2022-03-14 16:08:52,896{GMT}	INFO	[jepsen worker 5] jepsen.util: 71	:invoke	:cas	[2 [1 2]]
+2022-03-14 16:08:53,049{GMT}	INFO	[jepsen worker 3] jepsen.util: 69	:ok	:write	[2 2]
+2022-03-14 16:08:53,266{GMT}	INFO	[jepsen worker 3] jepsen.util: 69	:invoke	:write	[2 4]
+2022-03-14 16:08:53,355{GMT}	INFO	[jepsen worker 5] jepsen.util: 71	:info	:cas	[2 [1 2]]	[:unknown "does not match"]
+2022-03-14 16:08:53,532{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[2 nil]
+2022-03-14 16:08:53,678{GMT}	INFO	[jepsen worker 3] jepsen.util: 69	:ok	:write	[2 4]
+2022-03-14 16:08:53,781{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[2 nil]
+2022-03-14 16:08:53,985{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[2 4]
+2022-03-14 16:08:54,054{GMT}	INFO	[jepsen worker 5] jepsen.util: 77	:invoke	:write	[2 4]
+2022-03-14 16:08:54,193{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:ok	:read	[2 4]
+2022-03-14 16:08:54,269{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[2 nil]
+2022-03-14 16:08:54,402{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[2 nil]
+2022-03-14 16:08:54,478{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[2 nil]	[:unknown "locked state"]
+2022-03-14 16:08:54,498{GMT}	INFO	[jepsen worker 5] jepsen.util: 77	:ok	:write	[2 4]
+2022-03-14 16:08:54,530{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[2 nil]
+2022-03-14 16:08:54,609{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[2 nil]	[:unknown "locked state"]
+2022-03-14 16:08:54,782{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[2 nil]	[:unknown "locked state"]
+2022-03-14 16:08:54,823{GMT}	INFO	[jepsen worker 5] jepsen.util: 77	:invoke	:cas	[2 [3 3]]
+2022-03-14 16:08:54,968{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[2 nil]
+2022-03-14 16:08:55,175{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[2 nil]	[:unknown "locked state"]
+2022-03-14 16:08:55,233{GMT}	INFO	[jepsen worker 5] jepsen.util: 77	:info	:cas	[2 [3 3]]	[:unknown "does not match"]
+2022-03-14 16:08:55,299{GMT}	INFO	[jepsen worker 3] jepsen.util: 69	:invoke	:cas	[2 [1 1]]
+2022-03-14 16:08:55,537{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[2 nil]
+2022-03-14 16:08:55,713{GMT}	INFO	[jepsen worker 3] jepsen.util: 69	:info	:cas	[2 [1 1]]	[:unknown "does not match"]
+2022-03-14 16:08:55,748{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[2 nil]
+2022-03-14 16:08:55,836{GMT}	INFO	[jepsen worker 5] jepsen.util: 83	:invoke	:cas	[2 [0 4]]
+2022-03-14 16:08:55,945{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[2 nil]
+2022-03-14 16:08:55,957{GMT}	INFO	[jepsen worker 3] jepsen.util: 75	:invoke	:write	[2 1]
+2022-03-14 16:08:55,957{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[2 nil]	[:unknown "locked state"]
+2022-03-14 16:08:56,020{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[2 4]
+2022-03-14 16:08:56,032{GMT}	INFO	[jepsen worker 4] jepsen.util: 64	:invoke	:cas	[2 [0 1]]
+2022-03-14 16:08:56,057{GMT}	INFO	[jepsen worker 5] jepsen.util: 83	:info	:cas	[2 [0 4]]	[:unknown "locked state"]
+2022-03-14 16:08:56,159{GMT}	INFO	[jepsen worker 5] jepsen.util: 89	:invoke	:cas	[2 [1 2]]
+2022-03-14 16:08:56,160{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[2 nil]	[:unknown "locked state"]
+2022-03-14 16:08:56,207{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[2 nil]
+2022-03-14 16:08:56,223{GMT}	INFO	[jepsen worker 3] jepsen.util: 75	:info	:write	[2 1]	[:unknown "locked_state"]
+2022-03-14 16:08:56,262{GMT}	INFO	[jepsen worker 4] jepsen.util: 64	:info	:cas	[2 [0 1]]	[:unknown "locked state"]
+2022-03-14 16:08:56,365{GMT}	INFO	[jepsen worker 5] jepsen.util: 89	:info	:cas	[2 [1 2]]	[:unknown "locked state"]
+2022-03-14 16:08:56,427{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[2 nil]	[:unknown "locked state"]
+2022-03-14 16:08:56,559{GMT}	INFO	[jepsen worker 4] jepsen.util: 70	:invoke	:cas	[2 [2 1]]
+2022-03-14 16:08:56,668{GMT}	INFO	[jepsen worker 3] jepsen.util: 81	:invoke	:cas	[2 [2 4]]
+2022-03-14 16:08:56,766{GMT}	INFO	[jepsen worker 4] jepsen.util: 70	:info	:cas	[2 [2 1]]	[:unknown "locked state"]
+2022-03-14 16:08:56,875{GMT}	INFO	[jepsen worker 3] jepsen.util: 81	:info	:cas	[2 [2 4]]	[:unknown "locked state"]
+2022-03-14 16:08:56,993{GMT}	INFO	[jepsen worker 4] jepsen.util: 76	:invoke	:cas	[2 [3 2]]
+2022-03-14 16:08:57,202{GMT}	INFO	[jepsen worker 4] jepsen.util: 76	:info	:cas	[2 [3 2]]	[:unknown "locked state"]
+2022-03-14 16:08:57,250{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[2 nil]
+2022-03-14 16:08:57,510{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[2 nil]	[:unknown "locked state"]
+2022-03-14 16:08:57,619{GMT}	INFO	[jepsen worker 4] jepsen.util: 82	:invoke	:write	[2 0]
+2022-03-14 16:08:57,698{GMT}	INFO	[jepsen worker 5] jepsen.util: 95	:invoke	:cas	[2 [2 0]]
+2022-03-14 16:08:57,827{GMT}	INFO	[jepsen worker 4] jepsen.util: 82	:info	:write	[2 0]	[:unknown "locked_state"]
+2022-03-14 16:08:57,846{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[2 nil]
+2022-03-14 16:08:57,907{GMT}	INFO	[jepsen worker 5] jepsen.util: 95	:info	:cas	[2 [2 0]]	[:unknown "locked state"]
+2022-03-14 16:08:58,041{GMT}	INFO	[jepsen worker 3] jepsen.util: 87	:invoke	:write	[2 4]
+2022-03-14 16:08:58,055{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[2 nil]	[:unknown "locked state"]
+2022-03-14 16:08:58,227{GMT}	INFO	[jepsen worker 4] jepsen.util: 88	:invoke	:cas	[2 [0 4]]
+2022-03-14 16:08:58,460{GMT}	INFO	[jepsen worker 3] jepsen.util: 87	:ok	:write	[2 4]
+2022-03-14 16:08:58,495{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[2 nil]
+2022-03-14 16:08:58,641{GMT}	INFO	[jepsen worker 4] jepsen.util: 88	:info	:cas	[2 [0 4]]	[:unknown "does not match"]
+2022-03-14 16:08:58,787{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[3 nil]
+2022-03-14 16:08:58,945{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[2 4]
+2022-03-14 16:08:59,073{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[3 nil]
+2022-03-14 16:08:59,199{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[3 nil]	[:unknown "not found"]
+2022-03-14 16:08:59,206{GMT}	INFO	[jepsen worker 3] jepsen.util: 87	:invoke	:cas	[3 [3 1]]
+2022-03-14 16:08:59,314{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[3 nil]
+2022-03-14 16:08:59,399{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[3 nil]
+2022-03-14 16:08:59,415{GMT}	INFO	[jepsen worker 3] jepsen.util: 87	:info	:cas	[3 [3 1]]	[:unknown "locked state"]
+2022-03-14 16:08:59,486{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[3 nil]	[:unknown "not found"]
+2022-03-14 16:08:59,619{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[3 nil]	[:unknown "locked state"]
+2022-03-14 16:08:59,636{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[3 nil]
+2022-03-14 16:08:59,793{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[3 nil]	[:unknown "not found"]
+2022-03-14 16:09:00,006{GMT}	INFO	[jepsen worker 3] jepsen.util: 93	:invoke	:cas	[3 [0 1]]
+2022-03-14 16:09:00,015{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[3 nil]
+2022-03-14 16:09:00,097{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[3 nil]	[:unknown "not found"]
+2022-03-14 16:09:00,199{GMT}	INFO	[jepsen worker 4] jepsen.util: 94	:invoke	:cas	[3 [4 2]]
+2022-03-14 16:09:00,270{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[3 nil]
+2022-03-14 16:09:00,318{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[3 nil]	[:unknown "locked state"]
+2022-03-14 16:09:00,418{GMT}	INFO	[jepsen worker 3] jepsen.util: 93	:info	:cas	[3 [0 1]]	[:unknown "not found"]
+2022-03-14 16:09:00,479{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[3 nil]	[:unknown "locked state"]
+2022-03-14 16:09:00,632{GMT}	INFO	[jepsen worker 4] jepsen.util: 94	:info	:cas	[3 [4 2]]	[:unknown "not found"]
+2022-03-14 16:09:00,664{GMT}	INFO	[jepsen worker 4] jepsen.util: 100	:invoke	:cas	[3 [2 1]]
+2022-03-14 16:09:00,814{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[3 nil]
+2022-03-14 16:09:00,844{GMT}	INFO	[jepsen worker 3] jepsen.util: 99	:invoke	:write	[3 0]
+2022-03-14 16:09:01,054{GMT}	INFO	[jepsen worker 3] jepsen.util: 99	:info	:write	[3 0]	[:unknown "locked_state"]
+2022-03-14 16:09:01,077{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[3 nil]	[:unknown "locked state"]
+2022-03-14 16:09:01,078{GMT}	INFO	[jepsen worker 4] jepsen.util: 100	:info	:cas	[3 [2 1]]	[:unknown "not found"]
+2022-03-14 16:09:01,102{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[3 nil]
+2022-03-14 16:09:01,418{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[3 nil]
+2022-03-14 16:09:01,514{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[3 nil]	[:unknown "not found"]
+2022-03-14 16:09:01,705{GMT}	INFO	[jepsen worker 4] jepsen.util: 106	:invoke	:cas	[3 [1 1]]
+2022-03-14 16:09:01,829{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[3 nil]	[:unknown "not found"]
+2022-03-14 16:09:02,087{GMT}	INFO	[jepsen worker 3] jepsen.util: 105	:invoke	:cas	[3 [2 3]]
+2022-03-14 16:09:02,117{GMT}	INFO	[jepsen worker 4] jepsen.util: 106	:info	:cas	[3 [1 1]]	[:unknown "not found"]
+2022-03-14 16:09:02,459{GMT}	INFO	[jepsen worker 4] jepsen.util: 112	:invoke	:write	[3 0]
+2022-03-14 16:09:02,497{GMT}	INFO	[jepsen worker 5] jepsen.util: 101	:invoke	:cas	[3 [3 0]]
+2022-03-14 16:09:02,499{GMT}	INFO	[jepsen worker 3] jepsen.util: 105	:info	:cas	[3 [2 3]]	[:unknown "not found"]
+2022-03-14 16:09:02,703{GMT}	INFO	[jepsen worker 5] jepsen.util: 101	:info	:cas	[3 [3 0]]	[:unknown "locked state"]
+2022-03-14 16:09:02,871{GMT}	INFO	[jepsen worker 4] jepsen.util: 112	:ok	:write	[3 0]
+2022-03-14 16:09:02,883{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[3 nil]
+2022-03-14 16:09:03,173{GMT}	INFO	[jepsen worker 4] jepsen.util: 112	:invoke	:write	[3 4]
+2022-03-14 16:09:03,295{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:ok	:read	[3 0]
+2022-03-14 16:09:03,360{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[3 nil]
+2022-03-14 16:09:03,434{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[3 nil]
+2022-03-14 16:09:03,571{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[3 nil]	[:unknown "locked state"]
+2022-03-14 16:09:03,601{GMT}	INFO	[jepsen worker 4] jepsen.util: 112	:ok	:write	[3 4]
+2022-03-14 16:09:03,671{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[3 nil]
+2022-03-14 16:09:03,673{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[3 nil]	[:unknown "locked state"]
+2022-03-14 16:09:03,818{GMT}	INFO	[jepsen worker 3] jepsen.util: 111	:invoke	:write	[3 4]
+2022-03-14 16:09:04,083{GMT}	INFO	[jepsen worker 3] jepsen.util: 111	:info	:write	[3 4]	[:unknown "locked_state"]
+2022-03-14 16:09:04,135{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[3 nil]
+2022-03-14 16:09:04,181{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:ok	:read	[3 4]
+2022-03-14 16:09:04,533{GMT}	INFO	[jepsen worker 3] jepsen.util: 117	:invoke	:cas	[3 [4 1]]
+2022-03-14 16:09:04,546{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[3 4]
+2022-03-14 16:09:04,667{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[3 nil]
+2022-03-14 16:09:04,876{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[3 nil]	[:unknown "locked state"]
+2022-03-14 16:09:04,901{GMT}	INFO	[jepsen worker 5] jepsen.util: 107	:invoke	:cas	[3 [2 2]]
+2022-03-14 16:09:04,922{GMT}	INFO	[jepsen worker 4] jepsen.util: 112	:invoke	:cas	[3 [3 1]]
+2022-03-14 16:09:04,953{GMT}	INFO	[jepsen worker 3] jepsen.util: 117	:ok	:cas	[3 [4 1]]
+2022-03-14 16:09:05,105{GMT}	INFO	[jepsen worker 3] jepsen.util: 117	:invoke	:cas	[3 [1 3]]
+2022-03-14 16:09:05,183{GMT}	INFO	[jepsen worker 4] jepsen.util: 112	:info	:cas	[3 [3 1]]	[:unknown "locked state"]
+2022-03-14 16:09:05,279{GMT}	INFO	[jepsen worker 4] jepsen.util: 118	:invoke	:cas	[3 [3 3]]
+2022-03-14 16:09:05,293{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[3 nil]
+2022-03-14 16:09:05,312{GMT}	INFO	[jepsen worker 5] jepsen.util: 107	:info	:cas	[3 [2 2]]	[:unknown "does not match"]
+2022-03-14 16:09:05,330{GMT}	INFO	[jepsen worker 5] jepsen.util: 113	:invoke	:write	[3 1]
+2022-03-14 16:09:05,490{GMT}	INFO	[jepsen worker 4] jepsen.util: 118	:info	:cas	[3 [3 3]]	[:unknown "locked state"]
+2022-03-14 16:09:05,518{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[3 nil]	[:unknown "locked state"]
+2022-03-14 16:09:05,518{GMT}	INFO	[jepsen worker 3] jepsen.util: 117	:ok	:cas	[3 [1 3]]
+2022-03-14 16:09:05,589{GMT}	INFO	[jepsen worker 4] jepsen.util: 124	:invoke	:write	[3 0]
+2022-03-14 16:09:05,592{GMT}	INFO	[jepsen worker 5] jepsen.util: 113	:info	:write	[3 1]	[:unknown "locked_state"]
+2022-03-14 16:09:05,791{GMT}	INFO	[jepsen worker 5] jepsen.util: 119	:invoke	:cas	[3 [3 2]]
+2022-03-14 16:09:05,842{GMT}	INFO	[jepsen worker 3] jepsen.util: 117	:invoke	:cas	[3 [2 3]]
+2022-03-14 16:09:05,999{GMT}	INFO	[jepsen worker 4] jepsen.util: 124	:ok	:write	[3 0]
+2022-03-14 16:09:06,001{GMT}	INFO	[jepsen worker 5] jepsen.util: 119	:info	:cas	[3 [3 2]]	[:unknown "locked state"]
+2022-03-14 16:09:06,103{GMT}	INFO	[jepsen worker 3] jepsen.util: 117	:info	:cas	[3 [2 3]]	[:unknown "locked state"]
+2022-03-14 16:09:06,123{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[4 nil]
+2022-03-14 16:09:06,180{GMT}	INFO	[jepsen worker 4] jepsen.util: 124	:invoke	:cas	[4 [4 4]]
+2022-03-14 16:09:06,266{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[4 nil]
+2022-03-14 16:09:06,389{GMT}	INFO	[jepsen worker 4] jepsen.util: 124	:info	:cas	[4 [4 4]]	[:unknown "locked state"]
+2022-03-14 16:09:06,491{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[4 nil]	[:unknown "locked state"]
+2022-03-14 16:09:06,532{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[4 nil]	[:unknown "not found"]
+2022-03-14 16:09:06,578{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[4 nil]
+2022-03-14 16:09:06,579{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[4 nil]
+2022-03-14 16:09:06,788{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[4 nil]	[:unknown "locked state"]
+2022-03-14 16:09:06,867{GMT}	INFO	[jepsen worker 3] jepsen.util: 123	:invoke	:write	[4 2]
+2022-03-14 16:09:06,992{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[4 nil]	[:unknown "not found"]
+2022-03-14 16:09:06,992{GMT}	INFO	[jepsen worker 5] jepsen.util: 125	:invoke	:write	[4 3]
+2022-03-14 16:09:07,170{GMT}	INFO	[jepsen worker 4] jepsen.util: 130	:invoke	:cas	[4 [1 3]]
+2022-03-14 16:09:07,200{GMT}	INFO	[jepsen worker 5] jepsen.util: 125	:info	:write	[4 3]	[:unknown "locked_state"]
+2022-03-14 16:09:07,279{GMT}	INFO	[jepsen worker 3] jepsen.util: 123	:ok	:write	[4 2]
+2022-03-14 16:09:07,310{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[4 nil]
+2022-03-14 16:09:07,379{GMT}	INFO	[jepsen worker 4] jepsen.util: 130	:info	:cas	[4 [1 3]]	[:unknown "locked state"]
+2022-03-14 16:09:07,529{GMT}	INFO	[jepsen worker 5] jepsen.util: 131	:invoke	:cas	[4 [2 4]]
+2022-03-14 16:09:07,720{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:ok	:read	[4 2]
+2022-03-14 16:09:07,878{GMT}	INFO	[jepsen worker 3] jepsen.util: 123	:invoke	:cas	[4 [3 1]]
+2022-03-14 16:09:07,918{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[4 nil]
+2022-03-14 16:09:08,027{GMT}	INFO	[jepsen worker 5] jepsen.util: 131	:ok	:cas	[4 [2 4]]
+2022-03-14 16:09:08,041{GMT}	INFO	[jepsen worker 4] jepsen.util: 136	:invoke	:cas	[4 [1 1]]
+2022-03-14 16:09:08,130{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[4 nil]	[:unknown "locked state"]
+2022-03-14 16:09:08,249{GMT}	INFO	[jepsen worker 4] jepsen.util: 136	:info	:cas	[4 [1 1]]	[:unknown "locked state"]
+2022-03-14 16:09:08,269{GMT}	INFO	[jepsen worker 5] jepsen.util: 131	:invoke	:cas	[4 [0 2]]
+2022-03-14 16:09:08,290{GMT}	INFO	[jepsen worker 3] jepsen.util: 123	:info	:cas	[4 [3 1]]	[:unknown "does not match"]
+2022-03-14 16:09:08,508{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[4 nil]
+2022-03-14 16:09:08,661{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[4 nil]
+2022-03-14 16:09:08,756{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[4 nil]
+2022-03-14 16:09:08,761{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[4 nil]	[:unknown "locked state"]
+2022-03-14 16:09:08,761{GMT}	INFO	[jepsen worker 5] jepsen.util: 131	:info	:cas	[4 [0 2]]	[:unknown "does not match"]
+2022-03-14 16:09:08,972{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[4 nil]	[:unknown "locked state"]
+2022-03-14 16:09:09,071{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[4 4]
+2022-03-14 16:09:09,084{GMT}	INFO	[jepsen worker 4] jepsen.util: 142	:invoke	:write	[4 3]
+2022-03-14 16:09:09,320{GMT}	INFO	[jepsen worker 5] jepsen.util: 137	:invoke	:cas	[4 [1 1]]
+2022-03-14 16:09:09,497{GMT}	INFO	[jepsen worker 4] jepsen.util: 142	:ok	:write	[4 3]
+2022-03-14 16:09:09,574{GMT}	INFO	[jepsen worker 3] jepsen.util: 129	:invoke	:write	[4 3]
+2022-03-14 16:09:09,642{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[4 nil]
+2022-03-14 16:09:09,729{GMT}	INFO	[jepsen worker 5] jepsen.util: 137	:info	:cas	[4 [1 1]]	[:unknown "does not match"]
+2022-03-14 16:09:09,850{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[4 nil]	[:unknown "locked state"]
+2022-03-14 16:09:09,896{GMT}	INFO	[jepsen worker 4] jepsen.util: 142	:invoke	:cas	[4 [3 1]]
+2022-03-14 16:09:09,984{GMT}	INFO	[jepsen worker 3] jepsen.util: 129	:ok	:write	[4 3]
+2022-03-14 16:09:10,005{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[4 nil]
+2022-03-14 16:09:10,213{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[4 nil]	[:unknown "locked state"]
+2022-03-14 16:09:10,308{GMT}	INFO	[jepsen worker 4] jepsen.util: 142	:ok	:cas	[4 [3 1]]
+2022-03-14 16:09:10,343{GMT}	INFO	[jepsen worker 5] jepsen.util: 143	:invoke	:cas	[4 [1 1]]
+2022-03-14 16:09:10,634{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[4 nil]
+2022-03-14 16:09:10,754{GMT}	INFO	[jepsen worker 5] jepsen.util: 143	:ok	:cas	[4 [1 1]]
+2022-03-14 16:09:11,011{GMT}	INFO	[jepsen worker 4] jepsen.util: 142	:invoke	:cas	[4 [2 0]]
+2022-03-14 16:09:11,061{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[4 1]
+2022-03-14 16:09:11,284{GMT}	INFO	[jepsen worker 5] jepsen.util: 143	:invoke	:cas	[4 [3 0]]
+2022-03-14 16:09:11,385{GMT}	INFO	[jepsen worker 3] jepsen.util: 129	:invoke	:cas	[4 [3 0]]
+2022-03-14 16:09:11,470{GMT}	INFO	[jepsen worker 4] jepsen.util: 142	:info	:cas	[4 [2 0]]	[:unknown "does not match"]
+2022-03-14 16:09:11,521{GMT}	INFO	[jepsen worker 4] jepsen.util: 148	:invoke	:cas	[4 [4 3]]
+2022-03-14 16:09:11,637{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[4 nil]
+2022-03-14 16:09:11,673{GMT}	INFO	[jepsen worker 3] jepsen.util: 129	:info	:cas	[4 [3 0]]	[:unknown "locked state"]
+2022-03-14 16:09:11,776{GMT}	INFO	[jepsen worker 5] jepsen.util: 143	:info	:cas	[4 [3 0]]	[:unknown "does not match"]
+2022-03-14 16:09:11,879{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[4 nil]	[:unknown "locked state"]
+2022-03-14 16:09:11,980{GMT}	INFO	[jepsen worker 4] jepsen.util: 148	:info	:cas	[4 [4 3]]	[:unknown "does not match"]
+2022-03-14 16:09:12,021{GMT}	INFO	[jepsen worker 4] jepsen.util: 154	:invoke	:cas	[4 [0 0]]
+2022-03-14 16:09:12,220{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[4 nil]
+2022-03-14 16:09:12,263{GMT}	INFO	[jepsen worker 5] jepsen.util: 149	:invoke	:cas	[4 [2 1]]
+2022-03-14 16:09:12,314{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[4 nil]
+2022-03-14 16:09:12,435{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[4 nil]	[:unknown "locked state"]
+2022-03-14 16:09:12,438{GMT}	INFO	[jepsen worker 4] jepsen.util: 154	:info	:cas	[4 [0 0]]	[:unknown "does not match"]
+2022-03-14 16:09:12,539{GMT}	INFO	[jepsen worker 5] jepsen.util: 149	:info	:cas	[4 [2 1]]	[:unknown "locked state"]
+2022-03-14 16:09:12,539{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[4 nil]	[:unknown "locked state"]
+2022-03-14 16:09:12,586{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[4 nil]
+2022-03-14 16:09:12,795{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[4 nil]	[:unknown "locked state"]
+2022-03-14 16:09:12,888{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[4 nil]
+2022-03-14 16:09:12,888{GMT}	INFO	[jepsen worker 4] jepsen.util: 160	:invoke	:cas	[4 [3 3]]
+2022-03-14 16:09:13,097{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[4 nil]	[:unknown "locked state"]
+2022-03-14 16:09:13,097{GMT}	INFO	[jepsen worker 4] jepsen.util: 160	:info	:cas	[4 [3 3]]	[:unknown "locked state"]
+2022-03-14 16:09:13,233{GMT}	INFO	[jepsen worker 4] jepsen.util: 166	:invoke	:write	[4 1]
+2022-03-14 16:09:13,245{GMT}	INFO	[jepsen worker 5] jepsen.util: 155	:invoke	:cas	[4 [3 4]]
+2022-03-14 16:09:13,535{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[4 nil]
+2022-03-14 16:09:13,541{GMT}	INFO	[jepsen worker 5] jepsen.util: 155	:info	:cas	[4 [3 4]]	[:unknown "locked state"]
+2022-03-14 16:09:13,641{GMT}	INFO	[jepsen worker 4] jepsen.util: 166	:ok	:write	[4 1]
+2022-03-14 16:09:13,722{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[5 nil]
+2022-03-14 16:09:13,741{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[4 nil]	[:unknown "locked state"]
+2022-03-14 16:09:13,811{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[5 nil]
+2022-03-14 16:09:13,928{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:14,049{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:14,122{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[5 nil]
+2022-03-14 16:09:14,442{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[5 nil]
+2022-03-14 16:09:14,534{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[5 nil]	[:unknown "not found"]
+2022-03-14 16:09:14,649{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:14,803{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[5 nil]
+2022-03-14 16:09:15,005{GMT}	INFO	[jepsen worker 3] jepsen.util: 135	:invoke	:cas	[5 [4 4]]
+2022-03-14 16:09:15,011{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:15,175{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[5 nil]
+2022-03-14 16:09:15,213{GMT}	INFO	[jepsen worker 3] jepsen.util: 135	:info	:cas	[5 [4 4]]	[:unknown "locked state"]
+2022-03-14 16:09:15,384{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:15,510{GMT}	INFO	[jepsen worker 3] jepsen.util: 141	:invoke	:cas	[5 [0 3]]
+2022-03-14 16:09:15,520{GMT}	INFO	[jepsen worker 5] jepsen.util: 161	:invoke	:cas	[5 [4 1]]
+2022-03-14 16:09:15,702{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[5 nil]
+2022-03-14 16:09:15,823{GMT}	INFO	[jepsen worker 5] jepsen.util: 161	:info	:cas	[5 [4 1]]	[:unknown "locked state"]
+2022-03-14 16:09:15,896{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[5 nil]
+2022-03-14 16:09:15,924{GMT}	INFO	[jepsen worker 3] jepsen.util: 141	:info	:cas	[5 [0 3]]	[:unknown "not found"]
+2022-03-14 16:09:16,127{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[5 nil]	[:unknown "not found"]
+2022-03-14 16:09:16,127{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:16,235{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[5 nil]
+2022-03-14 16:09:16,595{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[5 nil]
+2022-03-14 16:09:16,646{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[5 nil]	[:unknown "not found"]
+2022-03-14 16:09:16,844{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[5 nil]
+2022-03-14 16:09:16,999{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[5 nil]
+2022-03-14 16:09:17,007{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[5 nil]	[:unknown "not found"]
+2022-03-14 16:09:17,212{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:17,315{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[5 nil]	[:unknown "not found"]
+2022-03-14 16:09:17,390{GMT}	INFO	[jepsen worker 5] jepsen.util: 167	:invoke	:cas	[5 [4 2]]
+2022-03-14 16:09:17,470{GMT}	INFO	[jepsen worker 3] jepsen.util: 147	:invoke	:write	[5 2]
+2022-03-14 16:09:17,550{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[5 nil]
+2022-03-14 16:09:17,701{GMT}	INFO	[jepsen worker 3] jepsen.util: 147	:info	:write	[5 2]	[:unknown "locked_state"]
+2022-03-14 16:09:17,804{GMT}	INFO	[jepsen worker 5] jepsen.util: 167	:info	:cas	[5 [4 2]]	[:unknown "not found"]
+2022-03-14 16:09:17,804{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:17,907{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[5 nil]
+2022-03-14 16:09:18,283{GMT}	INFO	[jepsen worker 4] jepsen.util: 166	:invoke	:cas	[5 [0 0]]
+2022-03-14 16:09:18,318{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[5 nil]	[:unknown "not found"]
+2022-03-14 16:09:18,553{GMT}	INFO	[jepsen worker 3] jepsen.util: 153	:invoke	:write	[5 1]
+2022-03-14 16:09:18,695{GMT}	INFO	[jepsen worker 4] jepsen.util: 166	:info	:cas	[5 [0 0]]	[:unknown "not found"]
+2022-03-14 16:09:18,759{GMT}	INFO	[jepsen worker 5] jepsen.util: 173	:invoke	:write	[5 2]
+2022-03-14 16:09:18,820{GMT}	INFO	[jepsen worker 4] jepsen.util: 172	:invoke	:write	[5 2]
+2022-03-14 16:09:18,824{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[5 nil]
+2022-03-14 16:09:18,963{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[5 nil]
+2022-03-14 16:09:18,967{GMT}	INFO	[jepsen worker 5] jepsen.util: 173	:info	:write	[5 2]	[:unknown "locked_state"]
+2022-03-14 16:09:18,988{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[5 nil]
+2022-03-14 16:09:18,999{GMT}	INFO	[jepsen worker 3] jepsen.util: 153	:ok	:write	[5 1]
+2022-03-14 16:09:19,066{GMT}	INFO	[jepsen worker 3] jepsen.util: 153	:invoke	:write	[5 4]
+2022-03-14 16:09:19,069{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:19,172{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:19,236{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[5 nil]
+2022-03-14 16:09:19,274{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:19,275{GMT}	INFO	[jepsen worker 4] jepsen.util: 172	:ok	:write	[5 2]
+2022-03-14 16:09:19,477{GMT}	INFO	[jepsen worker 3] jepsen.util: 153	:ok	:write	[5 4]
+2022-03-14 16:09:19,478{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:19,493{GMT}	INFO	[jepsen worker 3] jepsen.util: 153	:invoke	:cas	[5 [1 3]]
+2022-03-14 16:09:19,560{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[5 nil]
+2022-03-14 16:09:19,624{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[5 nil]
+2022-03-14 16:09:19,787{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:19,888{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:19,928{GMT}	INFO	[jepsen worker 5] jepsen.util: 179	:invoke	:cas	[5 [0 2]]
+2022-03-14 16:09:19,988{GMT}	INFO	[jepsen worker 3] jepsen.util: 153	:info	:cas	[5 [1 3]]	[:unknown "does not match"]
+2022-03-14 16:09:20,043{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[5 nil]
+2022-03-14 16:09:20,208{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[5 nil]
+2022-03-14 16:09:20,285{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[5 nil]
+2022-03-14 16:09:20,341{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:20,342{GMT}	INFO	[jepsen worker 5] jepsen.util: 179	:info	:cas	[5 [0 2]]	[:unknown "does not match"]
+2022-03-14 16:09:20,494{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:20,581{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[5 nil]
+2022-03-14 16:09:20,647{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[5 4]
+2022-03-14 16:09:20,668{GMT}	INFO	[jepsen worker 4] jepsen.util: 172	:invoke	:write	[5 2]
+2022-03-14 16:09:20,726{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[5 nil]
+2022-03-14 16:09:20,824{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[5 nil]
+2022-03-14 16:09:20,875{GMT}	INFO	[jepsen worker 4] jepsen.util: 172	:info	:write	[5 2]	[:unknown "locked_state"]
+2022-03-14 16:09:20,978{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:20,991{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[5 4]
+2022-03-14 16:09:21,139{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[5 nil]
+2022-03-14 16:09:21,283{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:ok	:read	[5 4]
+2022-03-14 16:09:21,340{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[5 nil]
+2022-03-14 16:09:21,537{GMT}	INFO	[jepsen worker 3] jepsen.util: 159	:invoke	:write	[5 4]
+2022-03-14 16:09:21,549{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:21,589{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[5 4]
+2022-03-14 16:09:21,641{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[5 nil]
+2022-03-14 16:09:21,896{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[5 nil]
+2022-03-14 16:09:21,897{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:21,986{GMT}	INFO	[jepsen worker 4] jepsen.util: 178	:invoke	:write	[5 3]
+2022-03-14 16:09:21,998{GMT}	INFO	[jepsen worker 3] jepsen.util: 159	:ok	:write	[5 4]
+2022-03-14 16:09:22,206{GMT}	INFO	[jepsen worker 4] jepsen.util: 178	:info	:write	[5 3]	[:unknown "locked_state"]
+2022-03-14 16:09:22,265{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[5 nil]
+2022-03-14 16:09:22,307{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:ok	:read	[5 4]
+2022-03-14 16:09:22,656{GMT}	INFO	[jepsen worker 3] jepsen.util: 159	:invoke	:cas	[5 [2 4]]
+2022-03-14 16:09:22,715{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[5 4]
+2022-03-14 16:09:22,761{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[5 nil]
+2022-03-14 16:09:23,023{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:23,102{GMT}	INFO	[jepsen worker 5] jepsen.util: 185	:invoke	:write	[5 2]
+2022-03-14 16:09:23,122{GMT}	INFO	[jepsen worker 3] jepsen.util: 159	:ok	:cas	[5 [2 4]]
+2022-03-14 16:09:23,445{GMT}	INFO	[jepsen worker 3] jepsen.util: 159	:invoke	:write	[5 0]
+2022-03-14 16:09:23,514{GMT}	INFO	[jepsen worker 5] jepsen.util: 185	:ok	:write	[5 2]
+2022-03-14 16:09:23,578{GMT}	INFO	[jepsen worker 4] jepsen.util: 184	:invoke	:cas	[5 [4 1]]
+2022-03-14 16:09:23,786{GMT}	INFO	[jepsen worker 4] jepsen.util: 184	:info	:cas	[5 [4 1]]	[:unknown "locked state"]
+2022-03-14 16:09:23,855{GMT}	INFO	[jepsen worker 3] jepsen.util: 159	:ok	:write	[5 0]
+2022-03-14 16:09:23,945{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[5 nil]
+2022-03-14 16:09:24,076{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[5 nil]
+2022-03-14 16:09:24,154{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:24,285{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:24,476{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[5 nil]
+2022-03-14 16:09:24,581{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[5 nil]
+2022-03-14 16:09:24,685{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:24,697{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[5 nil]
+2022-03-14 16:09:24,781{GMT}	INFO	[jepsen worker 4] jepsen.util: 190	:invoke	:cas	[5 [1 2]]
+2022-03-14 16:09:24,788{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:24,906{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:25,007{GMT}	INFO	[jepsen worker 4] jepsen.util: 190	:info	:cas	[5 [1 2]]	[:unknown "locked state"]
+2022-03-14 16:09:25,059{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[5 nil]
+2022-03-14 16:09:25,154{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[5 nil]
+2022-03-14 16:09:25,164{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[5 nil]
+2022-03-14 16:09:25,267{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:25,331{GMT}	INFO	[jepsen worker 5] jepsen.util: 185	:invoke	:cas	[5 [2 0]]
+2022-03-14 16:09:25,369{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:25,371{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[5 nil]	[:unknown "locked state"]
+2022-03-14 16:09:25,440{GMT}	INFO	[jepsen worker 3] jepsen.util: 159	:invoke	:write	[5 2]
+2022-03-14 16:09:25,574{GMT}	INFO	[jepsen worker 5] jepsen.util: 185	:info	:cas	[5 [2 0]]	[:unknown "locked state"]
+2022-03-14 16:09:25,663{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[5 nil]
+2022-03-14 16:09:25,676{GMT}	INFO	[jepsen worker 3] jepsen.util: 159	:info	:write	[5 2]	[:unknown "locked_state"]
+2022-03-14 16:09:25,738{GMT}	INFO	[jepsen worker 4] jepsen.util: 196	:invoke	:write	[6 0]
+2022-03-14 16:09:25,984{GMT}	INFO	[jepsen worker 4] jepsen.util: 196	:info	:write	[6 0]	[:unknown "locked_state"]
+2022-03-14 16:09:26,037{GMT}	INFO	[jepsen worker 5] jepsen.util: 191	:invoke	:write	[6 2]
+2022-03-14 16:09:26,083{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:read	[5 0]
+2022-03-14 16:09:26,436{GMT}	INFO	[jepsen worker 4] jepsen.util: 202	:invoke	:cas	[6 [4 2]]
+2022-03-14 16:09:26,447{GMT}	INFO	[jepsen worker 5] jepsen.util: 191	:ok	:write	[6 2]
+2022-03-14 16:09:26,686{GMT}	INFO	[jepsen worker 5] jepsen.util: 191	:invoke	:cas	[6 [0 2]]
+2022-03-14 16:09:26,719{GMT}	INFO	[jepsen worker 3] jepsen.util: 165	:invoke	:cas	[6 [3 1]]
+2022-03-14 16:09:26,849{GMT}	INFO	[jepsen worker 4] jepsen.util: 202	:info	:cas	[6 [4 2]]	[:unknown "not found"]
+2022-03-14 16:09:26,940{GMT}	INFO	[jepsen worker 4] jepsen.util: 208	:invoke	:write	[6 2]
+2022-03-14 16:09:26,952{GMT}	INFO	[jepsen worker 5] jepsen.util: 191	:info	:cas	[6 [0 2]]	[:unknown "locked state"]
+2022-03-14 16:09:27,149{GMT}	INFO	[jepsen worker 4] jepsen.util: 208	:info	:write	[6 2]	[:unknown "locked_state"]
+2022-03-14 16:09:27,154{GMT}	INFO	[jepsen worker 3] jepsen.util: 165	:info	:cas	[6 [3 1]]	[:unknown "not found"]
+2022-03-14 16:09:27,211{GMT}	INFO	[jepsen worker 4] jepsen.util: 214	:invoke	:cas	[6 [4 2]]
+2022-03-14 16:09:27,305{GMT}	INFO	[jepsen worker 3] jepsen.util: 171	:invoke	:cas	[6 [1 1]]
+2022-03-14 16:09:27,514{GMT}	INFO	[jepsen worker 3] jepsen.util: 171	:info	:cas	[6 [1 1]]	[:unknown "locked state"]
+2022-03-14 16:09:27,622{GMT}	INFO	[jepsen worker 4] jepsen.util: 214	:info	:cas	[6 [4 2]]	[:unknown "not found"]
+2022-03-14 16:09:27,676{GMT}	INFO	[jepsen worker 5] jepsen.util: 197	:invoke	:cas	[6 [1 0]]
+2022-03-14 16:09:27,782{GMT}	INFO	[jepsen worker 3] jepsen.util: 177	:invoke	:cas	[6 [1 3]]
+2022-03-14 16:09:27,856{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[6 nil]
+2022-03-14 16:09:27,990{GMT}	INFO	[jepsen worker 3] jepsen.util: 177	:info	:cas	[6 [1 3]]	[:unknown "locked state"]
+2022-03-14 16:09:28,087{GMT}	INFO	[jepsen worker 5] jepsen.util: 197	:info	:cas	[6 [1 0]]	[:unknown "not found"]
+2022-03-14 16:09:28,092{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[6 nil]	[:unknown "locked state"]
+2022-03-14 16:09:28,202{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[6 nil]
+2022-03-14 16:09:28,318{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[6 nil]
+2022-03-14 16:09:28,398{GMT}	INFO	[jepsen worker 3] jepsen.util: 183	:invoke	:cas	[6 [1 2]]
+2022-03-14 16:09:28,411{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[6 nil]	[:unknown "locked state"]
+2022-03-14 16:09:28,483{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[6 nil]
+2022-03-14 16:09:28,526{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[6 nil]	[:unknown "locked state"]
+2022-03-14 16:09:28,615{GMT}	INFO	[jepsen worker 3] jepsen.util: 183	:info	:cas	[6 [1 2]]	[:unknown "locked state"]
+2022-03-14 16:09:28,707{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[6 nil]
+2022-03-14 16:09:28,717{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[6 nil]	[:unknown "locked state"]
+2022-03-14 16:09:28,923{GMT}	INFO	[jepsen worker 4] jepsen.util: 220	:invoke	:cas	[6 [3 2]]
+2022-03-14 16:09:29,119{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:ok	:read	[6 2]
+2022-03-14 16:09:29,260{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[6 nil]
+2022-03-14 16:09:29,376{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[6 nil]
+2022-03-14 16:09:29,426{GMT}	INFO	[jepsen worker 4] jepsen.util: 220	:info	:cas	[6 [3 2]]	[:unknown "not found"]
+2022-03-14 16:09:29,631{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[6 nil]	[:unknown "locked state"]
+2022-03-14 16:09:29,683{GMT}	INFO	[jepsen worker 4] jepsen.util: 226	:invoke	:cas	[6 [3 0]]
+2022-03-14 16:09:29,731{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:ok	:read	[6 2]
+2022-03-14 16:09:29,842{GMT}	INFO	[jepsen worker 5] jepsen.util: 203	:invoke	:write	[6 0]
+2022-03-14 16:09:30,053{GMT}	INFO	[jepsen worker 5] jepsen.util: 203	:info	:write	[6 0]	[:unknown "locked_state"]
+2022-03-14 16:09:30,113{GMT}	INFO	[jepsen worker 5] jepsen.util: 209	:invoke	:cas	[6 [2 2]]
+2022-03-14 16:09:30,125{GMT}	INFO	[jepsen worker 3] jepsen.util: 189	:invoke	:write	[6 4]
+2022-03-14 16:09:30,138{GMT}	INFO	[jepsen worker 4] jepsen.util: 226	:info	:cas	[6 [3 0]]	[:unknown "not found"]
+2022-03-14 16:09:30,260{GMT}	INFO	[jepsen worker 4] jepsen.util: 232	:invoke	:cas	[6 [4 3]]
+2022-03-14 16:09:30,393{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[6 nil]
+2022-03-14 16:09:30,423{GMT}	INFO	[jepsen worker 3] jepsen.util: 189	:info	:write	[6 4]	[:unknown "locked_state"]
+2022-03-14 16:09:30,468{GMT}	INFO	[jepsen worker 4] jepsen.util: 232	:info	:cas	[6 [4 3]]	[:unknown "locked state"]
+2022-03-14 16:09:30,505{GMT}	INFO	[jepsen worker 3] jepsen.util: 195	:invoke	:write	[7 4]
+2022-03-14 16:09:30,514{GMT}	INFO	[jepsen worker 4] jepsen.util: 238	:invoke	:cas	[7 [3 0]]
+2022-03-14 16:09:30,523{GMT}	INFO	[jepsen worker 5] jepsen.util: 209	:ok	:cas	[6 [2 2]]
+2022-03-14 16:09:30,671{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[6 nil]	[:unknown "locked state"]
+2022-03-14 16:09:30,714{GMT}	INFO	[jepsen worker 5] jepsen.util: 209	:invoke	:cas	[7 [2 0]]
+2022-03-14 16:09:30,774{GMT}	INFO	[jepsen worker 3] jepsen.util: 195	:info	:write	[7 4]	[:unknown "locked_state"]
+2022-03-14 16:09:30,774{GMT}	INFO	[jepsen worker 4] jepsen.util: 238	:info	:cas	[7 [3 0]]	[:unknown "locked state"]
+2022-03-14 16:09:30,890{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:invoke	:read	[7 nil]
+2022-03-14 16:09:30,922{GMT}	INFO	[jepsen worker 5] jepsen.util: 209	:info	:cas	[7 [2 0]]	[:unknown "locked state"]
+2022-03-14 16:09:30,961{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:read	[7 nil]
+2022-03-14 16:09:31,155{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:invoke	:read	[7 nil]
+2022-03-14 16:09:31,302{GMT}	INFO	[jepsen worker 1] jepsen.util: 1	:fail	:read	[7 nil]	[:unknown "not found"]
+2022-03-14 16:09:31,372{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:fail	:read	[7 nil]	[:unknown "not found"]
+2022-03-14 16:09:31,608{GMT}	INFO	[jepsen worker 2] jepsen.util: 2	:fail	:read	[7 nil]	[:unknown "not found"]
+2022-03-14 16:09:31,621{GMT}	INFO	[jepsen node n1] maelstrom.db: Tearing down n1
+2022-03-14 16:09:31,621{GMT}	INFO	[jepsen node n0] maelstrom.db: Tearing down n0
+2022-03-14 16:09:31,621{GMT}	INFO	[jepsen node n2] maelstrom.db: Tearing down n2
+2022-03-14 16:09:32,854{GMT}	INFO	[jepsen node n0] maelstrom.net: Shutting down Maelstrom network
+2022-03-14 16:09:32,856{GMT}	INFO	[jepsen test runner] jepsen.core: Run complete, writing
+2022-03-14 16:09:32,888{GMT}	INFO	[jepsen test runner] jepsen.core: Analyzing...
+2022-03-14 16:09:33,109{GMT}	INFO	[clojure-agent-send-pool-5] jepsen.independent: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220314T160830.000Z/independent/3/results.edn
+2022-03-14 16:09:33,109{GMT}	INFO	[clojure-agent-send-pool-2] jepsen.independent: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220314T160830.000Z/independent/1/results.edn
+2022-03-14 16:09:33,118{GMT}	INFO	[clojure-agent-send-pool-5] jepsen.independent: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220314T160830.000Z/independent/3/history.edn
+2022-03-14 16:09:33,119{GMT}	INFO	[clojure-agent-send-pool-2] jepsen.independent: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220314T160830.000Z/independent/1/history.edn
+2022-03-14 16:09:33,109{GMT}	INFO	[clojure-agent-send-pool-6] jepsen.independent: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220314T160830.000Z/independent/2/results.edn
+2022-03-14 16:09:33,121{GMT}	INFO	[clojure-agent-send-pool-6] jepsen.independent: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220314T160830.000Z/independent/2/history.edn
+2022-03-14 16:09:33,109{GMT}	INFO	[clojure-agent-send-pool-4] jepsen.independent: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220314T160830.000Z/independent/6/results.edn
+2022-03-14 16:09:33,123{GMT}	INFO	[clojure-agent-send-pool-4] jepsen.independent: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220314T160830.000Z/independent/6/history.edn
+2022-03-14 16:09:33,110{GMT}	INFO	[clojure-agent-send-pool-0] jepsen.independent: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220314T160830.000Z/independent/0/results.edn
+2022-03-14 16:09:33,126{GMT}	INFO	[clojure-agent-send-pool-0] jepsen.independent: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220314T160830.000Z/independent/0/history.edn
+2022-03-14 16:09:33,114{GMT}	INFO	[clojure-agent-send-pool-7] jepsen.independent: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220314T160830.000Z/independent/5/results.edn
+2022-03-14 16:09:33,128{GMT}	INFO	[clojure-agent-send-pool-1] jepsen.independent: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220314T160830.000Z/independent/7/results.edn
+2022-03-14 16:09:33,128{GMT}	INFO	[clojure-agent-send-pool-3] jepsen.independent: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220314T160830.000Z/independent/4/results.edn
+2022-03-14 16:09:33,129{GMT}	INFO	[clojure-agent-send-pool-1] jepsen.independent: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220314T160830.000Z/independent/7/history.edn
+2022-03-14 16:09:33,131{GMT}	INFO	[clojure-agent-send-pool-7] jepsen.independent: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220314T160830.000Z/independent/5/history.edn
+2022-03-14 16:09:33,131{GMT}	INFO	[clojure-agent-send-pool-3] jepsen.independent: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220314T160830.000Z/independent/4/history.edn
+2022-03-14 16:09:33,498{GMT}	INFO	[jepsen test runner] jepsen.core: Analysis complete
+2022-03-14 16:09:33,529{GMT}	INFO	[jepsen results] jepsen.store: Wrote /home/clock/Mestrado/2Sem/TF/TP/TP1/store/lin-kv/20220314T160830.000Z/results.edn
+2022-03-14 16:09:33,555{GMT}	INFO	[jepsen test runner] jepsen.core: {:perf {:latency-graph {:valid? true},
+        :rate-graph {:valid? true},
+        :valid? true},
+ :timeline {:valid? true},
+ :exceptions {:valid? true},
+ :stats {:valid? true,
+         :count 296,
+         :ok-count 83,
+         :fail-count 105,
+         :info-count 108,
+         :by-f {:cas {:valid? true,
+                      :count 97,
+                      :ok-count 13,
+                      :fail-count 0,
+                      :info-count 84},
+                :read {:valid? true,
+                       :count 144,
+                       :ok-count 39,
+                       :fail-count 105,
+                       :info-count 0},
+                :write {:valid? true,
+                        :count 55,
+                        :ok-count 31,
+                        :fail-count 0,
+                        :info-count 24}}},
+ :net {:all {:send-count 2481,
+             :recv-count 2481,
+             :msg-count 2481,
+             :msgs-per-op 8.381757},
+       :clients {:send-count 598, :recv-count 598, :msg-count 598},
+       :servers {:send-count 1883,
+                 :recv-count 1883,
+                 :msg-count 1883,
+                 :msgs-per-op 6.3614864},
+       :valid? true},
+ :workload {:valid? true,
+            :results {0 {:linearizable {:valid? true,
+                                        :model #knossos.model.CASRegister{:value 4},
+                                        :final-paths (),
+                                        :configs ()},
+                         :timeline {:valid? true},
+                         :valid? true},
+                      7 {:linearizable {:valid? true,
+                                        :configs ({:model #knossos.model.CASRegister{:value nil},
+                                                   :last-op nil,
+                                                   :pending [{:process 195,
+                                                              :type :invoke,
+                                                              :f :write,
+                                                              :value 4,
+                                                              :index 578,
+                                                              :time 59334053277}
+                                                             {:process 209,
+                                                              :type :invoke,
+                                                              :f :cas,
+                                                              :value [2
+                                                                      0],
+                                                              :index 582,
+                                                              :time 59543604704}
+                                                             {:process 238,
+                                                              :type :invoke,
+                                                              :f :cas,
+                                                              :value [3
+                                                                      0],
+                                                              :index 579,
+                                                              :time 59344182651}]}),
+                                        :final-paths ()},
+                         :timeline {:valid? true},
+                         :valid? true},
+                      1 {:linearizable {:valid? true,
+                                        :model #knossos.model.CASRegister{:value 3},
+                                        :final-paths (),
+                                        :configs ()},
+                         :timeline {:valid? true},
+                         :valid? true},
+                      4 {:linearizable {:valid? true,
+                                        :model #knossos.model.CASRegister{:value 1},
+                                        :final-paths (),
+                                        :configs ()},
+                         :timeline {:valid? true},
+                         :valid? true},
+                      6 {:linearizable {:valid? true,
+                                        :model #knossos.model.CASRegister{:value 2},
+                                        :final-paths (),
+                                        :configs ()},
+                         :timeline {:valid? true},
+                         :valid? true},
+                      3 {:linearizable {:valid? true,
+                                        :model #knossos.model.CASRegister{:value 0},
+                                        :final-paths (),
+                                        :configs ()},
+                         :timeline {:valid? true},
+                         :valid? true},
+                      2 {:linearizable {:valid? true,
+                                        :model #knossos.model.CASRegister{:value 4},
+                                        :final-paths (),
+                                        :configs ()},
+                         :timeline {:valid? true},
+                         :valid? true},
+                      5 {:linearizable {:valid? true,
+                                        :model #knossos.model.CASRegister{:value 2},
+                                        :final-paths (),
+                                        :configs ()},
+                         :timeline {:valid? true},
+                         :valid? true}},
+            :failures []},
+ :valid? true}
+
+
+Everything looks good! ヽ(‘ー`)ノ

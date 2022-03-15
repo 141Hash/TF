@@ -1,0 +1,264 @@
+/home/clock/Mestrado/2Sem/TF/TP/TP1/lin-kv.py:9: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+DEBUG:root:received {"id":0,"src":"c0","dest":"n2","body":{"type":"init","node_id":"n2","node_ids":["n0","n1","n2"],"msg_id":1}}
+INFO:root:node n2 initialized
+DEBUG:root:sending {"dest": "c0", "src": "n2", "body": {"msg_id": 1, "in_reply_to": 1, "type": "init_ok"}}
+DEBUG:root:received {"id":7,"src":"c7","dest":"n2","body":{"key":0,"from":2,"to":2,"type":"cas","msg_id":1}}
+INFO:root:node c7 comparing and setting
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 2, "type": "cas_lock", "key": 0, "from": 2, "to": 2}}
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 3, "type": "cas_lock", "key": 0, "from": 2, "to": 2}}
+DEBUG:root:received {"id":9,"src":"n2","dest":"n2","body":{"msg_id":3,"type":"cas_lock","key":0,"from":2,"to":2}}
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 4, "in_reply_to": 3, "type": "noKeyCas"}}
+DEBUG:root:received {"id":10,"src":"n2","dest":"n2","body":{"msg_id":4,"in_reply_to":3,"type":"noKeyCas"}}
+DEBUG:root:received {"id":12,"src":"n0","dest":"n2","body":{"msg_id":3,"type":"cas_lock","key":0,"from":2,"to":1}}
+DEBUG:root:received {"id":13,"src":"n0","dest":"n2","body":{"msg_id":4,"in_reply_to":2,"type":"noKeyCas"}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 5, "in_reply_to": 3, "type": "error_cas_lock", "text": "already locked"}}
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 6, "type": "unlock_cas", "code": 20}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 7, "type": "unlock_cas", "code": 20}}
+DEBUG:root:received {"id":15,"src":"n2","dest":"n2","body":{"msg_id":6,"type":"unlock_cas","code":20}}
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 8, "in_reply_to": 6, "type": "unlock_cas_ok", "code": 20}}
+DEBUG:root:received {"id":17,"src":"n2","dest":"n2","body":{"msg_id":8,"in_reply_to":6,"type":"unlock_cas_ok","code":20}}
+DEBUG:root:received {"id":19,"src":"n0","dest":"n2","body":{"msg_id":5,"in_reply_to":7,"type":"unlock_cas_ok","code":20}}
+DEBUG:root:received {"id":20,"src":"n0","dest":"n2","body":{"msg_id":6,"type":"unlock"}}
+DEBUG:root:sending {"dest": "c7", "src": "n2", "body": {"msg_id": 9, "in_reply_to": 1, "type": "error", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":25,"src":"n1","dest":"n2","body":{"msg_id":3,"type":"cas_lock","key":0,"from":2,"to":1}}
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 10, "in_reply_to": 3, "type": "noKeyCas"}}
+DEBUG:root:received {"id":29,"src":"n1","dest":"n2","body":{"msg_id":5,"type":"unlock_cas","code":20}}
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 11, "in_reply_to": 5, "type": "unlock_cas_ok", "code": 20}}
+DEBUG:root:received {"id":36,"src":"n0","dest":"n2","body":{"msg_id":12,"type":"read_server","key":0}}
+INFO:root:server n0 reading from 0
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 12, "in_reply_to": 12, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":40,"src":"n0","dest":"n2","body":{"msg_id":14,"type":"unlock_read","code":20}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 13, "in_reply_to": 14, "type": "unlock_read_ok", "code": 20}}
+DEBUG:root:received {"id":45,"src":"n1","dest":"n2","body":{"msg_id":10,"type":"read_server","key":0}}
+INFO:root:server n1 reading from 0
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 14, "in_reply_to": 10, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":49,"src":"n1","dest":"n2","body":{"msg_id":13,"type":"unlock_read","code":20}}
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 15, "in_reply_to": 13, "type": "unlock_read_ok", "code": 20}}
+DEBUG:root:received {"id":65,"src":"n0","dest":"n2","body":{"msg_id":18,"type":"cas_lock","key":0,"from":1,"to":2}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 16, "in_reply_to": 18, "type": "noKeyCas"}}
+DEBUG:root:received {"id":69,"src":"n0","dest":"n2","body":{"msg_id":21,"type":"unlock_cas","code":20}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 17, "in_reply_to": 21, "type": "unlock_cas_ok", "code": 20}}
+DEBUG:root:received {"id":74,"src":"c7","dest":"n2","body":{"key":0,"from":0,"to":3,"type":"cas","msg_id":2}}
+INFO:root:node c7 comparing and setting
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 18, "type": "cas_lock", "key": 0, "from": 0, "to": 3}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 19, "type": "cas_lock", "key": 0, "from": 0, "to": 3}}
+DEBUG:root:received {"id":75,"src":"n2","dest":"n2","body":{"msg_id":18,"type":"cas_lock","key":0,"from":0,"to":3}}
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 20, "in_reply_to": 18, "type": "noKeyCas"}}
+DEBUG:root:received {"id":77,"src":"n2","dest":"n2","body":{"msg_id":20,"in_reply_to":18,"type":"noKeyCas"}}
+DEBUG:root:received {"id":78,"src":"n0","dest":"n2","body":{"msg_id":25,"in_reply_to":19,"type":"noMatch"}}
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 21, "type": "unlock_cas", "code": 20}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 22, "type": "unlock_cas", "code": 20}}
+DEBUG:root:received {"id":79,"src":"n2","dest":"n2","body":{"msg_id":21,"type":"unlock_cas","code":20}}
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 23, "in_reply_to": 21, "type": "unlock_cas_ok", "code": 20}}
+DEBUG:root:received {"id":81,"src":"n2","dest":"n2","body":{"msg_id":23,"in_reply_to":21,"type":"unlock_cas_ok","code":20}}
+DEBUG:root:received {"id":82,"src":"n0","dest":"n2","body":{"msg_id":26,"in_reply_to":22,"type":"unlock_cas_ok","code":20}}
+DEBUG:root:sending {"dest": "c7", "src": "n2", "body": {"msg_id": 24, "in_reply_to": 2, "type": "error", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":94,"src":"c7","dest":"n2","body":{"key":0,"from":4,"to":3,"type":"cas","msg_id":3}}
+INFO:root:node c7 comparing and setting
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 25, "type": "cas_lock", "key": 0, "from": 4, "to": 3}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 26, "type": "cas_lock", "key": 0, "from": 4, "to": 3}}
+DEBUG:root:received {"id":97,"src":"n1","dest":"n2","body":{"msg_id":26,"in_reply_to":25,"type":"noMatch"}}
+DEBUG:root:received {"id":98,"src":"n0","dest":"n2","body":{"msg_id":34,"in_reply_to":26,"type":"noMatch"}}
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 27, "type": "unlock_cas", "code": 22}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 28, "type": "unlock_cas", "code": 22}}
+DEBUG:root:received {"id":101,"src":"n1","dest":"n2","body":{"msg_id":27,"in_reply_to":27,"type":"unlock_cas_ok","code":22}}
+DEBUG:root:received {"id":102,"src":"n0","dest":"n2","body":{"msg_id":35,"in_reply_to":28,"type":"unlock_cas_ok","code":22}}
+DEBUG:root:sending {"dest": "c7", "src": "n2", "body": {"msg_id": 29, "in_reply_to": 3, "type": "error", "code": 22, "text": "does not match"}}
+DEBUG:root:received {"id":106,"src":"n1","dest":"n2","body":{"msg_id":29,"type":"cas_lock","key":0,"from":4,"to":1}}
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 30, "in_reply_to": 29, "type": "noKeyCas"}}
+DEBUG:root:received {"id":110,"src":"n1","dest":"n2","body":{"msg_id":31,"type":"unlock_cas","code":20}}
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 31, "in_reply_to": 31, "type": "unlock_cas_ok", "code": 20}}
+DEBUG:root:received {"id":114,"src":"c11","dest":"n2","body":{"key":0,"type":"read","msg_id":1}}
+INFO:root:node c11 reading from 0
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 32, "type": "read_server", "key": 0}}
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 33, "type": "read_server", "key": 0}}
+DEBUG:root:received {"id":115,"src":"n2","dest":"n2","body":{"msg_id":32,"type":"read_server","key":0}}
+INFO:root:server n2 reading from 0
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 34, "in_reply_to": 32, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":117,"src":"n2","dest":"n2","body":{"msg_id":34,"in_reply_to":32,"type":"error_read","code":20,"text":"not found"}}
+DEBUG:root:received {"id":118,"src":"n1","dest":"n2","body":{"msg_id":33,"in_reply_to":33,"type":"read_server_ok","value":{"value":3,"timestamp":0}}}
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 35, "type": "unlock_read", "code": 0, "value": 3}}
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 36, "type": "unlock_read", "code": 0, "value": 3}}
+DEBUG:root:received {"id":119,"src":"n2","dest":"n2","body":{"msg_id":35,"type":"unlock_read","code":0,"value":3}}
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 37, "in_reply_to": 35, "type": "unlock_read_ok", "code": 0, "value": 3}}
+DEBUG:root:received {"id":121,"src":"n2","dest":"n2","body":{"msg_id":37,"in_reply_to":35,"type":"unlock_read_ok","code":0,"value":3}}
+DEBUG:root:received {"id":122,"src":"n1","dest":"n2","body":{"msg_id":34,"in_reply_to":36,"type":"unlock_read_ok","code":0,"value":3}}
+DEBUG:root:sending {"dest": "c11", "src": "n2", "body": {"msg_id": 38, "in_reply_to": 1, "type": "read_ok", "value": 3}}
+DEBUG:root:received {"id":125,"src":"n0","dest":"n2","body":{"msg_id":38,"type":"read_server","key":0}}
+INFO:root:server n0 reading from 0
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 39, "in_reply_to": 38, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":129,"src":"n0","dest":"n2","body":{"msg_id":41,"type":"unlock_read","code":0,"value":3}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 40, "in_reply_to": 41, "type": "unlock_read_ok", "code": 0, "value": 3}}
+DEBUG:root:received {"id":144,"src":"c7","dest":"n2","body":{"key":0,"from":2,"to":1,"type":"cas","msg_id":4}}
+INFO:root:node c7 comparing and setting
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 41, "type": "cas_lock", "key": 0, "from": 2, "to": 1}}
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 42, "type": "cas_lock", "key": 0, "from": 2, "to": 1}}
+DEBUG:root:received {"id":147,"src":"n0","dest":"n2","body":{"msg_id":52,"in_reply_to":41,"type":"noMatch"}}
+DEBUG:root:received {"id":148,"src":"n1","dest":"n2","body":{"msg_id":37,"in_reply_to":42,"type":"noMatch"}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 43, "type": "unlock_cas", "code": 22}}
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 44, "type": "unlock_cas", "code": 22}}
+DEBUG:root:received {"id":151,"src":"n0","dest":"n2","body":{"msg_id":53,"in_reply_to":43,"type":"unlock_cas_ok","code":22}}
+DEBUG:root:received {"id":152,"src":"n1","dest":"n2","body":{"msg_id":38,"in_reply_to":44,"type":"unlock_cas_ok","code":22}}
+DEBUG:root:sending {"dest": "c7", "src": "n2", "body": {"msg_id": 45, "in_reply_to": 4, "type": "error", "code": 22, "text": "does not match"}}
+DEBUG:root:received {"id":155,"src":"n0","dest":"n2","body":{"msg_id":54,"type":"read_server","key":0}}
+INFO:root:server n0 reading from 0
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 46, "in_reply_to": 54, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":160,"src":"n0","dest":"n2","body":{"msg_id":58,"type":"unlock_read","code":0,"value":3}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 47, "in_reply_to": 58, "type": "unlock_read_ok", "code": 0, "value": 3}}
+DEBUG:root:received {"id":165,"src":"n1","dest":"n2","body":{"msg_id":39,"type":"cas_lock","key":0,"from":2,"to":1}}
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 48, "in_reply_to": 39, "type": "noKeyCas"}}
+DEBUG:root:received {"id":169,"src":"n1","dest":"n2","body":{"msg_id":41,"type":"unlock_cas","code":20}}
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 49, "in_reply_to": 41, "type": "unlock_cas_ok", "code": 20}}
+DEBUG:root:received {"id":186,"src":"n1","dest":"n2","body":{"msg_id":52,"type":"read_server","key":0}}
+INFO:root:server n1 reading from 0
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 50, "in_reply_to": 52, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":190,"src":"n1","dest":"n2","body":{"msg_id":54,"type":"unlock_read","code":0,"value":3}}
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 51, "in_reply_to": 54, "type": "unlock_read_ok", "code": 0, "value": 3}}
+DEBUG:root:received {"id":205,"src":"n1","dest":"n2","body":{"msg_id":58,"type":"read_server","key":0}}
+INFO:root:server n1 reading from 0
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 52, "in_reply_to": 58, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":209,"src":"n1","dest":"n2","body":{"msg_id":60,"type":"unlock_read","code":0,"value":3}}
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 53, "in_reply_to": 60, "type": "unlock_read_ok", "code": 0, "value": 3}}
+DEBUG:root:received {"id":214,"src":"c7","dest":"n2","body":{"key":0,"from":2,"to":0,"type":"cas","msg_id":5}}
+INFO:root:node c7 comparing and setting
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 54, "type": "cas_lock", "key": 0, "from": 2, "to": 0}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 55, "type": "cas_lock", "key": 0, "from": 2, "to": 0}}
+DEBUG:root:received {"id":215,"src":"n2","dest":"n2","body":{"msg_id":54,"type":"cas_lock","key":0,"from":2,"to":0}}
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 56, "in_reply_to": 54, "type": "noKeyCas"}}
+DEBUG:root:received {"id":217,"src":"n2","dest":"n2","body":{"msg_id":56,"in_reply_to":54,"type":"noKeyCas"}}
+DEBUG:root:received {"id":218,"src":"n0","dest":"n2","body":{"msg_id":76,"in_reply_to":55,"type":"noMatch"}}
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 57, "type": "unlock_cas", "code": 20}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 58, "type": "unlock_cas", "code": 20}}
+DEBUG:root:received {"id":219,"src":"n2","dest":"n2","body":{"msg_id":57,"type":"unlock_cas","code":20}}
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 59, "in_reply_to": 57, "type": "unlock_cas_ok", "code": 20}}
+DEBUG:root:received {"id":221,"src":"n2","dest":"n2","body":{"msg_id":59,"in_reply_to":57,"type":"unlock_cas_ok","code":20}}
+DEBUG:root:received {"id":222,"src":"n0","dest":"n2","body":{"msg_id":77,"in_reply_to":58,"type":"unlock_cas_ok","code":20}}
+DEBUG:root:sending {"dest": "c7", "src": "n2", "body": {"msg_id": 60, "in_reply_to": 5, "type": "error", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":226,"src":"n0","dest":"n2","body":{"msg_id":79,"type":"read_server","key":0}}
+INFO:root:server n0 reading from 0
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 61, "in_reply_to": 79, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":230,"src":"n0","dest":"n2","body":{"msg_id":81,"type":"unlock_read","code":0,"value":3}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 62, "in_reply_to": 81, "type": "unlock_read_ok", "code": 0, "value": 3}}
+DEBUG:root:received {"id":234,"src":"c7","dest":"n2","body":{"key":0,"value":4,"type":"write","msg_id":6}}
+INFO:root:node c7 writing to 0
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 63, "type": "read_lock", "key": 0, "value": 4}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 64, "type": "read_lock", "key": 0, "value": 4}}
+DEBUG:root:received {"id":237,"src":"n1","dest":"n2","body":{"msg_id":65,"in_reply_to":63,"type":"lock_ok","value":{"value":3,"timestamp":0}}}
+DEBUG:root:received {"id":238,"src":"n0","dest":"n2","body":{"msg_id":83,"in_reply_to":64,"type":"lock_ok","value":{"value":3,"timestamp":0}}}
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 65, "type": "write_server", "key": 0, "value": 4, "timestamp": 1}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 66, "type": "write_server", "key": 0, "value": 4, "timestamp": 1}}
+DEBUG:root:received {"id":241,"src":"n1","dest":"n2","body":{"msg_id":66,"in_reply_to":65,"type":"write_server_ok"}}
+DEBUG:root:received {"id":242,"src":"n0","dest":"n2","body":{"msg_id":84,"in_reply_to":66,"type":"write_server_ok"}}
+DEBUG:root:sending {"dest": "c7", "src": "n2", "body": {"msg_id": 67, "in_reply_to": 6, "type": "write_ok"}}
+DEBUG:root:received {"id":245,"src":"n0","dest":"n2","body":{"msg_id":85,"type":"cas_lock","key":0,"from":0,"to":3}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 68, "in_reply_to": 85, "type": "noKeyCas"}}
+DEBUG:root:received {"id":249,"src":"n0","dest":"n2","body":{"msg_id":88,"type":"unlock_cas","code":20}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 69, "in_reply_to": 88, "type": "unlock_cas_ok", "code": 20}}
+DEBUG:root:received {"id":255,"src":"n0","dest":"n2","body":{"msg_id":92,"type":"read_server","key":0}}
+INFO:root:server n0 reading from 0
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 70, "in_reply_to": 92, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":259,"src":"n0","dest":"n2","body":{"msg_id":94,"type":"unlock_read","code":0,"value":4}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 71, "in_reply_to": 94, "type": "unlock_read_ok", "code": 0, "value": 4}}
+DEBUG:root:received {"id":275,"src":"n1","dest":"n2","body":{"msg_id":76,"type":"cas_lock","key":0,"from":3,"to":2}}
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 72, "in_reply_to": 76, "type": "noKeyCas"}}
+DEBUG:root:received {"id":279,"src":"n1","dest":"n2","body":{"msg_id":79,"type":"unlock_cas","code":20}}
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 73, "in_reply_to": 79, "type": "unlock_cas_ok", "code": 20}}
+DEBUG:root:received {"id":306,"src":"n1","dest":"n2","body":{"msg_id":88,"type":"read_server","key":0}}
+INFO:root:server n1 reading from 0
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 74, "in_reply_to": 88, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":310,"src":"n1","dest":"n2","body":{"msg_id":91,"type":"unlock_read","code":0,"value":1}}
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 75, "in_reply_to": 91, "type": "unlock_read_ok", "code": 0, "value": 1}}
+DEBUG:root:received {"id":324,"src":"c11","dest":"n2","body":{"key":0,"type":"read","msg_id":2}}
+INFO:root:node c11 reading from 0
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 76, "type": "read_server", "key": 0}}
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 77, "type": "read_server", "key": 0}}
+DEBUG:root:received {"id":327,"src":"n0","dest":"n2","body":{"msg_id":115,"in_reply_to":76,"type":"read_server_ok","value":{"value":1,"timestamp":2}}}
+DEBUG:root:received {"id":328,"src":"n1","dest":"n2","body":{"msg_id":101,"in_reply_to":77,"type":"read_server_ok","value":{"value":1,"timestamp":2}}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 78, "type": "unlock_read", "code": 0, "value": 1}}
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 79, "type": "unlock_read", "code": 0, "value": 1}}
+DEBUG:root:received {"id":331,"src":"n0","dest":"n2","body":{"msg_id":116,"in_reply_to":78,"type":"unlock_read_ok","code":0,"value":1}}
+DEBUG:root:received {"id":332,"src":"n1","dest":"n2","body":{"msg_id":102,"in_reply_to":79,"type":"unlock_read_ok","code":0,"value":1}}
+DEBUG:root:sending {"dest": "c11", "src": "n2", "body": {"msg_id": 80, "in_reply_to": 2, "type": "read_ok", "value": 1}}
+DEBUG:root:received {"id":346,"src":"n1","dest":"n2","body":{"msg_id":106,"type":"read_server","key":0}}
+INFO:root:server n1 reading from 0
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 81, "in_reply_to": 106, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":350,"src":"n1","dest":"n2","body":{"msg_id":109,"type":"unlock_read","code":0,"value":1}}
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 82, "in_reply_to": 109, "type": "unlock_read_ok", "code": 0, "value": 1}}
+DEBUG:root:received {"id":366,"src":"n1","dest":"n2","body":{"msg_id":115,"type":"read_server","key":0}}
+INFO:root:server n1 reading from 0
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 83, "in_reply_to": 115, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":370,"src":"n1","dest":"n2","body":{"msg_id":118,"type":"unlock_read","code":0,"value":0}}
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 84, "in_reply_to": 118, "type": "unlock_read_ok", "code": 0, "value": 0}}
+DEBUG:root:received {"id":374,"src":"c11","dest":"n2","body":{"key":0,"type":"read","msg_id":3}}
+INFO:root:node c11 reading from 0
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 85, "type": "read_server", "key": 0}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 86, "type": "read_server", "key": 0}}
+DEBUG:root:received {"id":375,"src":"n2","dest":"n2","body":{"msg_id":85,"type":"read_server","key":0}}
+INFO:root:server n2 reading from 0
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 87, "in_reply_to": 85, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":377,"src":"n2","dest":"n2","body":{"msg_id":87,"in_reply_to":85,"type":"error_read","code":20,"text":"not found"}}
+DEBUG:root:received {"id":378,"src":"n0","dest":"n2","body":{"msg_id":131,"in_reply_to":86,"type":"read_server_ok","value":{"value":0,"timestamp":3}}}
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 88, "type": "unlock_read", "code": 0, "value": 0}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 89, "type": "unlock_read", "code": 0, "value": 0}}
+DEBUG:root:received {"id":379,"src":"n2","dest":"n2","body":{"msg_id":88,"type":"unlock_read","code":0,"value":0}}
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 90, "in_reply_to": 88, "type": "unlock_read_ok", "code": 0, "value": 0}}
+DEBUG:root:received {"id":381,"src":"n2","dest":"n2","body":{"msg_id":90,"in_reply_to":88,"type":"unlock_read_ok","code":0,"value":0}}
+DEBUG:root:received {"id":382,"src":"n0","dest":"n2","body":{"msg_id":132,"in_reply_to":89,"type":"unlock_read_ok","code":0,"value":0}}
+DEBUG:root:sending {"dest": "c11", "src": "n2", "body": {"msg_id": 91, "in_reply_to": 3, "type": "read_ok", "value": 0}}
+DEBUG:root:received {"id":384,"src":"c7","dest":"n2","body":{"key":0,"from":3,"to":3,"type":"cas","msg_id":7}}
+INFO:root:node c7 comparing and setting
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 92, "type": "cas_lock", "key": 0, "from": 3, "to": 3}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 93, "type": "cas_lock", "key": 0, "from": 3, "to": 3}}
+DEBUG:root:received {"id":387,"src":"n1","dest":"n2","body":{"msg_id":121,"in_reply_to":92,"type":"noMatch"}}
+DEBUG:root:received {"id":388,"src":"n0","dest":"n2","body":{"msg_id":133,"in_reply_to":93,"type":"noMatch"}}
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 94, "type": "unlock_cas", "code": 22}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 95, "type": "unlock_cas", "code": 22}}
+DEBUG:root:received {"id":392,"src":"n1","dest":"n2","body":{"msg_id":122,"type":"read_server","key":0}}
+INFO:root:server n1 reading from 0
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 96, "in_reply_to": 122, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":394,"src":"n1","dest":"n2","body":{"msg_id":124,"in_reply_to":94,"type":"unlock_cas_ok","code":22}}
+DEBUG:root:received {"id":396,"src":"n0","dest":"n2","body":{"msg_id":134,"in_reply_to":95,"type":"unlock_cas_ok","code":22}}
+DEBUG:root:sending {"dest": "c7", "src": "n2", "body": {"msg_id": 97, "in_reply_to": 7, "type": "error", "code": 22, "text": "does not match"}}
+DEBUG:root:received {"id":399,"src":"n1","dest":"n2","body":{"msg_id":125,"type":"unlock_read","code":0,"value":0}}
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 98, "in_reply_to": 125, "type": "unlock_read_ok", "code": 0, "value": 0}}
+DEBUG:root:received {"id":404,"src":"c11","dest":"n2","body":{"key":1,"type":"read","msg_id":4}}
+INFO:root:node c11 reading from 1
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 99, "type": "read_server", "key": 1}}
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 100, "type": "read_server", "key": 1}}
+DEBUG:root:received {"id":406,"src":"n2","dest":"n2","body":{"msg_id":100,"type":"read_server","key":1}}
+INFO:root:server n2 reading from 1
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 101, "in_reply_to": 100, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":407,"src":"n2","dest":"n2","body":{"msg_id":101,"in_reply_to":100,"type":"error_read","code":20,"text":"not found"}}
+DEBUG:root:received {"id":408,"src":"n0","dest":"n2","body":{"msg_id":137,"in_reply_to":99,"type":"error_read","code":20,"text":"not found"}}
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 102, "type": "unlock_read", "code": 20}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 103, "type": "unlock_read", "code": 20}}
+DEBUG:root:received {"id":409,"src":"n2","dest":"n2","body":{"msg_id":102,"type":"unlock_read","code":20}}
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 104, "in_reply_to": 102, "type": "unlock_read_ok", "code": 20}}
+DEBUG:root:received {"id":411,"src":"n2","dest":"n2","body":{"msg_id":104,"in_reply_to":102,"type":"unlock_read_ok","code":20}}
+DEBUG:root:received {"id":412,"src":"n0","dest":"n2","body":{"msg_id":138,"in_reply_to":103,"type":"unlock_read_ok","code":20}}
+DEBUG:root:sending {"dest": "c11", "src": "n2", "body": {"msg_id": 105, "in_reply_to": 4, "type": "error", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":415,"src":"n0","dest":"n2","body":{"msg_id":139,"type":"read_server","key":1}}
+INFO:root:server n0 reading from 1
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 106, "in_reply_to": 139, "type": "error_read", "code": 20, "text": "not found"}}
+DEBUG:root:received {"id":420,"src":"n0","dest":"n2","body":{"msg_id":143,"type":"unlock_read","code":20}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 107, "in_reply_to": 143, "type": "unlock_read_ok", "code": 20}}
+DEBUG:root:received {"id":434,"src":"c7","dest":"n2","body":{"key":1,"value":1,"type":"write","msg_id":8}}
+INFO:root:node c7 writing to 1
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 108, "type": "read_lock", "key": 1, "value": 1}}
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 109, "type": "read_lock", "key": 1, "value": 1}}
+DEBUG:root:received {"id":435,"src":"n2","dest":"n2","body":{"msg_id":108,"type":"read_lock","key":1,"value":1}}
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 110, "in_reply_to": 108, "type": "noKey", "text": "not found"}}
+DEBUG:root:received {"id":437,"src":"n2","dest":"n2","body":{"msg_id":110,"in_reply_to":108,"type":"noKey","text":"not found"}}
+DEBUG:root:received {"id":438,"src":"n1","dest":"n2","body":{"msg_id":135,"in_reply_to":109,"type":"noKey","text":"not found"}}
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 111, "type": "write_server", "key": 1, "value": 1, "timestamp": 0}}
+DEBUG:root:sending {"dest": "n1", "src": "n2", "body": {"msg_id": 112, "type": "write_server", "key": 1, "value": 1, "timestamp": 0}}
+DEBUG:root:received {"id":439,"src":"n2","dest":"n2","body":{"msg_id":111,"type":"write_server","key":1,"value":1,"timestamp":0}}
+DEBUG:root:sending {"dest": "n2", "src": "n2", "body": {"msg_id": 113, "in_reply_to": 111, "type": "write_server_ok"}}
+DEBUG:root:received {"id":441,"src":"n2","dest":"n2","body":{"msg_id":113,"in_reply_to":111,"type":"write_server_ok"}}
+DEBUG:root:received {"id":442,"src":"n1","dest":"n2","body":{"msg_id":136,"in_reply_to":112,"type":"write_server_ok"}}
+DEBUG:root:sending {"dest": "c7", "src": "n2", "body": {"msg_id": 114, "in_reply_to": 8, "type": "write_ok"}}
+DEBUG:root:received {"id":445,"src":"n0","dest":"n2","body":{"msg_id":148,"type":"read_lock","key":1,"value":1}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 115, "in_reply_to": 148, "type": "lock_ok", "value": {"value": 1, "timestamp": 0}}}
+DEBUG:root:received {"id":449,"src":"n0","dest":"n2","body":{"msg_id":151,"type":"write_server","key":1,"value":1,"timestamp":1}}
+DEBUG:root:sending {"dest": "n0", "src": "n2", "body": {"msg_id": 116, "in_reply_to": 151, "type": "write_server_ok"}}
