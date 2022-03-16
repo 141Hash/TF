@@ -14,8 +14,6 @@ from operator import itemgetter
 from types import SimpleNamespace
 from numpy import maximum
 
-from scipy import rand
-from sqlalchemy import false
 from ms import send, receiveAll, reply, exitOnError
 
 import random
