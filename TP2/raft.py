@@ -3,6 +3,7 @@
 import logging
 from concurrent.futures import ThreadPoolExecutor
 from os import stat
+from platform import node
 from re import S
 import time
 import threading
@@ -15,8 +16,10 @@ import logging
 
 class State():
     def __init__(self,node_ids):
+        self.node_ids = node_ids
         self.currentState = 0 #0 - follower, 1-candidate, 2-leader
         self.currentTerm = 1
+        self.voteCount = 0
         self.votedFor = None
         self.log = []
         self.commitIndex = -1
@@ -25,6 +28,13 @@ class State():
         # Se resp com sucesso
         self.matchIndex = {i:-1 for i in node_ids}
         #Se tamanho do log for mais que o matchIndex do followers, inicia AppendEntries
+        # Thread que manda hearth beats
+        self.heartBeat = None
+        self.timeout = None
+        self.decreaseTimer = None
+        self.isHeartBeat = False
+        self.isTimeout = False
+        self.isDecreaseTimer = False
 
     def appendLog(self,msg):
         self.log.append((msg,self.currentTerm))
@@ -38,7 +48,7 @@ class State():
             quantities.setdefault(value,0)
             quantities[value] += 1
         reversed_list = sorted(quantities.items(),key=lambda x:-x[0])
-        majority = math.floor(len(self.matchIndex.keys())/2)+1
+        majority = math.floor(len(self.node_ids)/2)+1
         sum = 0
         for ele in reversed_list:
             sum += ele[1]
@@ -54,8 +64,9 @@ clock = TIMEOUT_TIME
 #PrevLogIndex esta no nextIndex
 
 def decreaseTime():
-    global clock
-    while True:
+    global clock,state
+    clock = TIMEOUT_TIME
+    while state.isDecreaseTimer:
         time.sleep(1)
         clock -= 1
         logging.info(clock)
@@ -63,19 +74,28 @@ def decreaseTime():
 
 def timeout():
     global clock,state, node_id, node_ids
-    while True:
+    while state.isTimeout:
         if clock < 0:
             clock = TIMEOUT_TIME
             state.currentState = 1
             state.currentTerm += 1
-            clock = TIMEOUT_TIME
+            state.votedFor = node_id
+            state.voteCount = 1
             for node in node_ids:
                 if node != node_id:
-                    send(node_id,node,type="RRPC",term=state.term,candidateId=node_id,
+                    send(node_id,node,type="RRPC",term=state.currentTerm,candidateId=node_id,
                          lastLogIndex=len(state.log)-1,
                          lastLogTerm=-1 if len(state.log) == 0 else state.log[len(state.log)-1][1])
                     
-
+def heartbeat():
+    while state.isHeartBeat:
+        for node in node_ids:
+            if node != node_id:
+                send(node_id,node,type="ARPC",term=state.currentTerm, leaderId=node_id,
+                prevLogIndex=state.nextIndex[node],prevLogTerm=state.log[state.nextIndex[node]][1],
+                entries=[],leaderCommit=state.commitIndex)
+        time.sleep(1)
+     
 
 def apply(msg):
     if msg.body.type == "write":
@@ -115,13 +135,13 @@ def handle(msg):
         logging.info('node %s initialized', node_id)
         state = State(node_ids)
         #leader = node_ids[0]
-        threading.Thread(target=decreaseTime).start()
-        threading.Thread(target=timeout).start()
-        # if state.currentState == 2:
-        #     state.commitIndex = 0
-        # for node in node_ids[1:]:
-        #     send(node_id,node,type="ARPC",term=state.currentTerm, leaderId=leader,
-        #          prevLogIndex=0,prevLogTerm=0,entries=[],leaderCommit=state.commitIndex)
+        state.decreaseTimer = threading.Thread(target=decreaseTime)
+        state.timeout = threading.Thread(target=timeout)
+        state.isDecreaseTimer = True
+        state.isTimeout = True
+        state.decreaseTimer.start()
+        state.timeout.start()
+
         reply(msg,type='init_ok')
         
     elif state.currentState == 2 and msg.src not in node_ids:
@@ -129,7 +149,7 @@ def handle(msg):
         for node in node_ids:
             if node != leader:
                 if len(state.log) >= state.nextIndex[node]:
-                   send(node_id,node,type="ARPC",term=state.currentTerm, leaderId=leader,
+                   send(node_id,node,type="ARPC",term=state.currentTerm, leaderId=node_id,
                    prevLogIndex=state.nextIndex[node],prevLogTerm=state.log[state.nextIndex[node]][1],
                    entries=state.log[state.nextIndex[node]:],leaderCommit=state.commitIndex) 
         
@@ -139,20 +159,49 @@ def handle(msg):
 
     elif state.currentState != 2 and msg.body.type == "ARPC":
         clock = TIMEOUT_TIME
+        #If RPC request or response contains term T > currentTerm: set currentTerm = T, convert to follower
+        if msg.body.term > state.currentTerm:
+            state.currentTerm = msg.body.term
+            state.currentState = 0
+            # Recomeça timeout timer
+            state.isHeartBeat = False
+            state.decreaseTimer = threading.Thread(target=decreaseTime)
+            state.timeout = threading.Thread(target=timeout)
+            state.isDecreaseTimer = True
+            state.isTimeout = True
+            state.decreaseTimer.start()
+            state.timeout.start()
+
+        #If AppendEntries RPC received from new leader: convert to follower
+        if state.currentState == 1:
+            state.currentState = 0
+            # Recomeça timeout timer
+            state.isHeartBeat = False
+            state.decreaseTimer = threading.Thread(target=decreaseTime)
+            state.timeout = threading.Thread(target=timeout)
+            state.isDecreaseTimer = True
+            state.isTimeout = True
+            state.decreaseTimer.start()
+            state.timeout.start()
+
+        #Passo 1
         if msg.body.term < state.currentTerm:
-            logging.info(f"ERROR: TERM")
+            reply(msg,type="ARPC_RESP",term=state.currentTerm,success=False)
+        #Passo 2
         elif state.log != [] and state.log[msg.body.prevLogIndex-1][1] != msg.body.prevLogTerm:
-            logging.info(f"ERROR: OUTRO")
+            reply(msg,type="ARPC_RESP",term=state.currentTerm,success=False)
         else: 
-            #@TODO passo 3   
             entries = msg.body.entries
-            # index = msg.body.prevLogIndex + 1
-            #     if 
-            # for entry in entries:
+            i = 1
+            #Passo 3
+            for e in entries:
+                if msg.body.prevLogIndex + i < len(state.log) and state.log[msg.prevLogIndex+i] != e:
+                    state.log = state.log[0:i]
+                    break
+                i+=1
+            #Passo 4
             state.appendLogs(entries)
-            # logging.info(f"LEADER:{msg.body.leaderCommit}")
-            # logging.info(f"ME:{state.commitIndex}")
-            # logging.info("-"*10)
+            #Passo 5
             if msg.body.leaderCommit > state.commitIndex:
                 state.commitIndex = min(msg.body.leaderCommit,len(state.log))
                 if state.commitIndex > state.lastApplied:
@@ -164,6 +213,18 @@ def handle(msg):
 
 
     elif state.currentState == 2 and msg.body.type == "ARPC_RESP":
+        if msg.body.term > state.currentTerm:
+            # Recomeça timeout timer
+            state.isHeartBeat = False
+            state.decreaseTimer = threading.Thread(target=decreaseTime)
+            state.timeout = threading.Thread(target=timeout)
+            state.isDecreaseTimer = True
+            state.isTimeout = True
+            state.decreaseTimer.start()
+            state.timeout.start()
+            state.currentTerm = msg.body.term
+            state.currentState = 0
+
         state.nextIndex[msg.src] = msg.body.nextIndex
         state.matchIndex[msg.src] = msg.body.matchIndex
         n = state.biggestMatch()
@@ -176,10 +237,42 @@ def handle(msg):
         logging.info(dic)
 
     elif state.currentState == 0 and msg.body.type == "RRPC":
-        #@TODO Continuar aqui
+        #Reset Clock
+        clock = TIMEOUT_TIME
 
+        if msg.body.term > state.currentTerm:
+            state.currentTerm = msg.body.term
+            state.currentState = 0
+
+        if msg.body.term < state.currentTerm:
+            reply(msg,type="RRPC_RESP",term=state.currentTerm,voteGranted=False)
+        elif (state.votedFor == None or msg.body.candidateId == state.votedFor) and  msg.body.lastLogIndex >= len(state.log)-1:
+            state.votedFor = msg.body.candidateId 
+            reply(msg,type="RRPC_RESP",term=state.currentTerm,voteGranted=True)
+        else:
+            reply(msg,type="RRPC_RESP",term=state.currentTerm,voteGranted=False)
+            
+    elif state.currentState == 1 and msg.body.type == "RRPC_RESP":
+        if msg.body.term > state.currentTerm:
+            state.currentTerm = msg.body.term
+            state.currentState = 0
+        if msg.body.voteGranted:
+            state.voteCount += 1
+        #If votes received from majority of servers: become leader    
+        if state.voteCount >= math.floor(len(node_ids))+1 and state.currentState != 2:
+            logging.info("IM THE LEADER")
+            state.currentState = 2
+            state.heartBeat = threading.Thread(target=heartbeat)
+            state.isHeartBeat = True
+            state.isTimeout = False
+            state.isDecreaseTimer = False
+            state.heartBeat.start()
+
+            
+    
 # Main loop
 executor.map(lambda msg: exitOnError(handle, msg), receiveAll())
 
-# Visto que para todos os servidores, incluindo o leader, o commitIndex começa em 0, tal como o lastAplied que tambem começa em 0, entao quando este enviar um AppendEntries RPC aos seguidores, enviará o leaderCommit tambem a 0, visto que é o valor que tem inicialmente, ou seja 0, a condição do ponto 5. (leaderCommit > commitIndex) nunca irá ser verdadeira, ou seja os seguidores nunca irão alterar o commitIndex.
-# Da mesma forma
+#All Servers: Done
+#Followers: Done, acho
+#
