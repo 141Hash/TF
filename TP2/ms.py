@@ -11,7 +11,7 @@ msg_id = 0
 def send(src, dest, **body):
     global msg_id
     data = dumps(sn(dest=dest, src=src, body=sn(msg_id=(msg_id:=msg_id+1), **body)), default=vars)
-    logging.debug("sending %s", data)
+    # logging.debug("sending %s", data)
     print(data, flush=True)
 
 def reply(request, **body):
@@ -19,7 +19,7 @@ def reply(request, **body):
 
 def receiveAll():
     while data := stdin.readline():
-        logging.debug("received %s", data.strip())
+        # logging.debug("received %s", data.strip())
         yield loads(data, object_hook=lambda x: sn(**x))
     
 def exitOnError(fn, *args):
