@@ -2,11 +2,8 @@
 
 import logging
 from concurrent.futures import ThreadPoolExecutor
-from os import stat
-import sched
 import time
 import threading
-import random
 
 from ms import send, receiveAll, reply, exitOnError
 import math
@@ -25,7 +22,6 @@ class State():
         self.lastApplied = -1
         self.nextIndex = {}
         self.matchIndex = {}
-        self.timeoutSched = None
         self.isHeartBeat = False
         self.isTimeout = False
         self.isDecreaseTimer = False
@@ -85,33 +81,14 @@ def heartbeat():
     while state.isHeartBeat:
         for node in node_ids:
             if node != node_id:
-                # logging.info(state.log)
-                # logging.info(state.nextIndex)
+                logging.info(state.log)
+                logging.info(state.nextIndex)
                 send(node_id,node,type="ARPC",term=state.currentTerm, leaderId=node_id,
                 prevLogIndex=state.nextIndex[node]-1,
                 prevLogTerm=state.log[state.nextIndex[node]-1][1] if state.nextIndex[node]-1 >= 0 else -1,
                 entries=[],leaderCommit=state.commitIndex)
         time.sleep(1)
      
-def schedTimeout():
-    global state
-    if not state.isTimeout:
-        state.isTimeout = True
-        state.timeoutSched.enter(random.uniform(1,2),1,schedTimeout)
-    else:
-        logging.info("TIMEOUT")
-        state.currentState = 1
-        state.currentTerm += 1
-        state.votedFor = node_id
-        state.voteCount = 1
-        for node in node_ids:
-            if node != node_id:
-                send(node_id,node,type="RRPC",term=state.currentTerm,candidateId=node_id,
-                        lastLogIndex=len(state.log)-1,
-                        lastLogTerm=-1 if len(state.log) == 0 else state.log[len(state.log)-1][1])        
-        
-
-
 
 def apply(msg):
     if msg.body.type == "write":
@@ -151,11 +128,10 @@ def handle(msg):
         logging.info('node %s initialized', node_id)
         state = State(node_ids)
 
+        state.isDecreaseTimer = True
         state.isTimeout = True
-        state.timeoutSched = sched.scheduler(time.time,time.sleep)
-        state.timeoutSched.enter(random.uniform(1,2),1,schedTimeout)
-        threading.Thread(target=state.timeoutSched.run).start()
-
+        threading.Thread(target=decreaseTime).start()
+        threading.Thread(target=timeout).start()
         reply(msg,type='init_ok')
         
     elif state.currentState == 2 and msg.src not in node_ids:
@@ -175,17 +151,17 @@ def handle(msg):
         reply(msg,type="error",code=11,text="not leader")
 
     elif state.currentState != 2 and msg.body.type == "ARPC":
-        state.isTimeout = False
+        clock = TIMEOUT_TIME
 
         #If AppendEntries RPC received from new leader: convert to follower
         if state.currentState == 1:
             state.currentState = 0
             # Recomeça timeout timer
             state.isHeartBeat = False
+            state.isDecreaseTimer = True
             state.isTimeout = True
-            state.timeoutSched = sched.scheduler(time.time,time.sleep)
-            state.timeoutSched.enter(random.uniform(1,2),1,schedTimeout)
-            threading.Thread(target=state.timeoutSched.run).start()
+            threading.Thread(target=decreaseTime).start()
+            threading.Thread(target=timeout).start()
 
         #If RPC request or response contains term T > currentTerm: set currentTerm = T, convert to follower
         if msg.body.term > state.currentTerm:
@@ -193,10 +169,10 @@ def handle(msg):
             state.currentState = 0
             # Recomeça timeout timer
             state.isHeartBeat = False
+            state.isDecreaseTimer = True
             state.isTimeout = True
-            state.timeoutSched = sched.scheduler(time.time,time.sleep)
-            state.timeoutSched.enter(random.uniform(1,2),1,schedTimeout)
-            threading.Thread(target=state.timeoutSched.run).start()
+            threading.Thread(target=decreaseTime).start()
+            threading.Thread(target=timeout).start()
 
         #Passo 1
         if msg.body.term < state.currentTerm:
@@ -235,10 +211,10 @@ def handle(msg):
         if msg.body.term > state.currentTerm:
             # Recomeça timeout timer
             state.isHeartBeat = False
+            state.isDecreaseTimer = True
             state.isTimeout = True
-            state.timeoutSched = sched.scheduler(time.time,time.sleep)
-            state.timeoutSched.enter(random.uniform(1,2),1,schedTimeout)
-            threading.Thread(target=state.timeoutSched.run).start()
+            threading.Thread(target=decreaseTime).start()
+            threading.Thread(target=timeout).start()
             state.currentTerm = msg.body.term
             state.currentState = 0
         if msg.body.success:
@@ -257,7 +233,7 @@ def handle(msg):
 
     elif state.currentState == 0 and msg.body.type == "RRPC":
         #Reset Clock
-        state.isTimeout = False
+        clock = TIMEOUT_TIME
 
         if msg.body.term > state.currentTerm:
             state.currentTerm = msg.body.term
