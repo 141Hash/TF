@@ -17,7 +17,7 @@ class State():
     def __init__(self,node_ids):
         self.node_ids = node_ids
         self.currentState = 0 #0 - follower, 1-candidate, 2-leader
-        self.currentTerm = 1
+        self.currentTerm = 0
         self.voteCount = 0
         self.votedFor = None
         self.log = []
@@ -42,12 +42,20 @@ class State():
             quantities.setdefault(value,0)
             quantities[value] += 1
         reversed_list = sorted(quantities.items(),key=lambda x:-x[0])
-        majority = math.floor(len(self.node_ids)/2)+1
+        majority = math.floor(len(self.matchIndex.keys())/2)+1
         sum = 0
         for ele in reversed_list:
             sum += ele[1]
             if sum >= majority:
                 return ele[0]
+
+    def printCurrentState(self):
+        logging.info(f"currentTerm=>{self.currentTerm}")
+        logging.info(f"log=>{self.log}")
+        logging.info(f"commitIndex=>{self.commitIndex}")
+        logging.info(f"lastApplied=>{self.lastApplied}")
+        logging.info(f"nextIndex=>{self.nextIndex}")
+        logging.info(f"matchIndex=>{self.matchIndex}")
 
 logging.getLogger().setLevel(logging.DEBUG)
 executor=ThreadPoolExecutor(max_workers=1)
@@ -111,6 +119,11 @@ def schedTimeout():
                         lastLogTerm=-1 if len(state.log) == 0 else state.log[len(state.log)-1][1])        
         
 
+def printBody(msg):
+    logging.info("*"*10)
+    for k,v in msg.body.__dict__.items():
+        logging.info(f"{k}=>{v}")
+    logging.info("*"*10)
 
 
 def apply(msg):
@@ -159,22 +172,26 @@ def handle(msg):
         reply(msg,type='init_ok')
         
     elif state.currentState == 2 and msg.src not in node_ids:
-        logging.info(msg)
+        printBody(msg)
         state.appendLog(msg)
+        state.nextIndex[node_id] = len(state.log)
+        state.matchIndex[node_id] = len(state.log)-1
         for node in node_ids:
             if node != node_id:
                 #If last log index ≥ nextIndex for a follower: send
                 if len(state.log)-1 >= state.nextIndex[node]:
                     #@TODO prevLogIndex é -1 ou n ?
-                   send(node_id,node,type="ARPC",term=state.currentTerm, leaderId=node_id,
-                   prevLogIndex=state.nextIndex[node]-1,prevLogTerm=state.log[state.nextIndex[node]-1][1],
-                   entries=state.log[state.nextIndex[node]:],leaderCommit=state.commitIndex) 
+                    send(node_id,node,type="ARPC",term=state.currentTerm, leaderId=node_id,
+                    prevLogIndex=state.nextIndex[node]-1,prevLogTerm=state.log[state.nextIndex[node]-1][1],
+                    entries=state.log[state.nextIndex[node]:],leaderCommit=state.commitIndex)
+        logging.info("RECEIVED")
         
 
     elif state.currentState != 2 and msg.src not in node_ids:
         reply(msg,type="error",code=11,text="not leader")
 
     elif state.currentState != 2 and msg.body.type == "ARPC":
+        # printBody(msg)
         state.isTimeout = False
 
         #If AppendEntries RPC received from new leader: convert to follower
@@ -201,23 +218,23 @@ def handle(msg):
         #Passo 1
         if msg.body.term < state.currentTerm:
             reply(msg,type="ARPC_RESP",term=state.currentTerm,success=False)
-            logging.info("FALSE")
+            logging.info("FALSE 1")
         #Passo 2
         elif state.log != [] and msg.body.prevLogIndex >= 0 and state.log[msg.body.prevLogIndex][1] != msg.body.prevLogTerm:
             reply(msg,type="ARPC_RESP",term=state.currentTerm,success=False)
-            logging.info("FALSE")
+            logging.info("FALSE 2")
         else: 
             entries = msg.body.entries
             i = 1
             #Passo 3
-            for e in entries:
+            ''' for e in entries:
                 if msg.body.prevLogIndex + i < len(state.log):
-                    if state.log[msg.prevLogIndex+i] != e:
+                    if state.log[msg.body.prevLogIndex+i][1] != e[msg.body.term]:
                         state.log = state.log[0:msg.prevLogIndex+(i-1)]
                         break
                 else:
                     break
-                i+=1
+                i+=1 '''
             #Passo 4
             state.appendLogs(entries)
             #Passo 5
@@ -229,7 +246,7 @@ def handle(msg):
                     logging.info(dic)
             reply(msg,type="ARPC_RESP",nextIndex=len(state.log),matchIndex=len(state.log)-1,
                   term=state.currentTerm,success=True)
-
+            # state.printCurrentState()
 
     elif state.currentState == 2 and msg.body.type == "ARPC_RESP":
         if msg.body.term > state.currentTerm:
@@ -245,13 +262,12 @@ def handle(msg):
             state.nextIndex[msg.src] = msg.body.nextIndex
             state.matchIndex[msg.src] = msg.body.matchIndex
             n = state.biggestMatch()
-            # Falta a ultima condicao
-            if n > state.commitIndex:
+            if n >= 0 and n > state.commitIndex and state.log[n][1] == state.currentTerm:
                 state.commitIndex = n
                 if state.commitIndex > state.lastApplied:
-                        reply_cliente(state.log[state.lastApplied+1][0])
-                        state.lastApplied += 1
-            logging.info(dic)
+                    state.lastApplied += 1
+                    reply_cliente(state.log[state.lastApplied][0])
+                    logging.info(dic)
         else:
             state.nextIndex[msg.src] -= 1
 
