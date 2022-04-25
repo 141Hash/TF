@@ -1,0 +1,97 @@
+INFO:root:node n0 initialized
+INFO:root:TIMEOUT
+INFO:root:IM THE LEADER
+INFO:root:**********
+INFO:root:key=>1
+INFO:root:type=>read
+INFO:root:msg_id=>7
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:**********
+INFO:root:key=>1
+INFO:root:from=>1
+INFO:root:to=>4
+INFO:root:type=>cas
+INFO:root:msg_id=>6
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{}
+INFO:root:**********
+INFO:root:key=>2
+INFO:root:type=>read
+INFO:root:msg_id=>8
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{}
+INFO:root:**********
+INFO:root:key=>2
+INFO:root:from=>3
+INFO:root:to=>0
+INFO:root:type=>cas
+INFO:root:msg_id=>7
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{}
+INFO:root:**********
+INFO:root:key=>2
+INFO:root:type=>read
+INFO:root:msg_id=>9
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{}
+Exception in thread Thread-2 (heartbeat):
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/threading.py", line 1009, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.10/threading.py", line 946, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/clock/Mestrado/2Sem/TF/TP/TP2/raft.py", line 74, in heartbeat
+    prevLogTerm=state.log[state.nextIndex[node]-1][1] if state.nextIndex[node]-1 >= 0 else -1,
+IndexError: list index out of range
+INFO:root:**********
+INFO:root:key=>3
+INFO:root:value=>0
+INFO:root:type=>write
+INFO:root:msg_id=>8
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{}
+INFO:root:**********
+INFO:root:key=>3
+INFO:root:type=>read
+INFO:root:msg_id=>10
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{3: 0}
+INFO:root:**********
+INFO:root:key=>4
+INFO:root:from=>3
+INFO:root:to=>2
+INFO:root:type=>cas
+INFO:root:msg_id=>9
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{3: 0}
+INFO:root:**********
+INFO:root:key=>5
+INFO:root:type=>read
+INFO:root:msg_id=>11
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{3: 0}
+INFO:root:**********
+INFO:root:key=>6
+INFO:root:from=>3
+INFO:root:to=>2
+INFO:root:type=>cas
+INFO:root:msg_id=>10
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{3: 0}
+INFO:root:**********
+INFO:root:key=>8
+INFO:root:type=>read
+INFO:root:msg_id=>12
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{3: 0}

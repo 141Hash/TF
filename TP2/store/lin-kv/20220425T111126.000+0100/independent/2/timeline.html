@@ -1,0 +1,248 @@
+<html><head><style>.ops        { position: absolute; }
+.op         { position: absolute; padding: 2px; border-radius: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); transition: all 0.3s cubic-bezier(.25,.8,.25,1); overflow: hidden; }
+.op.invoke  { background: #eeeeee; }
+.op.ok      { background: #6DB6FE; }
+.op.info    { background: #FFAA26; }
+.op.fail    { background: #FEB5DA; }
+.op:target  { box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); }
+</style></head><body><div><a href="/">jepsen</a> / <a href="/files/lin-kv">lin-kv</a> / <a href="/files/lin-kv/20220425T111126.000+0100">20220425T111126.000+0100</a> / <a href="/files/lin-kv/20220425T111126.000+0100/">independent</a> / <a href="/files/lin-kv/20220425T111126.000+0100/independent/2">2</a></div><h1>lin-kv key 2</h1><div class="ops"><a href="#i100"><div class="op fail" id="i100" style="width:100;left:0;top:16;height:16" title="Dur: 5 ms
+Err: [:unknown &quot;not leader&quot;]
+Wall-clock Time: 2022-04-25T10:11:30.788Z
+
+Op:
+{:process 0
+ :type :fail
+ :f :read
+ :index 100
+ :error [:unknown &quot;not leader&quot;]
+ :value }">0 read </div></a><a href="#i102"><div class="op info" id="i102" style="width:100;left:1484;top:48;height:736" title="Dur: 6 ms
+Err: [:unknown &quot;not leader&quot;]
+Wall-clock Time: 2022-04-25T10:11:30.828Z
+
+Op:
+{:process 98
+ :type :info
+ :f :write
+ :index 102
+ :error [:unknown &quot;not leader&quot;]
+ :value 1}">98 write 1</div></a><a href="#i103"><div class="op fail" id="i103" style="width:100;left:106;top:0;height:80" title="Dur: 208 ms
+Err: [:unknown &quot;not found&quot;]
+Wall-clock Time: 2022-04-25T10:11:30.834Z
+
+Op:
+{:process 1
+ :type :fail
+ :f :read
+ :index 103
+ :error [:unknown &quot;not found&quot;]
+ :value }">1 read </div></a><a href="#i105"><div class="op info" id="i105" style="width:100;left:530;top:96;height:688" title="Dur: 3 ms
+Err: [:unknown &quot;not leader&quot;]
+Wall-clock Time: 2022-04-25T10:11:30.997Z
+
+Op:
+{:process 27
+ :type :info
+ :f :write
+ :index 105
+ :error [:unknown &quot;not leader&quot;]
+ :value 3}">27 write 3</div></a><a href="#i107"><div class="op info" id="i107" style="width:100;left:1590;top:128;height:656" title="Dur: 8 ms
+Err: [:unknown &quot;not leader&quot;]
+Wall-clock Time: 2022-04-25T10:11:31.075Z
+
+Op:
+{:process 108
+ :type :info
+ :f :write
+ :index 107
+ :error [:unknown &quot;not leader&quot;]
+ :value 1}">108 write 1</div></a><a href="#i109"><div class="op info" id="i109" style="width:100;left:1272;top:160;height:624" title="Dur: 16 ms
+Err: [:unknown &quot;not leader&quot;]
+Wall-clock Time: 2022-04-25T10:11:31.265Z
+
+Op:
+{:process 59
+ :type :info
+ :f :cas
+ :index 109
+ :error [:unknown &quot;not leader&quot;]
+ :value [0 4]}">59 cas [0 4]</div></a><a href="#i111"><div class="op fail" id="i111" style="width:100;left:318;top:192;height:16" title="Dur: 6 ms
+Err: [:unknown &quot;not leader&quot;]
+Wall-clock Time: 2022-04-25T10:11:31.307Z
+
+Op:
+{:process 3
+ :type :fail
+ :f :read
+ :index 111
+ :error [:unknown &quot;not leader&quot;]
+ :value }">3 read </div></a><a href="#i113"><div class="op fail" id="i113" style="width:100;left:424;top:224;height:16" title="Dur: 3 ms
+Err: [:unknown &quot;not leader&quot;]
+Wall-clock Time: 2022-04-25T10:11:31.440Z
+
+Op:
+{:process 4
+ :type :fail
+ :f :read
+ :index 113
+ :error [:unknown &quot;not leader&quot;]
+ :value }">4 read </div></a><a href="#i115"><div class="op info" id="i115" style="width:100;left:636;top:256;height:528" title="Dur: 5 ms
+Err: [:unknown &quot;not leader&quot;]
+Wall-clock Time: 2022-04-25T10:11:31.483Z
+
+Op:
+{:process 35
+ :type :info
+ :f :cas
+ :index 115
+ :error [:unknown &quot;not leader&quot;]
+ :value [4 1]}">35 cas [4 1]</div></a><a href="#i117"><div class="op fail" id="i117" style="width:100;left:0;top:288;height:16" title="Dur: 7 ms
+Err: [:unknown &quot;not leader&quot;]
+Wall-clock Time: 2022-04-25T10:11:31.655Z
+
+Op:
+{:process 0
+ :type :fail
+ :f :read
+ :index 117
+ :error [:unknown &quot;not leader&quot;]
+ :value }">0 read </div></a><a href="#i119"><div class="op fail" id="i119" style="width:100;left:212;top:320;height:16" title="Dur: 10 ms
+Err: [:unknown &quot;not leader&quot;]
+Wall-clock Time: 2022-04-25T10:11:31.689Z
+
+Op:
+{:process 2
+ :type :fail
+ :f :read
+ :index 119
+ :error [:unknown &quot;not leader&quot;]
+ :value }">2 read </div></a><a href="#i122"><div class="op fail" id="i122" style="width:100;left:106;top:352;height:32" title="Dur: 210 ms
+Err: [:unknown &quot;not found&quot;]
+Wall-clock Time: 2022-04-25T10:11:31.925Z
+
+Op:
+{:process 1
+ :type :fail
+ :f :read
+ :index 122
+ :error [:unknown &quot;not found&quot;]
+ :value }">1 read </div></a><a href="#i124"><div class="op info" id="i124" style="width:100;left:742;top:400;height:384" title="Dur: 63 ms
+Err: [:unknown &quot;not leader&quot;]
+Wall-clock Time: 2022-04-25T10:11:32.016Z
+
+Op:
+{:process 37
+ :type :info
+ :f :cas
+ :index 124
+ :error [:unknown &quot;not leader&quot;]
+ :value [1 2]}">37 cas [1 2]</div></a><a href="#i126"><div class="op info" id="i126" style="width:100;left:954;top:368;height:416" title="Dur: 281 ms
+Err: [:unknown &quot;not found&quot;]
+Wall-clock Time: 2022-04-25T10:11:32.124Z
+
+Op:
+{:process 46
+ :type :info
+ :f :cas
+ :index 126
+ :error [:unknown &quot;not found&quot;]
+ :value [3 3]}">46 cas [3 3]</div></a><a href="#i127"><div class="op fail" id="i127" style="width:100;left:106;top:432;height:32" title="Dur: 69 ms
+Err: [:unknown &quot;not found&quot;]
+Wall-clock Time: 2022-04-25T10:11:32.126Z
+
+Op:
+{:process 1
+ :type :fail
+ :f :read
+ :index 127
+ :error [:unknown &quot;not found&quot;]
+ :value }">1 read </div></a><a href="#i130"><div class="op info" id="i130" style="width:100;left:848;top:480;height:304" title="Dur: 66 ms
+Err: [:unknown &quot;not leader&quot;]
+Wall-clock Time: 2022-04-25T10:11:32.217Z
+
+Op:
+{:process 45
+ :type :info
+ :f :cas
+ :index 130
+ :error [:unknown &quot;not leader&quot;]
+ :value [0 3]}">45 cas [0 3]</div></a><a href="#i131"><div class="op fail" id="i131" style="width:100;left:424;top:496;height:32" title="Dur: 20 ms
+Err: [:unknown &quot;not leader&quot;]
+Wall-clock Time: 2022-04-25T10:11:32.218Z
+
+Op:
+{:process 4
+ :type :fail
+ :f :read
+ :index 131
+ :error [:unknown &quot;not leader&quot;]
+ :value }">4 read </div></a><a href="#i133"><div class="op fail" id="i133" style="width:100;left:424;top:544;height:16" title="Dur: 5 ms
+Err: [:unknown &quot;not leader&quot;]
+Wall-clock Time: 2022-04-25T10:11:32.382Z
+
+Op:
+{:process 4
+ :type :fail
+ :f :read
+ :index 133
+ :error [:unknown &quot;not leader&quot;]
+ :value }">4 read </div></a><a href="#i135"><div class="op fail" id="i135" style="width:100;left:318;top:576;height:16" title="Dur: 5 ms
+Err: [:unknown &quot;not leader&quot;]
+Wall-clock Time: 2022-04-25T10:11:32.394Z
+
+Op:
+{:process 3
+ :type :fail
+ :f :read
+ :index 135
+ :error [:unknown &quot;not leader&quot;]
+ :value }">3 read </div></a><a href="#i138"><div class="op info" id="i138" style="width:100;left:1060;top:624;height:160" title="Dur: 3 ms
+Err: [:unknown &quot;not leader&quot;]
+Wall-clock Time: 2022-04-25T10:11:32.547Z
+
+Op:
+{:process 55
+ :type :info
+ :f :cas
+ :index 138
+ :error [:unknown &quot;not leader&quot;]
+ :value [1 0]}">55 cas [1 0]</div></a><a href="#i140"><div class="op info" id="i140" style="width:100;left:1696;top:656;height:128" title="Dur: 3 ms
+Err: [:unknown &quot;not leader&quot;]
+Wall-clock Time: 2022-04-25T10:11:32.576Z
+
+Op:
+{:process 118
+ :type :info
+ :f :cas
+ :index 140
+ :error [:unknown &quot;not leader&quot;]
+ :value [2 4]}">118 cas [2 4]</div></a><a href="#i143"><div class="op info" id="i143" style="width:100;left:1378;top:704;height:80" title="Dur: 7 ms
+Err: [:unknown &quot;not leader&quot;]
+Wall-clock Time: 2022-04-25T10:11:32.767Z
+
+Op:
+{:process 65
+ :type :info
+ :f :cas
+ :index 143
+ :error [:unknown &quot;not leader&quot;]
+ :value [1 4]}">65 cas [1 4]</div></a><a href="#i144"><div class="op fail" id="i144" style="width:100;left:106;top:608;height:128" title="Dur: 291 ms
+Err: [:unknown &quot;not found&quot;]
+Wall-clock Time: 2022-04-25T10:11:32.786Z
+
+Op:
+{:process 1
+ :type :fail
+ :f :read
+ :index 144
+ :error [:unknown &quot;not found&quot;]
+ :value }">1 read </div></a><a href="#i154"><div class="op info" id="i154" style="width:100;left:1166;top:688;height:96" title="Dur: 638 ms
+Err: [:unknown &quot;not found&quot;]
+Wall-clock Time: 2022-04-25T10:11:33.216Z
+
+Op:
+{:process 56
+ :type :info
+ :f :cas
+ :index 154
+ :error [:unknown &quot;not found&quot;]
+ :value [0 2]}">56 cas [0 2]</div></a></div></body></html>

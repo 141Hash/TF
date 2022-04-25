@@ -1,0 +1,42 @@
+{:type :invoke, :f :read, :time 9985006229, :process 4, :value nil, :index 410}
+{:type :fail, :f :read, :time 9986887007, :process 4, :value nil, :error [:unknown "not leader"], :index 411}
+{:type :invoke, :f :cas, :value [1 1], :time 10029009738, :process 279, :index 412}
+{:type :info, :f :cas, :value [1 1], :time 10031620019, :process 279, :error [:unknown "not leader"], :index 413}
+{:type :invoke, :f :cas, :value [3 1], :time 10103976172, :process 289, :index 414}
+{:type :invoke, :f :cas, :value [4 2], :time 10104671964, :process 208, :index 415}
+{:type :info, :f :cas, :value [3 1], :time 10106508999, :process 289, :error [:unknown "not leader"], :index 416}
+{:type :info, :f :cas, :value [4 2], :time 10106623781, :process 208, :error [:unknown "not leader"], :index 417}
+{:type :invoke, :f :write, :value 0, :time 10196431238, :process 299, :index 418}
+{:type :info, :f :write, :value 0, :time 10201395158, :process 299, :error [:unknown "not leader"], :index 419}
+{:type :invoke, :f :read, :time 10222399760, :process 3, :value nil, :index 420}
+{:type :fail, :f :read, :time 10228268411, :process 3, :value nil, :error [:unknown "not leader"], :index 421}
+{:type :invoke, :f :write, :value 2, :time 10280173663, :process 116, :index 422}
+{:type :info, :f :write, :value 2, :time 10284863001, :process 116, :error [:unknown "not leader"], :index 423}
+{:type :invoke, :f :write, :value 4, :time 10343095549, :process 309, :index 424}
+{:type :info, :f :write, :value 4, :time 10346804998, :process 309, :error [:unknown "not leader"], :index 425}
+{:type :invoke, :f :read, :time 10423515934, :process 3, :value nil, :index 427}
+{:type :fail, :f :read, :time 10425741837, :process 3, :value nil, :error [:unknown "not leader"], :index 428}
+{:type :invoke, :f :read, :time 10442319297, :process 1, :value nil, :index 429}
+{:type :fail, :f :read, :time 10444866265, :process 1, :value nil, :error [:unknown "not leader"], :index 430}
+{:type :invoke, :f :cas, :value [0 3], :time 10453289306, :process 145, :index 431}
+{:type :invoke, :f :read, :time 10496997813, :process 4, :value nil, :index 432}
+{:type :invoke, :f :read, :time 10499209942, :process 1, :value nil, :index 433}
+{:type :fail, :f :read, :time 10501201147, :process 1, :value nil, :error [:unknown "not leader"], :index 434}
+{:type :invoke, :f :cas, :value [2 0], :time 10527046779, :process 197, :index 435}
+{:type :invoke, :f :read, :time 10602911735, :process 2, :value nil, :index 436}
+{:type :invoke, :f :cas, :value [2 1], :time 10634934875, :process 319, :index 437}
+{:type :invoke, :f :read, :time 10636472502, :process 3, :value nil, :index 438}
+{:type :fail, :f :read, :time 10657389228, :process 4, :value nil, :error [:unknown "not leader"], :index 439}
+{:type :info, :f :cas, :value [2 1], :time 10657529747, :process 319, :error [:unknown "not leader"], :index 440}
+{:type :info, :f :cas, :value [2 0], :time 10657613840, :process 197, :error [:unknown "not leader"], :index 441}
+{:type :fail, :f :read, :time 10657682827, :process 2, :value nil, :error [:unknown "not leader"], :index 442}
+{:type :fail, :f :read, :time 10657750233, :process 3, :value nil, :error [:unknown "not leader"], :index 443}
+{:type :invoke, :f :read, :time 10693656666, :process 4, :value nil, :index 444}
+{:type :fail, :f :read, :time 10695754203, :process 4, :value nil, :error [:unknown "not leader"], :index 445}
+{:type :invoke, :f :read, :time 10759853166, :process 4, :value nil, :index 446}
+{:type :fail, :f :read, :time 10762063746, :process 4, :value nil, :error [:unknown "not leader"], :index 447}
+{:type :invoke, :f :cas, :value [4 2], :time 10793642768, :process 126, :index 448}
+{:type :info, :f :cas, :value [4 2], :time 10795583914, :process 126, :error [:unknown "not leader"], :index 449}
+{:type :invoke, :f :cas, :value [0 3], :time 10830389804, :process 329, :index 450}
+{:type :info, :f :cas, :value [0 3], :time 10832718583, :process 329, :error [:unknown "not leader"], :index 451}
+{:type :info, :f :cas, :value [0 3], :time 12453682371, :process 145, :error :net-timeout, :index 514}

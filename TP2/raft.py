@@ -63,43 +63,20 @@ executor=ThreadPoolExecutor(max_workers=1)
 dic = dict()
 TIMEOUT_TIME = 2
 clock = TIMEOUT_TIME
-#PrevLogIndex esta no nextIndex
 
-def decreaseTime():
-    global clock,state
-    clock = TIMEOUT_TIME
-    while state.isDecreaseTimer:
-        time.sleep(1)
-        clock -= 1
-        logging.info(clock)
-
-
-def timeout():
-    global clock,state, node_id, node_ids
-    while state.isTimeout:
-        if clock < 0:
-            clock = TIMEOUT_TIME
-            state.currentState = 1
-            state.currentTerm += 1
-            state.votedFor = node_id
-            state.voteCount = 1
-            for node in node_ids:
-                if node != node_id:
-                    send(node_id,node,type="RRPC",term=state.currentTerm,candidateId=node_id,
-                         lastLogIndex=len(state.log)-1,
-                         lastLogTerm=-1 if len(state.log) == 0 else state.log[len(state.log)-1][1])
-                    
 def heartbeat():
+    global state
     while state.isHeartBeat:
         for node in node_ids:
-            if node != node_id:
-                # logging.info(state.log)
-                # logging.info(state.nextIndex)
-                send(node_id,node,type="ARPC",term=state.currentTerm, leaderId=node_id,
-                prevLogIndex=state.nextIndex[node]-1,
-                prevLogTerm=state.log[state.nextIndex[node]-1][1] if state.nextIndex[node]-1 >= 0 else -1,
-                entries=[],leaderCommit=state.commitIndex)
-        time.sleep(1)
+            if node != node_id and state.isHeartBeat:
+                try:
+                    send(node_id,node,type="ARPC",term=state.currentTerm, leaderId=node_id,
+                    prevLogIndex=state.nextIndex[node]-1,
+                    prevLogTerm=state.log[state.nextIndex[node]-1][1] if state.nextIndex[node]-1 >= 0 else -1,
+                    entries=[],leaderCommit=state.commitIndex)
+                except:
+                    state.isHeartBeat = False
+        time.sleep(0.5)
      
 def schedTimeout():
     global state
@@ -180,7 +157,6 @@ def handle(msg):
             if node != node_id:
                 #If last log index ≥ nextIndex for a follower: send
                 if len(state.log)-1 >= state.nextIndex[node]:
-                    #@TODO prevLogIndex é -1 ou n ?
                     send(node_id,node,type="ARPC",term=state.currentTerm, leaderId=node_id,
                     prevLogIndex=state.nextIndex[node]-1,prevLogTerm=state.log[state.nextIndex[node]-1][1],
                     entries=state.log[state.nextIndex[node]:],leaderCommit=state.commitIndex)
@@ -190,7 +166,7 @@ def handle(msg):
     elif state.currentState != 2 and msg.src not in node_ids:
         reply(msg,type="error",code=11,text="not leader")
 
-    elif state.currentState != 2 and msg.body.type == "ARPC":
+    elif msg.body.type == "ARPC":
         # printBody(msg)
         state.isTimeout = False
 
@@ -203,6 +179,7 @@ def handle(msg):
             state.timeoutSched = sched.scheduler(time.time,time.sleep)
             state.timeoutSched.enter(random.uniform(1,2),1,schedTimeout)
             threading.Thread(target=state.timeoutSched.run).start()
+            state.votedFor = None
 
         #If RPC request or response contains term T > currentTerm: set currentTerm = T, convert to follower
         if msg.body.term > state.currentTerm:
@@ -214,29 +191,33 @@ def handle(msg):
             state.timeoutSched = sched.scheduler(time.time,time.sleep)
             state.timeoutSched.enter(random.uniform(1,2),1,schedTimeout)
             threading.Thread(target=state.timeoutSched.run).start()
+            state.votedFor = None
 
         #Passo 1
         if msg.body.term < state.currentTerm:
-            reply(msg,type="ARPC_RESP",term=state.currentTerm,success=False)
+            reply(msg,type="ARPC_RESP",term=state.currentTerm,success=False,inconsistency=False)
             logging.info("FALSE 1")
         #Passo 2
-        elif state.log != [] and msg.body.prevLogIndex >= 0 and state.log[msg.body.prevLogIndex][1] != msg.body.prevLogTerm:
-            reply(msg,type="ARPC_RESP",term=state.currentTerm,success=False)
+        elif (state.log != [] and msg.body.prevLogIndex >= 0 and
+                (msg.body.prevLogIndex > len(state.log)-1 or 
+                state.log[msg.body.prevLogIndex][1] != msg.body.prevLogTerm)):
+            reply(msg,type="ARPC_RESP",term=state.currentTerm,success=False,inconsistency=True)
             logging.info("FALSE 2")
-        else: 
+        else:
             entries = msg.body.entries
             i = 1
             #Passo 3
-            ''' for e in entries:
+            for e in entries:
                 if msg.body.prevLogIndex + i < len(state.log):
-                    if state.log[msg.body.prevLogIndex+i][1] != e[msg.body.term]:
+                    if state.log[msg.body.prevLogIndex+i][1] != e[1]:
                         state.log = state.log[0:msg.prevLogIndex+(i-1)]
                         break
                 else:
                     break
-                i+=1 '''
+                i+=1
             #Passo 4
-            state.appendLogs(entries)
+            if len(entries) != 0:
+                state.appendLogs(entries)
             #Passo 5
             if msg.body.leaderCommit > state.commitIndex:
                 state.commitIndex = min(msg.body.leaderCommit,len(state.log)-1)
@@ -245,10 +226,11 @@ def handle(msg):
                     apply(state.log[state.lastApplied][0])
                     logging.info(dic)
             reply(msg,type="ARPC_RESP",nextIndex=len(state.log),matchIndex=len(state.log)-1,
-                  term=state.currentTerm,success=True)
+                term=state.currentTerm,success=True)
             # state.printCurrentState()
 
-    elif state.currentState == 2 and msg.body.type == "ARPC_RESP":
+    elif msg.body.type == "ARPC_RESP":
+        #If RPC request or response contains term T > currentTerm: set currentTerm = T, convert to follower
         if msg.body.term > state.currentTerm:
             # Recomeça timeout timer
             state.isHeartBeat = False
@@ -258,41 +240,55 @@ def handle(msg):
             threading.Thread(target=state.timeoutSched.run).start()
             state.currentTerm = msg.body.term
             state.currentState = 0
-        if msg.body.success:
-            state.nextIndex[msg.src] = msg.body.nextIndex
-            state.matchIndex[msg.src] = msg.body.matchIndex
+            state.votedFor = None
+
+        elif msg.body.success:
+            state.nextIndex[msg.src] = max(msg.body.nextIndex,state.nextIndex[msg.src])
+            state.matchIndex[msg.src] = max(msg.body.matchIndex,state.matchIndex[msg.src])
             n = state.biggestMatch()
-            if n >= 0 and n > state.commitIndex and state.log[n][1] == state.currentTerm:
+            if n >= 0 and n<= len(state.log)-1 and n > state.commitIndex and state.log[n][1] == state.currentTerm:
                 state.commitIndex = n
                 if state.commitIndex > state.lastApplied:
                     state.lastApplied += 1
                     reply_cliente(state.log[state.lastApplied][0])
                     logging.info(dic)
-        else:
+        elif not msg.body.success and msg.body.inconsistency:
             state.nextIndex[msg.src] -= 1
 
-    elif state.currentState == 0 and msg.body.type == "RRPC":
+    elif msg.body.type == "RRPC":
         #Reset Clock
         state.isTimeout = False
 
+        #If RPC request or response contains term T > currentTerm: set currentTerm = T, convert to follower
         if msg.body.term > state.currentTerm:
             state.currentTerm = msg.body.term
             state.currentState = 0
+            state.votedFor = None
+            state.isHeartBeat = False
+
 
         if msg.body.term < state.currentTerm:
             reply(msg,type="RRPC_RESP",term=state.currentTerm,voteGranted=False)
+            
         elif (state.votedFor == None or msg.body.candidateId == state.votedFor) and  msg.body.lastLogIndex >= len(state.log)-1:
             state.votedFor = msg.body.candidateId 
             reply(msg,type="RRPC_RESP",term=state.currentTerm,voteGranted=True)
+
         else:
             reply(msg,type="RRPC_RESP",term=state.currentTerm,voteGranted=False)
             
-    elif state.currentState == 1 and msg.body.type == "RRPC_RESP":
+    elif msg.body.type == "RRPC_RESP":
+
+        #If RPC request or response contains term T > currentTerm: set currentTerm = T, convert to follower
         if msg.body.term > state.currentTerm:
             state.currentTerm = msg.body.term
             state.currentState = 0
+            state.votedFor = None
+            state.isHeartBeat = False
+
         if msg.body.voteGranted:
             state.voteCount += 1
+
         #If votes received from majority of servers: become leader   
         if state.voteCount >= math.floor(len(node_ids)/2)+1 and state.currentState != 2:
             logging.info("IM THE LEADER")
@@ -303,11 +299,8 @@ def handle(msg):
             state.isTimeout = False
             state.isDecreaseTimer = False
             threading.Thread(target=heartbeat).start()
-                    
+    else:
+        logging.info("Something Wrong")
     
 # Main loop
 executor.map(lambda msg: exitOnError(handle, msg), receiveAll())
-
-#All Servers: Done
-#Followers: Done, acho
-#

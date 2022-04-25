@@ -1,0 +1,18 @@
+INFO:root:node n4 initialized
+INFO:root:{}
+INFO:root:{}
+INFO:root:{}
+INFO:root:{}
+INFO:root:{}
+INFO:root:{1: 3}
+INFO:root:{1: 3}
+INFO:root:{1: 3}
+INFO:root:{1: 3}
+INFO:root:{1: 3}
+INFO:root:{1: 3, 2: 4}
+INFO:root:{1: 3, 2: 4}
+INFO:root:{1: 3, 2: 4}
+INFO:root:{1: 3, 2: 4}
+INFO:root:{1: 3, 2: 4, 3: 3}
+INFO:root:{1: 3, 2: 4, 3: 3}
+INFO:root:{1: 3, 2: 4, 3: 3}

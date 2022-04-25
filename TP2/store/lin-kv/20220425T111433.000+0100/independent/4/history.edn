@@ -1,0 +1,54 @@
+{:type :invoke, :f :read, :time 15747723627, :process 2, :value nil, :index 160}
+{:type :fail, :f :read, :time 15931382658, :process 2, :value nil, :error [:unknown "not leader"], :index 161}
+{:type :invoke, :f :read, :time 16107688773, :process 2, :value nil, :index 162}
+{:type :invoke, :f :cas, :value [4 1], :time 16227318951, :process 69, :index 163}
+{:type :invoke, :f :read, :time 16316743555, :process 3, :value nil, :index 164}
+{:type :invoke, :f :read, :time 16367638469, :process 0, :value nil, :index 165}
+{:type :fail, :f :read, :time 16428089176, :process 0, :value nil, :error [:unknown "not leader"], :index 166}
+{:type :fail, :f :read, :time 16428383941, :process 3, :value nil, :error [:unknown "not leader"], :index 167}
+{:type :fail, :f :read, :time 16429356857, :process 2, :value nil, :error [:unknown "not leader"], :index 168}
+{:type :invoke, :f :cas, :value [3 1], :time 16711809563, :process 147, :index 169}
+{:type :invoke, :f :read, :time 16842998088, :process 3, :value nil, :index 170}
+{:type :invoke, :f :write, :value 3, :time 16919780522, :process 56, :index 171}
+{:type :info, :f :write, :value 3, :time 16938438764, :process 56, :error [:unknown "not leader"], :index 172}
+{:type :info, :f :cas, :value [3 1], :time 16938897539, :process 147, :error [:unknown "not leader"], :index 173}
+{:type :fail, :f :read, :time 16939205222, :process 3, :value nil, :error [:unknown "not leader"], :index 174}
+{:type :invoke, :f :read, :time 16979936412, :process 2, :value nil, :index 175}
+{:type :fail, :f :read, :time 17178801159, :process 2, :value nil, :error [:unknown "not leader"], :index 176}
+{:type :invoke, :f :read, :time 17224325031, :process 3, :value nil, :index 177}
+{:type :fail, :f :read, :time 17232025281, :process 3, :value nil, :error [:unknown "not leader"], :index 178}
+{:type :invoke, :f :read, :time 17442550572, :process 3, :value nil, :index 179}
+{:type :invoke, :f :cas, :value [4 4], :time 17625746706, :process 125, :index 180}
+{:type :invoke, :f :cas, :value [0 0], :time 17774974744, :process 157, :index 181}
+{:type :info, :f :cas, :value [4 4], :time 17928935266, :process 125, :error [:unknown "not leader"], :index 182}
+{:type :info, :f :cas, :value [0 0], :time 17929137491, :process 157, :error [:unknown "not leader"], :index 183}
+{:type :fail, :f :read, :time 17929246511, :process 3, :value nil, :error [:unknown "not leader"], :index 184}
+{:type :invoke, :f :cas, :value [1 3], :time 17997354376, :process 135, :index 186}
+{:type :info, :f :cas, :value [1 3], :time 18001238766, :process 135, :error [:unknown "not leader"], :index 187}
+{:type :invoke, :f :read, :time 18151112007, :process 2, :value nil, :index 188}
+{:type :fail, :f :read, :time 18153894687, :process 2, :value nil, :error [:unknown "not leader"], :index 189}
+{:type :invoke, :f :read, :time 18325426061, :process 2, :value nil, :index 190}
+{:type :fail, :f :read, :time 18330213468, :process 2, :value nil, :error [:unknown "not leader"], :index 191}
+{:type :invoke, :f :read, :time 18535053564, :process 0, :value nil, :index 192}
+{:type :fail, :f :read, :time 18537916247, :process 0, :value nil, :error [:unknown "not leader"], :index 193}
+{:type :invoke, :f :cas, :value [0 3], :time 18589540618, :process 145, :index 194}
+{:type :info, :f :cas, :value [0 3], :time 18594341642, :process 145, :error [:unknown "not leader"], :index 195}
+{:type :invoke, :f :write, :value 1, :time 18644179256, :process 155, :index 196}
+{:type :info, :f :write, :value 1, :time 18647585491, :process 155, :error [:unknown "not leader"], :index 197}
+{:type :invoke, :f :read, :time 18910997607, :process 2, :value nil, :index 198}
+{:type :fail, :f :read, :time 18916423709, :process 2, :value nil, :error [:unknown "not leader"], :index 199}
+{:type :invoke, :f :read, :time 19258261514, :process 3, :value nil, :index 200}
+{:type :fail, :f :read, :time 19263569999, :process 3, :value nil, :error [:unknown "not leader"], :index 201}
+{:type :invoke, :f :read, :time 19406173852, :process 1, :value nil, :index 202}
+{:type :fail, :f :read, :time 19409519134, :process 1, :value nil, :error [:unknown "not leader"], :index 203}
+{:type :invoke, :f :read, :time 19658458019, :process 2, :value nil, :index 204}
+{:type :fail, :f :read, :time 19663197173, :process 2, :value nil, :error [:unknown "not leader"], :index 205}
+{:type :invoke, :f :read, :time 19807212079, :process 3, :value nil, :index 206}
+{:type :fail, :f :read, :time 19810626185, :process 3, :value nil, :error [:unknown "not leader"], :index 207}
+{:type :invoke, :f :cas, :value [3 0], :time 19888761906, :process 98, :index 208}
+{:type :info, :f :cas, :value [3 0], :time 19891059735, :process 98, :error [:unknown "not leader"], :index 209}
+{:type :invoke, :f :read, :time 19980971783, :process 3, :value nil, :index 210}
+{:type :fail, :f :read, :time 19985651714, :process 3, :value nil, :error [:unknown "not leader"], :index 211}
+{:type :invoke, :f :read, :time 19987787164, :process 1, :value nil, :index 212}
+{:type :fail, :f :read, :time 19992134335, :process 1, :value nil, :error [:unknown "not leader"], :index 213}
+{:type :info, :f :cas, :value [4 1], :time 21230754219, :process 69, :error :net-timeout, :index 215}

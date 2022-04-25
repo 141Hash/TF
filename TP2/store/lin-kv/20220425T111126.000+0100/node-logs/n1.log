@@ -1,0 +1,190 @@
+INFO:root:node n1 initialized
+INFO:root:TIMEOUT
+INFO:root:IM THE LEADER
+INFO:root:**********
+INFO:root:key=>0
+INFO:root:type=>read
+INFO:root:msg_id=>4
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{}
+INFO:root:**********
+INFO:root:key=>0
+INFO:root:value=>2
+INFO:root:type=>write
+INFO:root:msg_id=>3
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{0: 2}
+INFO:root:**********
+INFO:root:key=>1
+INFO:root:type=>read
+INFO:root:msg_id=>5
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{0: 2}
+INFO:root:**********
+INFO:root:key=>1
+INFO:root:from=>4
+INFO:root:to=>4
+INFO:root:type=>cas
+INFO:root:msg_id=>4
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{0: 2}
+INFO:root:**********
+INFO:root:key=>1
+INFO:root:from=>3
+INFO:root:to=>1
+INFO:root:type=>cas
+INFO:root:msg_id=>5
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{0: 2}
+INFO:root:**********
+INFO:root:key=>2
+INFO:root:type=>read
+INFO:root:msg_id=>6
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{0: 2}
+INFO:root:**********
+INFO:root:key=>2
+INFO:root:type=>read
+INFO:root:msg_id=>7
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:**********
+INFO:root:key=>2
+INFO:root:from=>3
+INFO:root:to=>3
+INFO:root:type=>cas
+INFO:root:msg_id=>6
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{0: 2}
+INFO:root:**********
+INFO:root:key=>2
+INFO:root:type=>read
+INFO:root:msg_id=>8
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{0: 2}
+INFO:root:{0: 2}
+INFO:root:**********
+INFO:root:key=>2
+INFO:root:type=>read
+INFO:root:msg_id=>9
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:**********
+INFO:root:key=>2
+INFO:root:from=>0
+INFO:root:to=>2
+INFO:root:type=>cas
+INFO:root:msg_id=>7
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{0: 2}
+INFO:root:**********
+INFO:root:key=>3
+INFO:root:type=>read
+INFO:root:msg_id=>10
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{0: 2}
+INFO:root:**********
+INFO:root:key=>3
+INFO:root:from=>0
+INFO:root:to=>2
+INFO:root:type=>cas
+INFO:root:msg_id=>8
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{0: 2}
+INFO:root:**********
+INFO:root:key=>3
+INFO:root:type=>read
+INFO:root:msg_id=>11
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{0: 2}
+INFO:root:**********
+INFO:root:key=>4
+INFO:root:type=>read
+INFO:root:msg_id=>12
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{0: 2}
+INFO:root:**********
+INFO:root:key=>4
+INFO:root:from=>1
+INFO:root:to=>4
+INFO:root:type=>cas
+INFO:root:msg_id=>9
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{0: 2}
+INFO:root:**********
+INFO:root:key=>5
+INFO:root:type=>read
+INFO:root:msg_id=>13
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{0: 2}
+INFO:root:**********
+INFO:root:key=>5
+INFO:root:type=>read
+INFO:root:msg_id=>14
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{0: 2}
+INFO:root:**********
+INFO:root:key=>6
+INFO:root:from=>3
+INFO:root:to=>4
+INFO:root:type=>cas
+INFO:root:msg_id=>10
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{0: 2}
+INFO:root:**********
+INFO:root:key=>6
+INFO:root:type=>read
+INFO:root:msg_id=>15
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{0: 2}
+INFO:root:**********
+INFO:root:key=>6
+INFO:root:from=>2
+INFO:root:to=>1
+INFO:root:type=>cas
+INFO:root:msg_id=>11
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{0: 2}
+INFO:root:**********
+INFO:root:key=>7
+INFO:root:from=>4
+INFO:root:to=>1
+INFO:root:type=>cas
+INFO:root:msg_id=>12
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{0: 2}
+INFO:root:**********
+INFO:root:key=>7
+INFO:root:type=>read
+INFO:root:msg_id=>16
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{0: 2}
+INFO:root:**********
+INFO:root:key=>7
+INFO:root:value=>3
+INFO:root:type=>write
+INFO:root:msg_id=>13
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{0: 2}

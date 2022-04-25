@@ -1,0 +1,28 @@
+INFO:root:node n1 initialized
+INFO:root:{}
+INFO:root:{}
+INFO:root:TIMEOUT
+INFO:root:{}
+INFO:root:{}
+INFO:root:{}
+INFO:root:{}
+INFO:root:{}
+INFO:root:{}
+INFO:root:TIMEOUT
+INFO:root:IM THE LEADER
+INFO:root:**********
+INFO:root:key=>3
+INFO:root:type=>read
+INFO:root:msg_id=>8
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{}
+INFO:root:**********
+INFO:root:key=>4
+INFO:root:from=>3
+INFO:root:to=>1
+INFO:root:type=>cas
+INFO:root:msg_id=>11
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{}

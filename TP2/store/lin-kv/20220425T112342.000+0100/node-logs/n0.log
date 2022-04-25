@@ -1,0 +1,49 @@
+INFO:root:node n0 initialized
+INFO:root:{}
+INFO:root:TIMEOUT
+INFO:root:IM THE LEADER
+INFO:root:**********
+INFO:root:key=>1
+INFO:root:value=>4
+INFO:root:type=>write
+INFO:root:msg_id=>3
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{}
+INFO:root:**********
+INFO:root:key=>1
+INFO:root:type=>read
+INFO:root:msg_id=>4
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{}
+INFO:root:**********
+INFO:root:key=>2
+INFO:root:type=>read
+INFO:root:msg_id=>5
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{1: 4}
+INFO:root:**********
+INFO:root:key=>3
+INFO:root:from=>4
+INFO:root:to=>0
+INFO:root:type=>cas
+INFO:root:msg_id=>4
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{1: 4}
+INFO:root:**********
+INFO:root:key=>3
+INFO:root:type=>read
+INFO:root:msg_id=>6
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{1: 4}
+INFO:root:**********
+INFO:root:key=>4
+INFO:root:type=>read
+INFO:root:msg_id=>7
+INFO:root:**********
+INFO:root:RECEIVED
+INFO:root:{1: 4}

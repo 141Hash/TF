@@ -1,0 +1,6 @@
+{:type :invoke, :f :write, :value 4, :time 19528465491, :process 86, :index 214}
+{:type :info, :f :write, :value 4, :time 19532209013, :process 86, :error [:unknown "not leader"], :index 215}
+{:type :invoke, :f :read, :time 19560422135, :process 1, :value nil, :index 216}
+{:type :fail, :f :read, :time 19567020445, :process 1, :value nil, :error [:unknown "not leader"], :index 217}
+{:type :invoke, :f :write, :value 2, :time 19918842064, :process 96, :index 218}
+{:type :info, :f :write, :value 2, :time 19923469545, :process 96, :error [:unknown "not leader"], :index 219}
