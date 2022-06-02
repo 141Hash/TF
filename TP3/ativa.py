@@ -43,8 +43,10 @@ async def handle(msg):
                 await db.commit(ctx, wv)
                 reply(msg, type='txn_replicated_ok', txn=res, client = msg.body.client)
             else:
-                reply(msg, type='error', code=14, text='transaction aborted')
-            
+                for node in node_ids:
+                    send(node_id, node, type = 'error_res')
+                reply(msg.body.client, type='error', code=14, text='transaction aborted')
+
             ts += 1
             
             if len(waitingList) > 0:
@@ -73,8 +75,18 @@ async def handle(msg):
 
                 waitingList.remove(element)
                 break
+    
+    elif msg.body.type == 'error_res':
+        ts += 1
+        if len(waitingList) > 0:
+            for element in waitingList:
+                if element[1] == ts:
+                    for node in node_ids:
+                        send(node_id, node, type = 'txn', txn = element[0].body.txn, mensagem = element[0].body.msg_id, client = element[0])
 
-        
+                    waitingList.remove(element)
+                    break
+
     else:
         logging.warning('unknown message type %s', msg.body.type)
 
