@@ -5,7 +5,10 @@ from http import client
 import logging
 from asyncio import run, create_task, sleep
 from multiprocessing.connection import wait
+from time import time
 from wsgiref.headers import tspecials
+
+from numpy import logical_and
 
 from ams import send, receiveAll, reply
 from db import DB
@@ -50,6 +53,7 @@ async def handle(msg):
         if len(waitingList) > 0:
             for element in waitingList:
                 if element[1] == ts:
+                    logging.info(f"TS - {element[1]} ,time: {time()}")
                     ctx = await db.begin([k for op,k,v in element[0].body.txn], element[0].src)
                     rs,wv,res = await db.execute(ctx, msg.body.txn)
                     if res:
@@ -63,16 +67,18 @@ async def handle(msg):
 
                     db.cleanup(ctx)
                     waitingList.remove(element)
+                    break
                     
 
     elif msg.body.type == 'ts_ok':
-        logging.info('TS: %s', msg.body.ts)
+        # logging.info('TS: %s', msg.body.ts)
         req = queue.pop(0)
         waitingList.append((req, msg.body.ts))
         sorted(waitingList, key=lambda x: x[1])
 
         for element in waitingList:
             if element[1] == ts:
+                logging.info(f"TS - {element[1]} ,time: {time()}")
                 ctx = await db.begin([k for op,k,v in element[0].body.txn], element[0].src)
                 rs,wv,res = await db.execute(ctx, element[0].body.txn)
                 if res:
@@ -86,6 +92,7 @@ async def handle(msg):
 
                 db.cleanup(ctx)
                 waitingList.remove(element)
+                break
                 
     
     elif msg.body.type == 'error_res':
@@ -93,6 +100,7 @@ async def handle(msg):
         if len(waitingList) > 0:
             for element in waitingList: 
                 if element[1] == ts:
+                    logging.info(f"TS - {element[1]} ,time: {time()}")
                     ctx = await db.begin([k for op,k,v in element[0].body.txn], element[0].src)
                     rs,wv,res = await db.execute(ctx, element[0].body.txn)
                     if res:
@@ -106,6 +114,7 @@ async def handle(msg):
                     
                     db.cleanup(ctx)
                     waitingList.remove(element)
+                    break
                     
 
     else:

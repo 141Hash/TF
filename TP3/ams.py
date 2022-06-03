@@ -11,7 +11,7 @@ msg_id = 0
 def send(src, dest, **body):
     global msg_id
     data = dumps(sn(dest=dest, src=src, body=sn(msg_id=(msg_id:=msg_id+1), **body)), default=vars)
-    logging.debug("sending %s", data)
+    # logging.debug("sending %s", data)
     print(data, flush=True)
     return msg_id
 
@@ -20,5 +20,5 @@ def reply(request, **body):
 
 async def receiveAll(handle):
     while data := await get_event_loop().run_in_executor(None, stdin.readline):
-        logging.debug("received %s", data.strip())
+        # logging.debug("received %s", data.strip())
         create_task(handle(loads(data, object_hook=lambda x: sn(**x))))
