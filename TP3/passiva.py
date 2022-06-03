@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from cmath import log
 from http import client
 import logging
 from asyncio import run, create_task, sleep
@@ -36,10 +37,10 @@ async def handle(msg):
         queue.append(msg)
 
     elif msg.body.type == 'txn_replicated':
-        if node_id != msg.src:
-                ctx = await db.begin([k for op,k,v in msg.body.txn], msg.src)
-                await db.commit(ctx, msg.body.wv)
-                db.cleanup(ctx)
+        if msg.src != node_id:
+            ctx = await db.begin([k for op,k,v in msg.body.txn], msg.src)
+            await db.commit(ctx, msg.body.wv)
+            db.cleanup(ctx)
 
         ts += 1
 
@@ -54,20 +55,21 @@ async def handle(msg):
                     if res:
                         await db.commit(ctx, wv)
                         for node in node_ids:
-                            send(node_id, node, type = 'txn_replicated', res = res, wv = wv, txn = element[0].body.txn, mensagem = element[0].body.msg_id, client = element[0])
+                            send(node_id, node, type = 'txn_replicated', wv = wv, txn = element[0].body.txn, client = element[0])
                     else:
                         for node in node_ids:
                             send(node_id, node, type = 'error_res')
-                        reply(element[0].body.client, type='error', code=14, text='transaction aborted')
+                        reply(element[0], type='error', code=14, text='transaction aborted')
 
                     db.cleanup(ctx)
                     waitingList.remove(element)
-                    break
+                    
 
     elif msg.body.type == 'ts_ok':
         logging.info('TS: %s', msg.body.ts)
         req = queue.pop(0)
         waitingList.append((req, msg.body.ts))
+        sorted(waitingList, key=lambda x: x[1])
 
         for element in waitingList:
             if element[1] == ts:
@@ -76,7 +78,7 @@ async def handle(msg):
                 if res:
                     await db.commit(ctx, wv)
                     for node in node_ids:
-                        send(node_id, node, type = 'txn_replicated', res = res, wv = wv ,txn = element[0].body.txn, mensagem = element[0].body.msg_id, client = element[0])
+                        send(node_id, node, type = 'txn_replicated', wv = wv ,txn = element[0].body.txn, client = element[0])
                 else:
                     for node in node_ids:
                         send(node_id, node, type = 'error_res')
@@ -84,7 +86,7 @@ async def handle(msg):
 
                 db.cleanup(ctx)
                 waitingList.remove(element)
-                break
+                
     
     elif msg.body.type == 'error_res':
         ts += 1
@@ -96,15 +98,15 @@ async def handle(msg):
                     if res:
                         await db.commit(ctx, wv)
                         for node in node_ids:
-                            send(node_id, node, type = 'txn_replicated', res = res, wv = wv, txn = element[0].body.txn, mensagem = element[0].body.msg_id, client = element[0])
+                            send(node_id, node, type = 'txn_replicated', res = res, wv = wv, txn = element[0].body.txn, client = element[0])
                     else:
                         for node in node_ids:
                             send(node_id, node, type = 'error_res')
-                        reply(element[0].body.client, type='error', code=14, text='transaction aborted')
+                        reply(element[0], type='error', code=14, text='transaction aborted')
                     
                     db.cleanup(ctx)
                     waitingList.remove(element)
-                    break
+                    
 
     else:
         logging.warning('unknown message type %s', msg.body.type)
