@@ -1,15 +1,9 @@
 #!/usr/bin/env python3
 
-from cmath import log
-from http import client
 import logging
 from asyncio import run, create_task, sleep
 from multiprocessing.connection import wait
 from time import time
-from wsgiref.headers import tspecials
-
-from numpy import logical_and
-
 from ams import send, receiveAll, reply
 from db import DB
 
@@ -41,25 +35,24 @@ async def handle(msg):
 
     elif msg.body.type == 'txn_replicated':
         if msg.src != node_id:
-            ctx = await db.begin([k for op,k,v in msg.body.txn], msg.src)
+            ctx = await db.begin([k for op,k,v in msg.body.txn], msg.src+"-"+str(msg.body.msg_id))
             await db.commit(ctx, msg.body.wv)
             db.cleanup(ctx)
 
         ts += 1
 
         if msg.src == node_id:
-            reply(msg.body.client, type='txn_ok', txn = msg.body.txn)
+            reply(msg.body.client, type='txn_ok', txn = msg.body.res)
             
         if len(waitingList) > 0:
             for element in waitingList:
                 if element[1] == ts:
-                    logging.info(f"TS - {element[1]} ,time: {time()}")
-                    ctx = await db.begin([k for op,k,v in element[0].body.txn], element[0].src)
-                    rs,wv,res = await db.execute(ctx, msg.body.txn)
+                    ctx = await db.begin([k for op,k,v in element[0].body.txn], element[0].src+'-'+str(element[0].body.msg_id))
+                    rs,wv,res = await db.execute(ctx, element[0].body.txn)
                     if res:
                         await db.commit(ctx, wv)
                         for node in node_ids:
-                            send(node_id, node, type = 'txn_replicated', wv = wv, txn = element[0].body.txn, client = element[0])
+                            send(node_id, node, type = 'txn_replicated',res=res, wv = wv, txn = element[0].body.txn, client = element[0])
                     else:
                         for node in node_ids:
                             send(node_id, node, type = 'error_res')
@@ -74,21 +67,20 @@ async def handle(msg):
         # logging.info('TS: %s', msg.body.ts)
         req = queue.pop(0)
         waitingList.append((req, msg.body.ts))
-        sorted(waitingList, key=lambda x: x[1])
+        # sorted(waitingList, key=lambda x: x[1])
 
         for element in waitingList:
             if element[1] == ts:
-                logging.info(f"TS - {element[1]} ,time: {time()}")
-                ctx = await db.begin([k for op,k,v in element[0].body.txn], element[0].src)
+                ctx = await db.begin([k for op,k,v in element[0].body.txn], element[0].src+'-'+str(element[0].body.msg_id))
                 rs,wv,res = await db.execute(ctx, element[0].body.txn)
                 if res:
                     await db.commit(ctx, wv)
                     for node in node_ids:
-                        send(node_id, node, type = 'txn_replicated', wv = wv ,txn = element[0].body.txn, client = element[0])
+                        send(node_id, node, type = 'txn_replicated',res=res, wv = wv ,txn = element[0].body.txn, client = element[0])
                 else:
                     for node in node_ids:
                         send(node_id, node, type = 'error_res')
-                    reply(element[0].body.client, type='error', code=14, text='transaction aborted')
+                    reply(element[0], type='error', code=14, text='transaction aborted')
 
                 db.cleanup(ctx)
                 waitingList.remove(element)
@@ -100,13 +92,12 @@ async def handle(msg):
         if len(waitingList) > 0:
             for element in waitingList: 
                 if element[1] == ts:
-                    logging.info(f"TS - {element[1]} ,time: {time()}")
-                    ctx = await db.begin([k for op,k,v in element[0].body.txn], element[0].src)
+                    ctx = await db.begin([k for op,k,v in element[0].body.txn], element[0].src+'-'+str(element[0].body.msg_id))
                     rs,wv,res = await db.execute(ctx, element[0].body.txn)
                     if res:
                         await db.commit(ctx, wv)
                         for node in node_ids:
-                            send(node_id, node, type = 'txn_replicated', res = res, wv = wv, txn = element[0].body.txn, client = element[0])
+                            send(node_id, node, type = 'txn_replicated',  res = res, wv = wv, txn = element[0].body.txn, client = element[0])
                     else:
                         for node in node_ids:
                             send(node_id, node, type = 'error_res')
